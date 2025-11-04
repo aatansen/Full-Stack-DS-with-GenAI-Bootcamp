@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Full-Stack-DS-with-GenAI-Bootcamp"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = ">=3.13.0,<3.14"
+jupyterlab = ">=4.4.10,<5"
