@@ -21,19 +21,18 @@
     - [Different Roles in AI](#different-roles-in-ai)
   - [**System Setup Tools**](#system-setup-tools)
 - [**Day 03 - Introduction And Basic Of Python**](#day-03---introduction-and-basic-of-python)
-  - [**Day 03 Topics**](#day-03-topics)
-    - [Introduction to Python \& Setup](#introduction-to-python--setup)
-    - [Write our first Program in Python](#write-our-first-program-in-python)
-      - [print() Function Parameters in Python](#print-function-parameters-in-python)
-    - [Operators in Python](#operators-in-python)
-    - [Python Data Types \& Comments](#python-data-types--comments)
-    - [Variables, Keywords \& Identifiers in Python](#variables-keywords--identifiers-in-python)
-      - [Variables](#variables)
-      - [Keywords](#keywords)
-      - [Identifiers](#identifiers)
-    - [Python Input](#python-input)
-    - [Type Conversion in Python](#type-conversion-in-python)
-    - [Literals in Python](#literals-in-python)
+  - [**Introduction to Python \& Setup**](#introduction-to-python--setup)
+  - [**Write our first Program in Python**](#write-our-first-program-in-python)
+    - [print() Function Parameters in Python](#print-function-parameters-in-python)
+  - [**Operators in Python**](#operators-in-python)
+  - [**Python Data Types \& Comments**](#python-data-types--comments)
+  - [**Variables, Keywords \& Identifiers in Python**](#variables-keywords--identifiers-in-python)
+    - [Variables](#variables)
+    - [Keywords](#keywords)
+    - [Identifiers](#identifiers)
+  - [**Python Input**](#python-input)
+  - [**Type Conversion in Python**](#type-conversion-in-python)
+  - [**Literals in Python**](#literals-in-python)
 
 # **Day 01 - Induction Session**
 
@@ -143,20 +142,7 @@
 
 # **Day 03 - Introduction And Basic Of Python**
 
-## **Day 03 Topics**
-
-- Introduction to Python & Setup
-- Write our first Program in Python
-- Python Data Types & Comments
-- Variables, Keywords & Identifiers in Python
-- Python Input
-- Type Conversion in Python
-- Literals in Python
-- Operators in Python
-
-[⬆️ Go to Context](#context)
-
-### Introduction to Python & Setup
+## **Introduction to Python & Setup**
 
 - What is Python?
   - Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation.
@@ -175,13 +161,13 @@
 
 [⬆️ Go to Context](#context)
 
-### Write our first Program in Python
+## **Write our first Program in Python**
 
 ```py
 print("Hello World")
 ```
 
-#### print() Function Parameters in Python
+### print() Function Parameters in Python
 
 - `objects`: Values to print (can be multiple)
   - Example: `print("Hello", "World") → Hello World`
@@ -196,7 +182,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Operators in Python
+## **Operators in Python**
 
 - Arithmetic Operators
   - Addition (`+ `): `5 + 3 → 8`
@@ -248,7 +234,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Python Data Types & Comments
+## **Python Data Types & Comments**
 
 - Data Types in Python
   - Integer (`int`) - Whole numbers: `x = 10`
@@ -275,9 +261,9 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Variables, Keywords & Identifiers in Python
+## **Variables, Keywords & Identifiers in Python**
 
-#### Variables
+### Variables
 
 - Variable Binding in Python
   - Static Binding: Variable type is fixed at **compile time** (not typical in Python, seen in languages like C/C++)
@@ -295,7 +281,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-#### Keywords
+### Keywords
 
 - Boolean Literals
   - `True`: Boolean true value
@@ -350,7 +336,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-#### Identifiers
+### Identifiers
 
 - Names given to variables, functions, classes, or objects to identify them.
   - Rules for Python Identifiers:
@@ -371,7 +357,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Python Input
+## **Python Input**
 
 - Input in Python
 
@@ -380,7 +366,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Type Conversion in Python
+## **Type Conversion in Python**
 
 - `int()`: Convert to integer
   - Example: `x = int(3.14) → 3`
@@ -417,7 +403,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-### Literals in Python
+## **Literals in Python**
 
 - Literals in Python : Literals are **fixed values** assigned directly in the code that represent data. They are not computed or changed during execution.
 
