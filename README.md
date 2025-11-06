@@ -38,6 +38,7 @@
   - [**PIP (Pip Installs Packages)**](#pip-pip-installs-packages)
   - [**Modules in Python**](#modules-in-python)
   - [**Loops in Python**](#loops-in-python)
+  - [**Assignment 01**](#assignment-01)
 
 # **Day 01 - Induction Session**
 
@@ -676,5 +677,9 @@ print("Hello World")
           print("Running...")
           break
       ```
+
+[⬆️ Go to Context](#context)
+
+## [**Assignment 01**](./Assignments/Assignment%2001/)
 
 [⬆️ Go to Context](#context)
