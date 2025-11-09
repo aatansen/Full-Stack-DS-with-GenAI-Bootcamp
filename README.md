@@ -56,6 +56,20 @@
   - [**Strings Exercise**](#strings-exercise)
     - [Find the length of a given string without using the len() function](#find-the-length-of-a-given-string-without-using-the-len-function)
     - [Extract username from a given email](#extract-username-from-a-given-email)
+- [**Day 07 - List in Python**](#day-07---list-in-python)
+  - [**List in Python**](#list-in-python)
+    - [What are Lists?](#what-are-lists)
+    - [Lists Vs Arrays](#lists-vs-arrays)
+    - [Characteristics of a List](#characteristics-of-a-list)
+    - [How to create a list](#how-to-create-a-list)
+    - [Access items from a List](#access-items-from-a-list)
+    - [List Methods](#list-methods)
+    - [List Functions](#list-functions)
+    - [Editing items in a List](#editing-items-in-a-list)
+    - [Deleting items from a List](#deleting-items-from-a-list)
+    - [Operations on Lists](#operations-on-lists)
+    - [List comprehension](#list-comprehension)
+    - [`zip()` Function in Python](#zip-function-in-python)
 
 # **Day 01 - Induction Session**
 
@@ -1259,5 +1273,502 @@ print(counter)
   pos = email.index("@")
   print(email[0:pos])
   ```
+
+[⬆️ Go to Context](#context)
+
+# [**Day 07 - List in Python**](./Day%2007%20-%20List%20in%20Python/)
+
+## **List in Python**
+
+### What are Lists?
+
+- List is a data type where you can store multiple items under 1 name. More technically, lists act like dynamic arrays which means you can add more items on the fly.
+
+[⬆️ Go to Context](#context)
+
+### Lists Vs Arrays
+
+- **Lists**
+  - Can store elements of **different data types**
+  - Part of **core Python**
+  - Flexible but slower for large numeric data
+
+    ```py
+    my_list = [1, "two", 3.0, True]
+    print(my_list)
+    ```
+
+- **Arrays**
+  - Can store elements of **same data type only**
+  - Need to import from **array module** or **NumPy**
+  - More **memory-efficient** for numeric operations
+
+    ```py
+    import array
+    arr = array.array('i', [1, 2, 3, 4])
+    print(arr)
+    ```
+
+  - **Key Differences**
+    - **Data Type:** Lists → Heterogeneous | Arrays → Homogeneous
+    - **Speed:** Arrays are faster for numeric operations
+    - **Size:** Lists → Dynamic | Arrays → Fixed (unless NumPy array)
+    - **Memory:** Arrays use less memory than lists
+    - **Usage:** Lists are flexible | Arrays are optimized for computation
+
+    ```mermaid
+    flowchart TD
+
+        %% --- Python List Section ---
+        subgraph L1["Python List"]
+            direction LR
+            L1desc["(Dynamic Array: grows automatically)"]
+            L1A["Index 0 → 10"]
+            L1B["Index 1 → 20"]
+            L1C["Index 2 → 30"]
+        end
+
+        %% --- Array Section ---
+        subgraph A1["Array Module"]
+            direction LR
+            A1desc["(Fixed Size: array('i', [10,20,30]))"]
+            A1A["Index 0 → 10"]
+            A1B["Index 1 → 20"]
+            A1C["Index 2 → 30"]
+        end
+
+        L1 -->|"append(40)"| L2
+        A1 -->|"add new value"| A2
+
+        %% --- After Adding Value (List) ---
+        subgraph L2["After append(40)"]
+            direction LR
+            L2A["🆕 New Memory Block Allocated"]
+            L2B["Values Copied: 10, 20, 30, 40"]
+        end
+
+        %% --- After Adding Value (Array) ---
+        subgraph A2["Array Overflow"]
+            direction LR
+            A2A["❌ Memory Full"]
+            A2B["✅ Must create new array and copy values"]
+        end
+
+        %% --- Style Definitions ---
+        classDef list fill:#2E86C1,stroke:#1B4F72,color:#fff,font-weight:bold;
+        classDef array fill:#B9770E,stroke:#873600,color:#fff,font-weight:bold;
+        classDef resized fill:#1E8449,stroke:#145A32,color:#fff,font-weight:bold;
+        classDef overflow fill:#C0392B,stroke:#641E16,color:#fff,font-weight:bold;
+
+        class L1,L1A,L1B,L1C,L1desc list;
+        class A1,A1A,A1B,A1C,A1desc array;
+        class L2,L2A,L2B resized;
+        class A2,A2A,A2B overflow;
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Characteristics of a List
+
+- **Ordered** — Elements maintain their insertion order
+- **Changeable / Mutable** — Elements can be modified after creation
+- **Heterogeneous** — Can store elements of different data types
+- **Can Have Duplicates** — Allows repeated elements
+- **Dynamic** — Size can grow or shrink as needed
+- **Can Be Nested** — Lists can contain other lists
+- **Index-Based Access** — Elements can be accessed using indices
+- **Can Contain Any Python Object** — Strings, numbers, lists, tuples, functions, etc.
+
+[⬆️ Go to Context](#context)
+
+### How to create a list
+
+- Using square brackets `[]`
+
+  ```py
+  my_list = [1, 2, 3, 4]
+  ```
+
+- Using `list()` constructor
+
+  ```py
+  my_list = list((1, 2, 3, 4))
+  ```
+
+- Empty list
+
+  ```py
+  my_list = []
+  ```
+
+- Heterogeneous list
+
+  ```py
+  my_list = [1, "Hello", 3.5, True]
+  ```
+
+- Nested list
+
+  ```py
+  my_list = [[1, 2], [3, 4]]
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Access items from a List
+
+- Using index (0-based)
+
+  ```py
+  my_list = [10, 20, 30, 40]
+  print(my_list[1])  # 20
+  ```
+
+- Using negative index (from end)
+
+  ```py
+  my_list = [10, 20, 30, 40]
+  print(my_list[-1])  # 40
+  ```
+
+- Using slicing
+
+  ```py
+  my_list = [10, 20, 30, 40, 50]
+  print(my_list[1:4])  # [20, 30, 40]
+  ```
+
+- Accessing nested list
+
+  ```py
+  my_list = [[1, 2], [3, 4]]
+  print(my_list[1][0])  # 3
+  ```
+
+[⬆️ Go to Context](#context)
+
+### List Methods
+
+- `append()` — Add an item to the end
+
+  ```py
+  my_list = [1, 2, 3]
+  my_list.append(4)
+  print(my_list)  # [1, 2, 3, 4]
+  ```
+
+- `extend()` — Add multiple items from another list
+
+  ```py
+  my_list = [1, 2, 3]
+  my_list.extend([4, 5])
+  print(my_list)  # [1, 2, 3, 4, 5]
+  ```
+
+- `insert()` — Insert item at specific position
+
+  ```py
+  my_list = [1, 3, 4]
+  my_list.insert(1, 2)
+  print(my_list)  # [1, 2, 3, 4]
+  ```
+
+- `remove()` — Remove first occurrence of an item
+
+  ```py
+  my_list = [1, 2, 3, 2]
+  my_list.remove(2)
+  print(my_list)  # [1, 3, 2]
+  ```
+
+- `pop()` — Remove and return item by index (default last)
+
+  ```py
+  my_list = [1, 2, 3]
+  my_list.pop()
+  print(my_list)  # [1, 2]
+  ```
+
+- `clear()` — Remove all elements
+
+  ```py
+  my_list = [1, 2, 3]
+  my_list.clear()
+  print(my_list)  # []
+  ```
+
+- `index()` — Return index of first occurrence
+
+  ```py
+  my_list = [10, 20, 30, 20]
+  print(my_list.index(20))  # 1
+  ```
+
+- `count()` — Count occurrences of item
+
+  ```py
+  my_list = [1, 2, 2, 3]
+  print(my_list.count(2))  # 2
+  ```
+
+- `sort()` — Sort list in ascending order
+
+  ```py
+  my_list = [3, 1, 2]
+  my_list.sort()
+  print(my_list)  # [1, 2, 3]
+  ```
+
+- `reverse()` — Reverse order of list
+
+  ```py
+  my_list = [1, 2, 3]
+  my_list.reverse()
+  print(my_list)  # [3, 2, 1]
+  ```
+
+- `copy()` — Return shallow copy of list
+
+  ```py
+  my_list = [1, 2, 3]
+  new_list = my_list.copy()
+  print(new_list)  # [1, 2, 3]
+  ```
+
+[⬆️ Go to Context](#context)
+
+### List Functions
+
+- `len()` — Returns number of elements in list
+
+  ```py
+  my_list = [1, 2, 3]
+  print(len(my_list))  # 3
+  ```
+
+- `max()` — Returns maximum element
+
+  ```py
+  my_list = [1, 5, 3]
+  print(max(my_list))  # 5
+  ```
+
+- `min()` — Returns minimum element
+
+  ```py
+  my_list = [1, 5, 3]
+  print(min(my_list))  # 1
+  ```
+
+- `sum()` — Returns sum of elements
+
+  ```py
+  my_list = [1, 2, 3]
+  print(sum(my_list))  # 6
+  ```
+
+- `sorted()` — Returns sorted list (ascending by default)
+
+  ```py
+  my_list = [3, 1, 2]
+  print(sorted(my_list))  # [1, 2, 3]
+  ```
+
+- `reversed()` — Returns iterator to reverse list
+
+  ```py
+  my_list = [1, 2, 3]
+  print(list(reversed(my_list)))  # [3, 2, 1]
+  ```
+
+- `any()` — Returns True if any element is True
+
+  ```py
+  my_list = [0, 0, 1]
+  print(any(my_list))  # True
+  ```
+
+- `all()` — Returns True if all elements are True
+
+  ```py
+  my_list = [1, 2, 3]
+  print(all(my_list))  # True
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Editing items in a List
+
+  ```py
+  # editing with slicing
+  L = [1,2,3,4]
+  L[1:4] = [200,300,400]
+  print(L)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Deleting items from a List
+
+  ```py
+  L = [1,2,3,4]
+  del L[0]
+  print(L)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Operations on Lists
+
+- **Concatenation (` +`)**
+
+  ```py
+  list1 = [1, 2]
+  list2 = [3, 4]
+  result = list1 + list2
+  print(result)  # [1, 2, 3, 4]
+  ```
+
+- **Repetition (`*`)**
+
+  ```py
+  list1 = [1, 2]
+  result = list1 * 3
+  print(result)  # [1, 2, 1, 2, 1, 2]
+  ```
+
+- **Membership (`in`, `not in`)**
+
+  ```py
+  list1 = [1, 2, 3]
+  print(2 in list1)     # True
+  print(5 not in list1) # True
+  ```
+
+- **Iteration / Loops**
+
+  ```py
+  list1 = [1, 2, 3]
+  for item in list1:
+      print(item)
+  ```
+
+- **Indexing and Slicing**
+
+  ```py
+  list1 = [10, 20, 30, 40]
+  print(list1[1])    # 20
+  print(list1[1:3])  # [20, 30]
+  ```
+
+- **Length (`len()`)**
+
+  ```py
+  list1 = [1, 2, 3, 4]
+  print(len(list1))  # 4
+  ```
+
+- **Minimum and Maximum (`min()`, `max()`)**
+
+  ```py
+  list1 = [5, 2, 9]
+  print(min(list1))  # 2
+  print(max(list1))  # 9
+  ```
+
+- **Sum (`sum()`)**
+
+  ```py
+  list1 = [1, 2, 3]
+  print(sum(list1))  # 6
+  ```
+
+[⬆️ Go to Context](#context)
+
+### List comprehension
+
+- A concise way to **create lists** using a single line of code with loops and conditions.
+
+- Basic Syntax
+
+  ```py
+  [expression for item in iterable if condition]
+  ```
+
+- Squares of numbers
+
+  ```py
+  squares = [x**2 for x in range(5)]
+  print(squares)  # [0, 1, 4, 9, 16]
+  ```
+
+- Even numbers only
+
+  ```py
+  evens = [x for x in range(10) if x % 2 == 0]
+  print(evens)  # [0, 2, 4, 6, 8]
+  ```
+
+- Convert strings to uppercase
+
+  ```py
+  fruits = ["apple", "banana", "cherry"]
+  fruits_upper = [f.upper() for f in fruits]
+  print(fruits_upper)  # ['APPLE', 'BANANA', 'CHERRY']
+  ```
+
+- Nested List Comprehension
+
+  ```py
+  matrix = [[1,2,3],[4,5,6]]
+  flat = [num for row in matrix for num in row]
+  print(flat)  # [1, 2, 3, 4, 5, 6]
+  ```
+
+[⬆️ Go to Context](#context)
+
+### `zip()` Function in Python
+
+- Combines multiple iterables (lists, tuples, etc.) element-wise into a single iterator of tuples.
+
+- Syntax
+
+  ```py
+  zip(iterable1, iterable2, ...)
+  ```
+
+- Example — Basic usage
+
+  ```py
+  list1 = [1, 2, 3]
+  list2 = ['a', 'b', 'c']
+  zipped = zip(list1, list2)
+  print(list(zipped))  # [(1, 'a'), (2, 'b'), (3, 'c')]
+  ```
+
+- Example — More than two iterables
+
+  ```py
+  nums = [1, 2, 3]
+  chars = ['x', 'y', 'z']
+  bools = [True, False, True]
+  zipped = zip(nums, chars, bools)
+  print(list(zipped))  # [(1, 'x', True), (2, 'y', False), (3, 'z', True)]
+  ```
+
+- Example — Iterating directly
+
+  ```py
+  for num, char in zip([1,2], ['a','b']):
+      print(num, char)
+  # Output:
+  # 1 a
+  # 2 b
+  ```
+
+> [!NOTE]
+>
+> - Stops at the **shortest iterable**
+> - Can be combined with `list()`, `dict()`, or unpacking
 
 [⬆️ Go to Context](#context)
