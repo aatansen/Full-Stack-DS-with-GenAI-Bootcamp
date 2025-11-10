@@ -18,6 +18,7 @@
     - [Task 08 - Leap Year Checker](#task-08---leap-year-checker)
     - [Task 09 - Job Eligibility Checker](#task-09---job-eligibility-checker)
     - [Task 10 - Electricity Bill Calculator](#task-10---electricity-bill-calculator)
+    - [**Assignment 01 Result \& Correction**](#assignment-01-result--correction)
 
 # **Assignments**
 
@@ -133,5 +134,40 @@ Print:
 - Print `total payable amount`.
 
 > [Task 10 Solution](./Assignment%2001/Task%2010%20-%20Electricity%20Bill%20Calculator.py)
+
+[⬆️ Go to Context](#context)
+
+### **Assignment 01 Result & Correction**
+
+- Task 01 - Temperature Check
+  - Correction: Type conversion float
+- Task 02 - ATM Withdrawal System
+  - Correction: Type conversion float, need to handle negative withdraw
+- Task 03 - Student Grade Calculator
+  - Correction: Type conversion float
+- Task 04 - Bus Ticket Discount
+  - Correction: Negative check required
+- Task 05 - Restaurant Bill with Discount
+  - Correction: Type conversion float and Limiting floats to two decimal points
+- Task 06 - Login Authentication
+  - Correction: username lowercase convert
+- Task 07 - Traffic Light System
+  - Correction: color lowercase convert
+- Task 08 - Leap Year Checker
+  - Correct
+- Task 09 - Job Eligibility Checker
+  - Correction: qualification lowercase convert
+- Task 10 - Electricity Bill Calculator
+  - Correction: Type conversion float and negative unit check
+- **Final result : `5.5`**
+
+> [!NOTE]
+>
+> - Convert user inputs to **float** only when decimal values are needed (like temperature, money, bills)
+> - Always check for **negative values** (withdraw amount, units, ticket price, etc.).
+> - **Convert user input to lowercase** before comparing strings (e.g., username, color, qualification).
+> - **Limit float outputs** to two decimal points when printing money or bill values.
+> - Be consistent with **data validation** before performing calculations.
+> - Review each task for **type conversion**, **case handling**, and **value checking**.
 
 [⬆️ Go to Context](#context)
