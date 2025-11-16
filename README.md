@@ -3583,7 +3583,7 @@ print(counter)
 
 ### Functions are First-Class Citizens
 
-– Functions in Python can be treated like any other object: assigned to variables, passed as arguments, and returned from other functions.
+- Functions in Python can be treated like any other object: assigned to variables, passed as arguments, and returned from other functions.
 
 - **Assigning Function to a Variable**
 
@@ -3655,7 +3655,7 @@ print(counter)
 
 ### Lambda Function
 
-– A small anonymous function defined using the `lambda` keyword, usually for simple operations
+- A small anonymous function defined using the `lambda` keyword, usually for simple operations
 
   ```py
   # Syntax: lambda arguments: expression
