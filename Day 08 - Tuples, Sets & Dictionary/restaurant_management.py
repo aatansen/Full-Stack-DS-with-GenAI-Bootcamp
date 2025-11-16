@@ -41,4 +41,4 @@ if another_order == "yes":
     else:
         print("Invalid item, Please order something from the Menu")
 
-print(f"Your total ammount is ${total_price}. Thank you!")
+print(f"Your total amount is ${total_price}. Thank you!")
