@@ -70,6 +70,7 @@
     - [Operations on Lists](#operations-on-lists)
     - [List comprehension](#list-comprehension)
     - [`zip()` Function in Python](#zip-function-in-python)
+  - [**Assignment 02**](#assignment-02)
 - [**Day 08 - Tuples, Sets \& Dictionary**](#day-08---tuples-sets--dictionary)
   - [**Tuples**](#tuples)
     - [Creating a Tuple](#creating-a-tuple)
@@ -1850,6 +1851,10 @@ print(counter)
 >
 > - Stops at the **shortest iterable**
 > - Can be combined with `list()`, `dict()`, or unpacking
+
+[⬆️ Go to Context](#context)
+
+## [**Assignment 02**](./Assignments/Assignment%2002/)
 
 [⬆️ Go to Context](#context)
 
