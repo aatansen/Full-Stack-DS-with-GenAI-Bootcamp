@@ -30,6 +30,7 @@
     - [Task 08 - Invoice Code Formatter](#task-08---invoice-code-formatter)
     - [Task 09 - Count Hashtags and Mentions (Social Media Analytics)](#task-09---count-hashtags-and-mentions-social-media-analytics)
     - [Task 10 - Word Reversal for Data Encryption](#task-10---word-reversal-for-data-encryption)
+    - [**Assignment 02 Result \& Correction**](#assignment-02-result--correction)
 
 # **Assignments**
 
@@ -303,5 +304,31 @@ Print:
   - Output: `IA si nuf`
 
 > [Task 10 Solution](./Assignment%2002/Task%2010%20-%20Word%20Reversal%20for%20Data%20Encryption.py)
+
+[⬆️ Go to Context](#context)
+
+### **Assignment 02 Result & Correction**
+
+- Task 01 - Email Validator (String Filtering + Loops)
+  - Correction: Also check `@gmail.com` with `find('@')>0` condition
+- Task 02 - Count Word Frequency in Customer Reviews
+  - Correction: output formate in dictionary
+- Task 03 - Password Strength Checker
+  - Correct
+- Task 04 - Username Generator
+  - Correction: random number 2 digit
+- Task 05 - SMS Word Counter
+  - Correct
+- Task 06 - Remove Duplicates from Contact List
+  - Correction: remove space after split (`.strip()`)
+- Task 07 - Detect Suspicious Words in Text (Moderation)
+  - Correct
+- Task 08 - Invoice Code Formatter
+  - Correction: After `INV` str inputted id need to be fill with 000 using `.zfill(5)`
+- Task 09 - Count Hashtags and Mentions (Social Media Analytics)
+  - Correct
+- Task 10 - Word Reversal for Data Encryption
+  - Correct
+- **Final result : `7`**
 
 [⬆️ Go to Context](#context)
