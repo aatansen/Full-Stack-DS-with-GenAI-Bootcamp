@@ -31,6 +31,17 @@
     - [Task 09 - Count Hashtags and Mentions (Social Media Analytics)](#task-09---count-hashtags-and-mentions-social-media-analytics)
     - [Task 10 - Word Reversal for Data Encryption](#task-10---word-reversal-for-data-encryption)
     - [**Assignment 02 Result \& Correction**](#assignment-02-result--correction)
+  - [**Assignment 03**](#assignment-03)
+    - [Task 01 - Inventory Price Calculator](#task-01---inventory-price-calculator)
+    - [Task 02 - Unique Visitor Tracker](#task-02---unique-visitor-tracker)
+    - [Task 03 - Product Category Counter](#task-03---product-category-counter)
+    - [Task 04 - Temperature Analytics](#task-04---temperature-analytics)
+    - [Task 05 - Menu Price Lookup](#task-05---menu-price-lookup)
+    - [Task 06 - Student Grading System](#task-06---student-grading-system)
+    - [Task 07 - Discount Calculator](#task-07---discount-calculator)
+    - [Task 08 - Hashtag Generator](#task-08---hashtag-generator)
+    - [Task 09 - User Authentication Mock](#task-09---user-authentication-mock)
+    - [Task 10 - Shopping Cart Bill Calculator](#task-10---shopping-cart-bill-calculator)
 
 # **Assignments**
 
@@ -330,5 +341,194 @@ Print:
 - Task 10 - Word Reversal for Data Encryption
   - Correct
 - **Final result : `7`**
+
+[⬆️ Go to Context](#context)
+
+## [**Assignment 03**](./Assignment%2003/)
+
+### Task 01 - Inventory Price Calculator
+
+> 💼 **Real-world use:** Used in e-commerce dashboards for price summaries.
+
+- Write a function `calculate_inventory_summary(prices)` that:
+  - receives a list of product prices
+  - returns total_cost and average_cost
+- **Input**: `[120, 250, 399, 150]`
+- **Output**: `(919, 229.75)`
+
+> [Task 01 Solution](./Assignment%2003/Task%2001%20-%20Inventory%20Price%20Calculator.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 02 - Unique Visitor Tracker
+
+> 💼 **Real-world use:** Website analytics tools calculating daily active users.
+
+- Write a function `count_unique_visitors(visitor_list)` that:
+  - takes a list of visitor IDs
+  - returns the number of unique visitors
+
+- **Example**
+  - **Input**: `[101, 205, 101, 310, 205, 550]`
+  - **Output**: `4 (The unique IDs are 101, 205, 310, 550)`
+
+> [Task 02 Solution](./Assignment%2003/Task%2002%20-%20Unique%20Visitor%20Tracker.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 03 - Product Category Counter
+
+> 💼 **Real-world use:** Inventory/category-based analytics.
+
+- Write a function `count_categories(products)` that:
+  - takes a list of product names
+  - returns a dictionary counting each product type.
+
+- **Example**
+  - **Input**: `["Laptop", "Smartphone", "Monitor", "Laptop", "Smartphone", "Headphones", "Laptop"]`
+  - **Output**: `{"Laptop": 3, "Smartphone": 2, "Monitor": 1, "Headphones": 1}`
+
+> [Task 03 Solution](./Assignment%2003/Task%2003%20-%20Product%20Category%20Counter.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 04 - Temperature Analytics
+
+> 💼 **Real-world use:** Health tech temperature screening systems.
+
+- Write a function `analyze_temperatures(temp_list)` that:
+  - separates high (> 38°C) and normal temps
+  - returns two lists: (`high_list`, `normal_list`)
+
+- **Example**
+  - **Input**: `[36.5, 38.0, 39.1, 37.2, 40.5, 38.0, 37.9]`
+  - **Output**:
+    - `High List (>38°C): [39.1, 40.5]`
+    - `Normal List (<38°C): [36.5, 38.0, 37.2, 38.0, 37.9]`
+    - `Full Output Tuple: ([39.1, 40.5], [36.5, 38.0, 37.2, 38.0, 37.9])`
+
+> [Task 04 Solution](./Assignment%2003/Task%2004%20-%20Temperature%20Analytics.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 05 - Menu Price Lookup
+
+> 💼 **Real-world use:** Restaurant ordering apps.
+
+- Write a function `get_price(menu, item)` that:
+  - receives a dictionary `menu` and an item name
+  - returns the price if it exists
+  - otherwise returns `"Item not found"`
+
+- **Example 1: Item Found**
+  - **Input (Menu):** `{"Coffee": 3.50, "Tea": 2.75, "Muffin": 4.00, "Sandwich": 8.50}`
+  - **Input (Item):** `"Muffin"`
+  - **Output:** `4.00`
+
+- **Example 2: Item Not Found**
+  - **Input (Menu):** `{"Coffee": 3.50, "Tea": 2.75, "Muffin": 4.00, "Sandwich": 8.50}`
+  - **Input (Item):** `"Donut"`
+  - **Output:** `"Item not found"`
+
+> [Task 05 Solution](./Assignment%2003/Task%2005%20-%20Menu%20Price%20Lookup.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 06 - Student Grading System
+
+> 💼 **Real-world use:** School result automation.
+
+- Write a function `calculate_grade(score)` that:
+  - returns `"A+"`, `"A"`, `"A-"`, `"F"` based on numeric marks
+- Write another function `grade_students(student_dict)` that:
+  - takes a dictionary of `student: score`
+  - returns a dictionary of `student: grade`
+
+- **Example**
+  - **Input (Scores Dictionary):** `{"Alice": 85, "Bob": 78, "Charlie": 32, "David": 69}`
+  - **Output (Grades Dictionary):** `{"Alice": "A+", "Bob": "A", "Charlie": "F", "David": "A-"}`
+
+> [Task 06 Solution](./Assignment%2003/Task%2006%20-%20Student%20Grading%20System.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 07 - Discount Calculator
+
+> 💼 **Real-world use:** Online store discount engine.
+
+- Write a function `apply_discounts(products)` where:
+  - `products` is a list of tuples: `(name, price, discount)`
+  - returns a list of updated prices after applying the discount
+
+- **Example**
+  - **Input (List of Tuples):** `[("Keyboard", 80.00, 20), ("Mouse", 25.00, 10), ("Monitor", 300.00, 5)]`
+  - **Output (List of Prices):** `[64.00, 22.50, 285.00]`
+
+> [Task 07 Solution](./Assignment%2003/Task%2007%20-%20Discount%20Calculator.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 08 - Hashtag Generator
+
+> 💼 **Real-world use:** Social media automation tools.
+
+- Write a function `generate_hashtags(sentence)` that:
+  - converts every word in the sentence into a hashtag
+  - returns a list of hashtags
+
+- **Example**
+  - **Input:** `"AI Data Science"`
+  - **Output:** `["#ai", "#data", "#science"]`
+
+> [Task 08 Solution](./Assignment%2003/Task%2008%20-%20Hashtag%20Generator.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 09 - User Authentication Mock
+
+> 💼 **Real-world use:** Login systems (basic level).
+
+- Write a function `login(username, password)` that:
+  - checks if the `username` exists
+  - checks if the `password` matches
+  - returns "Login Successful" or "Invalid Credentials"
+
+- **Example Setup (Mock Database):** Assume the following credential database is used internally:
+  - `CREDENTIALS` = `{"alex_s": "securepwd1", "maria_t": "password101", "john_d": "johndoe123"}`
+
+- **Example 1: Successful Login**
+  - Input (Username): "maria_t"
+  - Input (Password): "password101"
+  - Output: "Login Successful"
+
+- **Example 2: Failed Login (Wrong Password)**
+  - Input (Username): "alex_s"
+  - Input (Password): "securepwd12"
+  - Output: "Invalid Credentials"
+
+- **Example 3: Failed Login (Non-existent User)**
+  - Input (Username): "peter_z"
+  - Input (Password): "any_password"
+  - Output: "Invalid Credentials"
+
+> [Task 09 Solution](./Assignment%2003/Task%2009%20-%20User%20Authentication%20Mock.py)
+
+[⬆️ Go to Context](#context)
+
+### Task 10 - Shopping Cart Bill Calculator
+
+> 💼 **Real-world use:** Billing systems in e-commerce apps.
+
+- Write a function `calculate_total(cart, prices)` that:
+  - takes a shopping cart list
+  - takes a dictionary of `item: price`
+  - returns the total bill amount
+
+- **Example**
+  - **Input (Cart):** `["Milk", "Bread", "Milk", "Cheese", "Bread"]`
+  - **Input (Price):** `{"Milk": 3.00, "Bread": 2.50, "Eggs": 4.00, "Cheese": 5.00}`
+  - **Output (Total Bill Amount):** `16.00`
+
+> [Task 10 Solution](./Assignment%2003/Task%2010%20-%20Shopping%20Cart%20Bill%20Calculator.py)
 
 [⬆️ Go to Context](#context)

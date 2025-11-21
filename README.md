@@ -38,7 +38,7 @@
   - [**PIP (Pip Installs Packages)**](#pip-pip-installs-packages)
   - [**Modules in Python**](#modules-in-python)
   - [**Loops in Python**](#loops-in-python)
-  - [**Assignment 01**](#assignment-01)
+- [**Assignment 01**](#assignment-01)
 - [**Day 05 - Loops in Python**](#day-05---loops-in-python)
   - [**Loops Recap**](#loops-recap)
   - [**Loop Control Statements**](#loop-control-statements)
@@ -70,7 +70,7 @@
     - [Operations on Lists](#operations-on-lists)
     - [List comprehension](#list-comprehension)
     - [`zip()` Function in Python](#zip-function-in-python)
-  - [**Assignment 02**](#assignment-02)
+- [**Assignment 02**](#assignment-02)
 - [**Day 08 - Tuples, Sets \& Dictionary**](#day-08---tuples-sets--dictionary)
   - [**Tuples**](#tuples)
     - [Creating a Tuple](#creating-a-tuple)
@@ -131,6 +131,7 @@
     - [List and Remove Conda Environments](#list-and-remove-conda-environments)
   - [**Requirements**](#requirements)
     - [`requirements.txt` file](#requirementstxt-file)
+- [**Assignment 03**](#assignment-03)
 
 # **Day 01 - Induction Session**
 
@@ -772,7 +773,7 @@ print("Hello World")
 
 [⬆️ Go to Context](#context)
 
-## [**Assignment 01**](./Assignments/Assignment%2001/)
+# [**Assignment 01**](./Assignments/Assignment%2001/)
 
 [⬆️ Go to Context](#context)
 
@@ -1854,7 +1855,7 @@ print(counter)
 
 [⬆️ Go to Context](#context)
 
-## [**Assignment 02**](./Assignments/Assignment%2002/)
+# [**Assignment 02**](./Assignments/Assignment%2002/)
 
 [⬆️ Go to Context](#context)
 
@@ -3957,5 +3958,9 @@ print(counter)
   ```sh
   pip list
   ```
+
+[⬆️ Go to Context](#context)
+
+# [**Assignment 03**](./Assignments/Assignment%2003/)
 
 [⬆️ Go to Context](#context)
