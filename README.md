@@ -160,6 +160,9 @@
     - [Custom Logger](#custom-logger)
     - [Advanced Format](#advanced-format)
     - [Exception Logging](#exception-logging)
+- [**Day 12 - Building an Iron Man JARVIS System**](#day-12---building-an-iron-man-jarvis-system)
+  - [**Features in JARVIS System**](#features-in-jarvis-system)
+  - [**JARVIS System Setup**](#jarvis-system-setup)
 
 # **Day 01 - Induction Session**
 
@@ -4675,5 +4678,45 @@ print(counter)
   except ZeroDivisionError:
       logging.exception("Exception occurred")
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 12 - Building an Iron Man JARVIS System**
+
+- JARVIS is a Python-based voice assistant that can interact with the user through speech recognition, perform tasks like opening applications, searching on Google or Wikipedia, playing music randomly, telling jokes, and having small talk.
+
+- This project uses speech recognition and text-to-speech (TTS) to provide a hands-free assistant experience similar to Iron Man's JARVIS.
+
+[⬆️ Go to Context](#context)
+
+## **Features in JARVIS System**
+
+- Greet the user according to the time of day (morning, afternoon, evening)
+- Recognize voice commands using Google Speech Recognition
+- Speak responses using pyttsx3
+- Time & Date announcements
+- Wikipedia search with spoken summary
+- Open websites like Google, Facebook, YouTube
+- Play random music from a specified folder
+- Open system applications: Calculator, Notepad, CMD
+- Open Calendar (Google Calendar via browser)
+- Tell jokes and respond to basic small talk
+- Exit gracefully with a voice command
+
+[⬆️ Go to Context](#context)
+
+## **JARVIS System Setup**
+
+- Python `3.13` or higher
+- Packages
+
+  ```sh
+  PyAudio==0.2.14
+  pyttsx3==2.99
+  SpeechRecognition==3.14.4
+  wikipedia==1.4.0
+  ```
+
+- Create [virtual env](#create-conda-environment) then install package and run [jarvis.py](./Day%2012%20-%20Building%20an%20Iron%20Man%20JARVIS%20System/jarvis.py)
 
 [⬆️ Go to Context](#context)

@@ -1,0 +1,227 @@
+[ 2025-11-23 16:01:21,851 ] comtypes.client._code_cache - INFO - Could not import comtypes.gen, trying to create it.
+[ 2025-11-23 16:01:21,851 ] comtypes.client._code_cache - INFO - Created comtypes.gen directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:01:21,851 ] comtypes.client._code_cache - INFO - Writing __init__.py file: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen\__init__.py'
+[ 2025-11-23 16:01:21,861 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:01:21,876 ] comtypes.client._generate - INFO - Could not import comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4: No module named 'comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4'
+[ 2025-11-23 16:01:21,883 ] comtypes.client._generate - INFO - # Generating comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4
+[ 2025-11-23 16:01:21,974 ] comtypes.client._generate - INFO - # Generating comtypes.gen.SpeechLib
+[ 2025-11-23 16:01:21,981 ] comtypes.client._generate - INFO - Could not import comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0: No module named 'comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0'
+[ 2025-11-23 16:01:21,982 ] comtypes.client._generate - INFO - # Generating comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0
+[ 2025-11-23 16:01:21,989 ] comtypes.client._generate - INFO - # Generating comtypes.gen.stdole
+[ 2025-11-23 16:01:58,191 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:01:58,191 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:02:12,265 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:02:16,552 ] root - INFO - 
+[ 2025-11-23 16:02:16,630 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:02:26,444 ] root - INFO - User requested to open Calculator.
+[ 2025-11-23 16:02:33,428 ] root - INFO - 
+[ 2025-11-23 16:02:33,503 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:02:52,171 ] root - INFO - 
+[ 2025-11-23 16:02:52,249 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:02,437 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:03:09,244 ] root - INFO - 
+[ 2025-11-23 16:03:09,322 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:17,611 ] root - INFO - 
+[ 2025-11-23 16:03:17,690 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:25,030 ] root - INFO - 
+[ 2025-11-23 16:03:25,108 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:31,199 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:40,204 ] root - INFO - 
+[ 2025-11-23 16:03:40,283 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:03:47,284 ] root - INFO - 
+[ 2025-11-23 16:03:47,362 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:06:46,886 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:06:46,887 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:06:55,687 ] root - INFO - Playing music: deep-abstract-ambient_snowcap-401656.mp3
+[ 2025-11-23 16:07:04,901 ] root - INFO - 
+[ 2025-11-23 16:07:04,978 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:07:08,168 ] root - INFO - Playing music: deep-abstract-ambient_snowcap-401656.mp3
+[ 2025-11-23 16:07:21,619 ] root - INFO - Playing music: hype-drill-music-438398.mp3
+[ 2025-11-23 16:07:32,681 ] root - INFO - 
+[ 2025-11-23 16:07:32,759 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:07:37,044 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:07:48,103 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:14:12,601 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:14:12,601 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:14:22,877 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:14:54,150 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:14:54,150 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:15:00,971 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:05,705 ] root - INFO - User requested a joke.
+[ 2025-11-23 16:15:11,194 ] root - INFO - 
+[ 2025-11-23 16:15:11,272 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:19,235 ] root - INFO - 
+[ 2025-11-23 16:15:19,314 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:23,114 ] root - INFO - User requested to open GitHub.
+[ 2025-11-23 16:15:26,775 ] root - INFO - 
+[ 2025-11-23 16:15:26,853 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:30,722 ] root - INFO - User requested to open Facebook.
+[ 2025-11-23 16:15:37,438 ] root - INFO - User requested to search on YouTube.
+[ 2025-11-23 16:15:45,367 ] root - INFO - 
+[ 2025-11-23 16:15:45,440 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:48,262 ] root - INFO - 
+[ 2025-11-23 16:15:48,334 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:15:56,811 ] root - INFO - 
+[ 2025-11-23 16:15:56,889 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:16:02,940 ] root - INFO - 
+[ 2025-11-23 16:16:03,018 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:16:13,651 ] root - INFO - User requested to open Calendar.
+[ 2025-11-23 16:17:17,054 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:17:17,054 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:17:23,983 ] root - INFO - User requested a joke.
+[ 2025-11-23 16:17:30,283 ] root - INFO - 
+[ 2025-11-23 16:17:30,361 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:17:34,411 ] root - INFO - User requested a joke.
+[ 2025-11-23 16:17:38,701 ] root - INFO - 
+[ 2025-11-23 16:17:38,779 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:18:19,362 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:18:19,362 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:18:32,322 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:18:42,327 ] root - INFO - 
+[ 2025-11-23 16:18:42,405 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:19:03,597 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:19:03,597 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:19:10,390 ] root - INFO - Playing music: deep-abstract-ambient_snowcap-401656.mp3
+[ 2025-11-23 16:19:24,304 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:19:24,305 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:19:55,393 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:19:55,394 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:20:04,837 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:10,288 ] root - INFO - 
+[ 2025-11-23 16:20:10,367 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:13,893 ] root - INFO - 
+[ 2025-11-23 16:20:13,972 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:16,496 ] root - INFO - 
+[ 2025-11-23 16:20:16,575 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:33,442 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:20:33,442 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:20:39,731 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:45,286 ] root - INFO - 
+[ 2025-11-23 16:20:45,369 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:20:48,067 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:20:48,068 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:20:58,520 ] root - INFO - User requested to open Facebook.
+[ 2025-11-23 16:21:02,310 ] root - INFO - 
+[ 2025-11-23 16:21:02,388 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:21:10,072 ] root - INFO - User requested to search on YouTube.
+[ 2025-11-23 16:21:18,775 ] root - INFO - 
+[ 2025-11-23 16:21:18,852 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:21:39,235 ] root - INFO - 
+[ 2025-11-23 16:21:39,315 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:21:47,718 ] root - INFO - 
+[ 2025-11-23 16:21:47,801 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:21:57,943 ] root - INFO - 
+[ 2025-11-23 16:21:58,022 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:21:59,995 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:21:59,995 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:22:10,555 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:22:17,619 ] root - INFO - 
+[ 2025-11-23 16:22:17,696 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:22:25,717 ] root - INFO - 
+[ 2025-11-23 16:22:25,794 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:22:30,489 ] root - INFO - 
+[ 2025-11-23 16:22:30,566 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:22:37,742 ] root - INFO - 
+[ 2025-11-23 16:22:37,820 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:22:44,151 ] root - INFO - 
+[ 2025-11-23 16:22:44,229 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:22:52,948 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:22:52,949 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:23:03,874 ] root - INFO - User requested to open Facebook.
+[ 2025-11-23 16:23:07,947 ] root - INFO - 
+[ 2025-11-23 16:23:08,028 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:11,093 ] root - INFO - 
+[ 2025-11-23 16:23:11,173 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:16,329 ] root - INFO - 
+[ 2025-11-23 16:23:16,408 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:23,059 ] root - INFO - 
+[ 2025-11-23 16:23:23,137 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:28,804 ] root - INFO - 
+[ 2025-11-23 16:23:28,882 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:34,245 ] root - INFO - 
+[ 2025-11-23 16:23:34,325 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:49,673 ] root - INFO - 
+[ 2025-11-23 16:23:49,814 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:23:55,473 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:23:55,474 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:24:22,145 ] root - INFO - Wikipedia search for elon musk on
+[ 2025-11-23 16:24:26,809 ] root - INFO - 
+[ 2025-11-23 16:24:26,887 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:24:30,778 ] root - INFO - 
+[ 2025-11-23 16:24:30,857 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:24:37,012 ] root - INFO - 
+[ 2025-11-23 16:24:37,091 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:24:46,012 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:24:54,620 ] root - INFO - 
+[ 2025-11-23 16:24:54,697 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:24:59,438 ] root - INFO - 
+[ 2025-11-23 16:24:59,517 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:25:06,957 ] root - INFO - 
+[ 2025-11-23 16:25:07,036 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:25:08,838 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:25:08,838 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:25:18,236 ] root - INFO - Wikipedia search for marks on
+[ 2025-11-23 16:25:23,039 ] root - INFO - 
+[ 2025-11-23 16:25:23,117 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:26:25,819 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:26:25,819 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:26:35,587 ] root - INFO - Wikipedia search for elon musk on
+[ 2025-11-23 16:26:48,668 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:27:01,192 ] root - INFO - 
+[ 2025-11-23 16:27:01,270 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:27:06,890 ] root - INFO - 
+[ 2025-11-23 16:27:06,968 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:27:13,040 ] root - INFO - 
+[ 2025-11-23 16:27:13,161 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:27:20,320 ] root - INFO - 
+[ 2025-11-23 16:27:20,399 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:27:27,498 ] root - INFO - 
+[ 2025-11-23 16:27:27,578 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:35:57,212 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:35:57,212 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:36:08,168 ] root - INFO - 
+[ 2025-11-23 16:36:08,241 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:36:22,935 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:36:27,075 ] root - INFO - 
+[ 2025-11-23 16:36:27,145 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:36:39,045 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:37:09,753 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:37:09,753 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:38:01,944 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:38:01,945 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:38:12,726 ] root - INFO - User requested information from Wikipedia.
+[ 2025-11-23 16:38:17,769 ] root - INFO - 
+[ 2025-11-23 16:38:17,839 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:38:41,224 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:38:41,225 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:38:48,114 ] root - INFO - User asked for current time.
+[ 2025-11-23 16:38:53,143 ] root - INFO - 
+[ 2025-11-23 16:38:53,214 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:38:57,015 ] root - INFO - 
+[ 2025-11-23 16:38:57,085 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:39:02,856 ] root - INFO - 
+[ 2025-11-23 16:39:02,929 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:39:10,079 ] root - INFO - 
+[ 2025-11-23 16:39:10,149 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:39:15,578 ] root - INFO - 
+[ 2025-11-23 16:39:15,650 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:39:22,437 ] root - INFO - 
+[ 2025-11-23 16:39:22,507 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:39:30,723 ] root - INFO - User asked for current time.
+[ 2025-11-23 16:39:36,218 ] root - INFO - 
+[ 2025-11-23 16:39:36,289 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:41:13,686 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:41:13,686 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:41:24,809 ] root - INFO - User asked for current time.
+[ 2025-11-23 16:41:30,918 ] root - INFO - 
+[ 2025-11-23 16:41:30,990 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:41:36,868 ] root - INFO - 
+[ 2025-11-23 16:41:36,941 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:43:25,798 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:43:25,799 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:43:35,054 ] root - INFO - User asked for current time.
+[ 2025-11-23 16:46:12,942 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Admin\\Documents\\GitHub\\Full-Stack-DS-with-GenAI-Bootcamp\\Day 12 - Building an Iron Man JARVIS System\\.pixi\\envs\\default\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+[ 2025-11-23 16:46:12,942 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Admin\Documents\GitHub\Full-Stack-DS-with-GenAI-Bootcamp\Day 12 - Building an Iron Man JARVIS System\.pixi\envs\default\Lib\site-packages\comtypes\gen'
+[ 2025-11-23 16:46:19,032 ] root - INFO - 
+[ 2025-11-23 16:46:19,103 ] root - INFO - User asked for an unsupported command.
+[ 2025-11-23 16:46:23,988 ] root - INFO - User asked for current time.

@@ -1,0 +1,18 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "JARVIS ChatBot"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+
+[pypi-dependencies]
+speechrecognition = ">=3.14.4, <4"
+pyttsx3 = ">=2.99, <3"
+pyaudio = ">=0.2.14, <0.3"
+wikipedia = ">=1.4.0, <2"
+pipdeptree = ">=2.30.0, <3"
