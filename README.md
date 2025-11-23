@@ -143,8 +143,23 @@
     - [Pickling in Python](#pickling-in-python)
     - [JSON Dump vs Pickling](#json-dump-vs-pickling)
     - [File Handling Using `os` Module](#file-handling-using-os-module)
-    - [Exception Handling in Python](#exception-handling-in-python)
-    - [Logging in Python](#logging-in-python)
+  - [**Exception Handling in Python**](#exception-handling-in-python)
+    - [Try and Except](#try-and-except)
+    - [Try, Except with Multiple Exceptions](#try-except-with-multiple-exceptions)
+    - [Try, Except with Generic Exception](#try-except-with-generic-exception)
+    - [Else Block](#else-block)
+    - [Finally Block](#finally-block)
+    - [Raising Exceptions](#raising-exceptions)
+    - [Custom Exception](#custom-exception)
+    - [Try-Except-Else-Finally Complete Structure](#try-except-else-finally-complete-structure)
+  - [**Logging in Python**](#logging-in-python)
+    - [Import Logging Module](#import-logging-module)
+    - [Basic Configuration (Console Logging)](#basic-configuration-console-logging)
+    - [Logging to a File](#logging-to-a-file)
+    - [Logging Levels](#logging-levels)
+    - [Custom Logger](#custom-logger)
+    - [Advanced Format](#advanced-format)
+    - [Exception Logging](#exception-logging)
 
 # **Day 01 - Induction Session**
 
@@ -4464,12 +4479,14 @@ print(counter)
 
 [⬆️ Go to Context](#context)
 
-### Exception Handling in Python
+## **Exception Handling in Python**
 
 - Mechanism to handle runtime errors.
 - Prevents program from crashing.
 
-- Try and Except
+[⬆️ Go to Context](#context)
+
+### Try and Except
 
   ```py
   try:
@@ -4478,7 +4495,9 @@ print(counter)
       print("Cannot divide by zero")
   ```
 
-- Try, Except with Multiple Exceptions
+[⬆️ Go to Context](#context)
+
+### Try, Except with Multiple Exceptions
 
   ```py
   try:
@@ -4490,7 +4509,9 @@ print(counter)
       print("Cannot divide by zero")
   ```
 
-- Try, Except with Generic Exception
+[⬆️ Go to Context](#context)
+
+### Try, Except with Generic Exception
 
   ```py
   try:
@@ -4499,40 +4520,51 @@ print(counter)
       print("Error:", e)
   ```
 
-- Else Block
-  - Executes if no exception occurs.
+[⬆️ Go to Context](#context)
 
-    ```py
-    try:
-        x = 10 / 2
-    except ZeroDivisionError:
-        print("Error")
-    else:
-        print("No error, result is", x)
-    ```
+### Else Block
 
-- Finally Block
-  - Executes regardless of exception.
+- Executes if no exception occurs.
 
-    ```py
-    try:
-        x = 10 / 0
-    except ZeroDivisionError:
-        print("Error")
-    finally:
-        print("Always runs")
-    ```
+  ```py
+  try:
+      x = 10 / 2
+  except ZeroDivisionError:
+      print("Error")
+  else:
+      print("No error, result is", x)
+  ```
 
-- Raising Exceptions
-  - Manually trigger an exception.
+[⬆️ Go to Context](#context)
 
-    ```py
-    age = -5
-    if age < 0:
-        raise ValueError("Age cannot be negative")
-    ```
+### Finally Block
 
-- Custom Exception
+- Executes regardless of exception.
+
+  ```py
+  try:
+      x = 10 / 0
+  except ZeroDivisionError:
+      print("Error")
+  finally:
+      print("Always runs")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Raising Exceptions
+
+- Manually trigger an exception.
+
+  ```py
+  age = -5
+  if age < 0:
+      raise ValueError("Age cannot be negative")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Custom Exception
 
   ```py
   class CustomError(Exception):
@@ -4541,7 +4573,9 @@ print(counter)
   raise CustomError("This is a custom exception")
   ```
 
-- Try-Except-Else-Finally Complete Structure
+[⬆️ Go to Context](#context)
+
+### Try-Except-Else-Finally Complete Structure
 
   ```py
   try:
@@ -4559,18 +4593,22 @@ print(counter)
 
 [⬆️ Go to Context](#context)
 
-### Logging in Python
+## **Logging in Python**
 
 - Logging records events, errors, and messages during program execution.
 - Useful for debugging and monitoring applications.
 
-- Import Logging Module
+[⬆️ Go to Context](#context)
+
+### Import Logging Module
 
   ```py
   import logging
   ```
 
-- Basic Configuration (Console Logging)
+[⬆️ Go to Context](#context)
+
+### Basic Configuration (Console Logging)
 
   ```py
   logging.basicConfig(level=logging.DEBUG)
@@ -4581,7 +4619,9 @@ print(counter)
   logging.critical("Critical issue")
   ```
 
-- Logging to a File
+[⬆️ Go to Context](#context)
+
+### Logging to a File
 
   ```py
   log_path = "app.log"
@@ -4596,14 +4636,19 @@ print(counter)
   logging.error("This is an error")
   ```
 
-- Logging Levels
-  - DEBUG → Detailed information, for development.
-  - INFO → General events, program flow.
-  - WARNING → Indicates a potential problem.
-  - ERROR → Serious problem that prevents a function from running.
-  - CRITICAL → Very serious error, may stop program.
+[⬆️ Go to Context](#context)
 
-- Custom Logger
+### Logging Levels
+
+- `DEBUG` → Detailed information, for development.
+- `INFO` → General events, program flow.
+- `WARNING` → Indicates a potential problem.
+- `ERROR` → Serious problem that prevents a function from running.
+- `CRITICAL` → Very serious error, may stop program.
+
+[⬆️ Go to Context](#context)
+
+### Custom Logger
 
   ```py
   logger = logging.getLogger("myLogger")
@@ -4611,14 +4656,18 @@ print(counter)
   logger.info("Using custom logger")
   ```
 
-- Advanced Format
+[⬆️ Go to Context](#context)
+
+### Advanced Format
 
   ```py
   logging.basicConfig(format='%(levelname)s:%(name)s:%(message)s', level=logging.INFO)
   logging.info("Custom formatted log")
   ```
 
-- Exception Logging
+[⬆️ Go to Context](#context)
+
+### Exception Logging
 
   ```py
   try:
