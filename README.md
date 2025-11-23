@@ -132,6 +132,19 @@
   - [**Requirements**](#requirements)
     - [`requirements.txt` file](#requirementstxt-file)
 - [**Assignment 03**](#assignment-03)
+- [**Day 11 - File Handling, Exception Handling and Logging**](#day-11---file-handling-exception-handling-and-logging)
+  - [**File Handling**](#file-handling)
+    - [What is File Handling?](#what-is-file-handling)
+    - [File Modes](#file-modes)
+    - [File Handling Using `Open` All Modes](#file-handling-using-open-all-modes)
+    - [File Handling Using `with` All Modes](#file-handling-using-with-all-modes)
+    - [`Open` vs `With` in Python](#open-vs-with-in-python)
+    - [Serialization and Deserialization](#serialization-and-deserialization)
+    - [Pickling in Python](#pickling-in-python)
+    - [JSON Dump vs Pickling](#json-dump-vs-pickling)
+    - [File Handling Using `os` Module](#file-handling-using-os-module)
+    - [Exception Handling in Python](#exception-handling-in-python)
+    - [Logging in Python](#logging-in-python)
 
 # **Day 01 - Induction Session**
 
@@ -3962,5 +3975,656 @@ print(counter)
 [⬆️ Go to Context](#context)
 
 # [**Assignment 03**](./Assignments/Assignment%2003/)
+
+[⬆️ Go to Context](#context)
+
+# **Day 11 - File Handling, Exception Handling and Logging**
+
+## **File Handling**
+
+### What is File Handling?
+
+- A way to read from and write to files using Python’s built-in functions.
+- To store data permanently.
+- To read/write logs, configs, reports, user data, etc.
+
+---
+
+- Types of data used for I/O:
+  - Text - '12345' as a sequence of unicode chars
+  - Binary - 12345 as a sequence of bytes of its binary equivalent
+
+- Hence there are 2 file types to deal with
+  - Text files - All program files are text files
+  - Binary Files - Images,music,video,exe files
+
+- How File I/O is done in most programming languages
+  - Open a file
+  - Read/Write data
+  - Close the file
+
+[⬆️ Go to Context](#context)
+
+### File Modes
+
+- '`r`'  → read (default)
+- '`w`'  → write (overwrites file)
+- '`a`'  → append (adds to file)
+- '`x`'  → create error if file exists
+- '`b`'  → binary mode (images, videos)
+- '`t`'  → text mode (default)
+- Combinations: '`rb`', '`wb`', '`ab`', etc.
+
+[⬆️ Go to Context](#context)
+
+### File Handling Using `Open` All Modes
+
+- '`r`'  → Read mode (default)
+  - Opens file for reading.
+  - Raises error if file does not exist.
+
+    ```py
+    f = open("data.txt", "r")
+    content = f.read()
+    f.close()
+    ```
+
+- '`w`'  → Write mode
+  - Creates file if missing.
+  - Overwrites file if exists.
+
+    ```py
+      f = open("data.txt", "w")
+      f.write("Hello World")
+      f.close()
+      ```
+
+- '`a`'  → Append mode
+  - Creates file if missing.
+  - Adds new data at the end (does not overwrite).
+
+    ```py
+    f = open("data.txt", "a")
+    f.write("\nNew Line Added")
+    f.close()
+    ```
+
+- '`x`'  → Exclusive creation mode
+  - Creates new file.
+  - Error if file already exists.
+
+    ```py
+    f = open("newfile.txt", "x")
+    f.write("Created using x mode")
+    f.close()
+    ```
+
+- '`b`'  → Binary mode
+  - Used for images, videos, audio, PDFs.
+  - Must combine with r/w/a.
+
+    ```py
+    f = open("image.jpg", "rb")
+    data = f.read()
+    f.close()
+    ```
+
+- '`t`'  → Text mode (default)
+  - Handles normal text files.
+
+    ```py
+    f = open("notes.txt", "rt")
+    print(f.read())
+    f.close()
+    ```
+
+- '`rb`'  → Read Binary
+
+  ```py
+  f = open("file.bin", "rb")
+  data = f.read()
+  f.close()
+  ```
+
+- '`wb`'  → Write Binary
+
+  ```py
+  f = open("file.bin", "wb")
+  f.write(b"Binary Data")
+  f.close()
+  ```
+
+- '`ab`'  → Append Binary
+
+  ```py
+  f = open("file.bin", "ab")
+  f.write(b"\nMore Binary Data")
+  f.close()
+  ```
+
+- '`rt`'  → Read Text (same as 'r')
+
+  ```py
+  f = open("info.txt", "rt")
+  ```
+
+- '`wt`'  → Write Text (same as 'w')
+
+  ```py
+  f = open("info.txt", "wt")
+  ```
+
+- '`at`'  → Append Text (same as 'a')
+
+  ```py
+  f = open("info.txt", "at")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### File Handling Using `with` All Modes
+
+- '`r`' → Read mode (default)
+  - Opens file for reading.
+  - Automatically closes file after block ends.
+
+    ```py
+    with open("data.txt", "r") as f:
+        content = f.read()
+        print(content)
+    ```
+
+- '`w`' → Write mode
+  - Creates file if missing.
+  - Overwrites file if it exists.
+
+    ```py
+    with open("data.txt", "w") as f:
+        f.write("Hello World")
+    ```
+
+- '`a`' → Append mode
+  - Creates file if missing.
+  - Adds new data at the end.
+
+    ```py
+    with open("data.txt", "a") as f:
+        f.write("\nNew Line Added")
+    ```
+
+- '`x`' → Exclusive creation mode
+  - Creates new file.
+  - Error if file already exists.
+
+    ```py
+    with open("newfile.txt", "x") as f:
+        f.write("Created using x mode")
+    ```
+
+- '`b`' → Binary mode
+  - Used for images, PDFs, videos.
+  - Must combine with r/w/a.
+
+    ```py
+    with open("image.jpg", "rb") as f:
+        data = f.read()
+    ```
+
+- '`t`' → Text mode (default)
+  - For normal text files.
+
+    ```py
+    with open("notes.txt", "rt") as f:
+        print(f.read())
+    ```
+
+- '`rb`' → Read Binary
+
+    ```py
+    with open("file.bin", "rb") as f:
+        data = f.read()
+    ```
+
+- '`wb`' → Write Binary
+
+    ```py
+    with open("file.bin", "wb") as f:
+        f.write(b"Binary Data")
+    ```
+
+- '`ab`' → Append Binary
+
+    ```py
+    with open("file.bin", "ab") as f:
+        f.write(b"\nMore Binary Data")
+    ```
+
+- '`rt`' → Read Text (same as 'r')
+
+    ```py
+    with open("info.txt", "rt") as f:
+        print(f.read())
+    ```
+
+- '`wt`' → Write Text (same as 'w')
+
+    ```py
+    with open("info.txt", "wt") as f:
+        f.write("Hello!")
+    ```
+
+- '`at`' → Append Text (same as 'a')
+
+    ```py
+    with open("info.txt", "at") as f:
+        f.write("\nAppended text")
+    ```
+
+[⬆️ Go to Context](#context)
+
+### `Open` vs `With` in Python
+
+- **Using `open()`**
+  - Must manually close the file using `close()`.
+  - If an error occurs, file may remain open (resource leak).
+  - More lines of code and less safe.
+
+    ```py
+    f = open("data.txt", "r")
+    content = f.read()
+    f.close()
+    ```
+
+- **Using `with`**
+  - Automatically closes the file after block ends.
+  - Prevents resource leaks even if errors occur.
+  - Cleaner, safer, and recommended.
+
+    ```py
+    with open("data.txt", "r") as f:
+        content = f.read()
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Serialization and Deserialization
+
+- **Serialization**
+  - Process of converting Python data types into JSON format.
+  - Useful for storing or transmitting data.
+
+    ```py
+    import json
+
+    data = {"name": "TT", "age": 25, "city": "Dhaka"}
+    json_str = json.dumps(data)  # Python dict → JSON string
+    print(json_str)  # '{"name": "TT", "age": 25, "city": "Dhaka"}'
+    ```
+
+- **Deserialization**
+  - Process of converting JSON data back into Python data types.
+
+    ```py
+    import json
+
+    json_str = '{"name": "TT", "age": 25, "city": "Dhaka"}'
+    data = json.loads(json_str)  # JSON string → Python dict
+    print(data)  # {'name': 'TT', 'age': 25, 'city': 'Dhaka'}
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Pickling in Python
+
+- **Pickling**
+  - Process of converting Python objects into a byte stream.
+  - Can also pickle functions for later use (if defined at top level).
+
+    ```py
+    import pickle
+
+    def display_info():
+        return "Hi my name is Tansen and I am a Programmer"
+
+    with open("func.pkl", "wb") as f:
+        pickle.dump(display_info, f)
+    ```
+
+- **Unpickling**
+  - Process of converting byte stream back into Python objects.
+  - Can call the unpickled function like normal.
+
+    ```py
+    import pickle
+
+    with open("func.pkl", "rb") as f:
+        func = pickle.load(f)
+
+    print(func())  # Hi my name is Tansen and I am a Programmer
+    ```
+
+[⬆️ Go to Context](#context)
+
+### JSON Dump vs Pickling
+
+- **JSON Dump**
+  - Converts Python objects to JSON string format.
+  - Text-based, human-readable.
+  - Can be shared across different programming languages.
+  - Supports basic Python types (dict, list, str, int, float, bool, None).
+  - Cannot serialize custom Python objects or functions directly.
+
+    ```py
+    import json
+
+    def display_info():
+        return "Hi my name is Tansen and I am a Programmer"
+
+    data = {"name": "Tansen", "age": 25, "info": "Programmer"}
+    json_str = json.dumps(data)  # Serialize Python dict
+    print(json_str)  # '{"name": "Tansen", "age": 25, "info": "Programmer"}'
+    ```
+
+- **Pickling**
+  - Converts Python objects to byte stream.
+  - Binary format, not human-readable.
+  - Python-specific, cannot be directly used in other languages.
+  - Can serialize almost any Python object including custom classes and functions.
+
+    ```py
+    import pickle
+
+    def display_info():
+        return "Hi my name is Tansen and I am a Programmer"
+
+    with open("func.pkl", "wb") as f:
+        pickle.dump(display_info, f)  # Serialize function
+
+    with open("func.pkl", "rb") as f:
+        func = pickle.load(f)
+
+    print(func())  # Hi my name is Tansen and I am a Programmer
+    ```
+
+[⬆️ Go to Context](#context)
+
+### File Handling Using `os` Module
+
+- Importing OS Module
+
+  ```py
+  import os
+  ```
+
+- Check if File or Directory Exists
+
+  ```py
+  os.path.exists("data.txt")        # True if file or folder exists
+  os.path.isfile("data.txt")        # True if it is a file
+  os.path.isdir("my_folder")        # True if it is a directory
+  ```
+
+- Create a Directory
+
+  ```py
+  os.mkdir("my_folder")             # Single directory
+  os.makedirs("parent/child")       # Nested directories
+  ```
+
+- Remove/Delete a Directory
+
+  ```py
+  os.rmdir("my_folder")             # Only empty directories
+  os.removedirs("parent/child")     # Nested empty directories
+  ```
+
+- Remove/Delete a File
+
+  ```py
+  os.remove("data.txt")
+  ```
+
+- Rename a File or Directory
+
+  ```py
+  os.rename("old_name.txt", "new_name.txt")
+  ```
+
+- List Files and Directories
+
+  ```py
+  os.listdir(".")                    # List current directory
+  os.listdir("/path/to/folder")      # List specific folder
+  ```
+
+- Get Current Working Directory
+
+  ```py
+  cwd = os.getcwd()
+  print(cwd)
+  ```
+
+- Change Directory
+
+  ```py
+  os.chdir("my_folder")
+  print(os.getcwd())
+  ```
+
+- Join Paths
+
+  ```py
+  full_path = os.path.join("folder", "file.txt")
+  print(full_path)                   # folder/file.txt (or folder\file.txt in Windows)
+  ```
+
+- Get Absolute Path
+
+  ```py
+  abs_path = os.path.abspath("data.txt")
+  print(abs_path)
+  ```
+
+- Split Path
+
+  ```py
+  folder, file = os.path.split("/path/to/data.txt")
+  print(folder, file)
+  ```
+
+- Get File Name and Extension
+
+  ```py
+  name, ext = os.path.splitext("data.txt")
+  print(name, ext)                   # data .txt
+  ```
+
+- Check Access Permissions
+
+  ```py
+  os.access("data.txt", os.R_OK)    # True if readable
+  os.access("data.txt", os.W_OK)    # True if writable
+  os.access("data.txt", os.X_OK)    # True if executable
+  ```
+
+- File Size
+
+  ```py
+  size = os.path.getsize("data.txt")
+  print(size)
+  ```
+
+- Modification and Creation Time
+
+  ```py
+  import time
+  mod_time = os.path.getmtime("data.txt")
+  print(time.ctime(mod_time))
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Exception Handling in Python
+
+- Mechanism to handle runtime errors.
+- Prevents program from crashing.
+
+- Try and Except
+
+  ```py
+  try:
+      x = 10 / 0
+  except ZeroDivisionError:
+      print("Cannot divide by zero")
+  ```
+
+- Try, Except with Multiple Exceptions
+
+  ```py
+  try:
+      num = int("abc")
+      x = 10 / 0
+  except ValueError:
+      print("Invalid value")
+  except ZeroDivisionError:
+      print("Cannot divide by zero")
+  ```
+
+- Try, Except with Generic Exception
+
+  ```py
+  try:
+      x = 10 / 0
+  except Exception as e:
+      print("Error:", e)
+  ```
+
+- Else Block
+  - Executes if no exception occurs.
+
+    ```py
+    try:
+        x = 10 / 2
+    except ZeroDivisionError:
+        print("Error")
+    else:
+        print("No error, result is", x)
+    ```
+
+- Finally Block
+  - Executes regardless of exception.
+
+    ```py
+    try:
+        x = 10 / 0
+    except ZeroDivisionError:
+        print("Error")
+    finally:
+        print("Always runs")
+    ```
+
+- Raising Exceptions
+  - Manually trigger an exception.
+
+    ```py
+    age = -5
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    ```
+
+- Custom Exception
+
+  ```py
+  class CustomError(Exception):
+      pass
+
+  raise CustomError("This is a custom exception")
+  ```
+
+- Try-Except-Else-Finally Complete Structure
+
+  ```py
+  try:
+      x = int(input("Enter a number: "))
+      result = 10 / x
+  except ValueError:
+      print("Invalid input")
+  except ZeroDivisionError:
+      print("Cannot divide by zero")
+  else:
+      print("Result is", result)
+  finally:
+      print("End of program")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Logging in Python
+
+- Logging records events, errors, and messages during program execution.
+- Useful for debugging and monitoring applications.
+
+- Import Logging Module
+
+  ```py
+  import logging
+  ```
+
+- Basic Configuration (Console Logging)
+
+  ```py
+  logging.basicConfig(level=logging.DEBUG)
+  logging.debug("This is a debug message")
+  logging.info("Informational message")
+  logging.warning("Warning message")
+  logging.error("Error occurred")
+  logging.critical("Critical issue")
+  ```
+
+- Logging to a File
+
+  ```py
+  log_path = "app.log"
+  logging.basicConfig(
+      filename=log_path,
+      format="[ %(asctime)s ] %(name)s - %(levelname)s - %(message)s",
+      level=logging.INFO
+  )
+
+  logging.info("This will be written to a file with timestamp and format")
+  logging.warning("This is a warning")
+  logging.error("This is an error")
+  ```
+
+- Logging Levels
+  - DEBUG → Detailed information, for development.
+  - INFO → General events, program flow.
+  - WARNING → Indicates a potential problem.
+  - ERROR → Serious problem that prevents a function from running.
+  - CRITICAL → Very serious error, may stop program.
+
+- Custom Logger
+
+  ```py
+  logger = logging.getLogger("myLogger")
+  logger.setLevel(logging.DEBUG)
+  logger.info("Using custom logger")
+  ```
+
+- Advanced Format
+
+  ```py
+  logging.basicConfig(format='%(levelname)s:%(name)s:%(message)s', level=logging.INFO)
+  logging.info("Custom formatted log")
+  ```
+
+- Exception Logging
+
+  ```py
+  try:
+      x = 10 / 0
+  except ZeroDivisionError:
+      logging.exception("Exception occurred")
+  ```
 
 [⬆️ Go to Context](#context)
