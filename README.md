@@ -163,6 +163,8 @@
 - [**Day 12 - Building an Iron Man JARVIS System**](#day-12---building-an-iron-man-jarvis-system)
   - [**Features in JARVIS System**](#features-in-jarvis-system)
   - [**JARVIS System Setup**](#jarvis-system-setup)
+- [**Day 13 - Multilingual AI Assistant**](#day-13---multilingual-ai-assistant)
+  - [Extending Jarvis Chatbot](#extending-jarvis-chatbot)
 
 # **Day 01 - Induction Session**
 
@@ -4718,5 +4720,28 @@ print(counter)
   ```
 
 - Create [virtual env](#create-conda-environment) then install package and run [jarvis.py](./Day%2012%20-%20Building%20an%20Iron%20Man%20JARVIS%20System/jarvis.py)
+
+[⬆️ Go to Context](#context)
+
+# **Day 13 - Multilingual AI Assistant**
+
+## Extending Jarvis Chatbot
+
+- Add new requirement `google-generativeai` to use gemini flash model `gemini-2.5-flash`
+- And `python-dotenv` for loading secrete variable from `.env` like API key
+
+  ```sh
+  PyAudio==0.2.14
+  pyttsx3==2.99
+  SpeechRecognition==3.14.4
+  wikipedia==1.4.0
+  google-generativeai==0.8.5
+  python-dotenv==1.2.1
+  ```
+
+- Get Free API from [Google AI Studio](https://aistudio.google.com/api-keys)
+- Apply it in [jarvis.py](./Day%2013%20-%20Multilingual%20AI%20Assistant/jarvis.py)
+- Use it for others query from user
+- Run [jarvis.py](./Day%2013%20-%20Multilingual%20AI%20Assistant/jarvis.py)
 
 [⬆️ Go to Context](#context)
