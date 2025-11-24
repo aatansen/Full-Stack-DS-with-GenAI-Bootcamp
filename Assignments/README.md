@@ -42,6 +42,7 @@
     - [Task 08 - Hashtag Generator](#task-08---hashtag-generator)
     - [Task 09 - User Authentication Mock](#task-09---user-authentication-mock)
     - [Task 10 - Shopping Cart Bill Calculator](#task-10---shopping-cart-bill-calculator)
+    - [**Assignment 03 Result \& Correction**](#assignment-03-result--correction)
 
 # **Assignments**
 
@@ -530,5 +531,13 @@ Print:
   - **Output (Total Bill Amount):** `16.00`
 
 > [Task 10 Solution](./Assignment%2003/Task%2010%20-%20Shopping%20Cart%20Bill%20Calculator.py)
+
+[⬆️ Go to Context](#context)
+
+### **Assignment 03 Result & Correction**
+
+- All Correct
+
+- **Final result : `10`**
 
 [⬆️ Go to Context](#context)
