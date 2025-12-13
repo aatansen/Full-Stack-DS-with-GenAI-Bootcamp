@@ -43,6 +43,8 @@
     - [Task 09 - User Authentication Mock](#task-09---user-authentication-mock)
     - [Task 10 - Shopping Cart Bill Calculator](#task-10---shopping-cart-bill-calculator)
     - [**Assignment 03 Result \& Correction**](#assignment-03-result--correction)
+  - [**Assignment 04**](#assignment-04)
+    - [Assignment 04 Solution](#assignment-04-solution)
 
 # **Assignments**
 
@@ -539,5 +541,37 @@ Print:
 - All Correct
 
 - **Final result : `10`**
+
+[⬆️ Go to Context](#context)
+
+## **Assignment 04**
+
+- Build Your Own AI Desktop Assistant "`Jarvis`"
+  - Create a voice-activated desktop assistant named "`Jarvis`" that can perform daily tasks using voice commands. The goal is to master Python functions, library management, and API integration.
+- **Core Features (The "Must-Haves")**
+  - **Level 1: The Mouth & Ears (Basic Input/Output)**
+    - *Speak Function*: Create a function `speak(text)` that takes text and reads it out loud using [pyttsx3](https://pypi.org/project/pyttsx3/).
+    - *Listen Function*: Create a function `take_command()` that uses the microphone to listen to the user and converts the audio into a string (text).
+    - *Greeting*: When the program starts, `Jarvis` must greet the user based on the time of day (e.g., "Good Morning, Sir" if it's before 12 PM).
+  - **Level 2: The Worker (Automation Tasks)**
+    - *Tell Time*: Command: "What time is it?" -> `Jarvis` replies with the current time.
+    - *Wikipedia Search*: Command: "Wikipedia [topic]" -> `Jarvis` reads the first 2 sentences of the summary from Wikipedia.
+    - *Web Browser Automation*:
+      - "Open YouTube" -> Opens YouTube in the default browser.
+      - "Open Google" -> Opens Google.
+      - "Open LinkedIn" -> Opens the student's LinkedIn profile.
+  - **Level 3: The "Generative AI" Brain (Bootcamp Special)**
+    - *Integration*: Use the [google-generativeai](https://pypi.org/project/google-generativeai/) library (Gemini API) or openai library.
+    - The "Think" Command: If the user asks a question that isn't a basic command (e.g., "Write a poem about Python" or "Explain Data Science"), `Jarvis` should send that text to the LLM and read out the answer.
+
+> [!NOTE]
+>
+> - Note: Make "`Jarvis`" Your Own! (Bonus Challenge)
+> - "The best way to learn is to build what you need."
+> - The features listed above are just the starting point. To truly master Python, you are highly encouraged to add at least one custom feature of your own choice. Think about what would make your life easier or cooler.
+
+[⬆️ Go to Context](#context)
+
+### [Assignment 04 Solution](https://github.com/aatansen/Jarvis-AI/)
 
 [⬆️ Go to Context](#context)

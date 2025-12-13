@@ -165,6 +165,7 @@
   - [**JARVIS System Setup**](#jarvis-system-setup)
 - [**Day 13 - Multilingual AI Assistant**](#day-13---multilingual-ai-assistant)
   - [Extending Jarvis Chatbot](#extending-jarvis-chatbot)
+- [**Assignment 04**](#assignment-04)
 
 # **Day 01 - Induction Session**
 
@@ -4743,5 +4744,11 @@ print(counter)
 - Apply it in [jarvis.py](./Day%2013%20-%20Multilingual%20AI%20Assistant/jarvis.py)
 - Use it for others query from user
 - Run [jarvis.py](./Day%2013%20-%20Multilingual%20AI%20Assistant/jarvis.py)
+
+[⬆️ Go to Context](#context)
+
+# **Assignment 04**
+
+- [Jarvis AI Project](https://github.com/aatansen/Jarvis-AI/)
 
 [⬆️ Go to Context](#context)
