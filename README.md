@@ -173,6 +173,19 @@
   - [**Regular Expression (Regex)**](#regular-expression-regex)
     - [Email Extract Using Regex](#email-extract-using-regex)
   - [**Organize Files Using Python**](#organize-files-using-python)
+- [**Day 15 - Introduction to OOP**](#day-15---introduction-to-oop)
+  - [**The Robot Problem**](#the-robot-problem)
+    - [Class \& Object](#class--object)
+    - [Constructor (`__init__`)](#constructor-__init__)
+    - [`self` Keyword](#self-keyword)
+    - [Instance Variables](#instance-variables)
+    - [Class Variables](#class-variables)
+    - [Instance Methods](#instance-methods)
+  - [**Class vs Object**](#class-vs-object)
+    - [Class](#class)
+    - [Object](#object)
+    - [Key Differences](#key-differences)
+    - [Multiple Objects from One Class](#multiple-objects-from-one-class)
 
 # **Day 01 - Induction Session**
 
@@ -4963,6 +4976,8 @@ print(counter)
       print(text[index[0]: index[1]])
   ```
 
+[⬆️ Go to Context](#context)
+
 ### Email Extract Using Regex
 
   ```py
@@ -5000,5 +5015,259 @@ print(counter)
           os.makedirs(path+"/"+extension)
           shutil.move(path+"/"+file, path+"/"+extension+"/"+file)
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 15 - Introduction to OOP**
+
+## **The Robot Problem**
+
+- Using function
+
+  ```py
+  # Robot 1
+  def movement_1():
+    print("Its Robot 1")
+  def fire_detection_1():
+    print("Its Robot 1")
+  def wheel_control_1():
+    print("Its Robot 1")
+
+  ## Robot 2
+  def movement_2():
+    print("Its Robot 2")
+  def fire_detection_2():
+    print("Its Robot 2")
+  def wheel_control_2():
+    print("Its Robot 2")
+
+  movement_1()
+  movement_2()
+  ```
+
+- Solution using OOP
+
+  ```py
+  # using OOP
+
+  class Robot:
+
+    def __init__(self, robot_number):
+      self.robot_number = robot_number
+
+    def movement(self):
+      print(f"Its Robot {self.robot_number}")
+
+
+    def fire_detection(self):
+      print(f"Its Robot {self.robot_number}")
+
+    def wheel_controll(self):
+      print(f"Its Robot {self.robot_number}")
+
+
+    def ai_intelligence(self):
+      print(f"Its Robot {self.robot_number}")
+
+  # Robot 1
+  robot1 = Robot(robot_number = 1)
+  robot1.movement()
+
+  # Robot 2
+  robot2 = Robot(robot_number = 2)
+  robot2.movement()
+  ```
+
+- In OOP `__init__` function is contructor. In construction data properties are defined
+- And methods are called functional properties
+
+[⬆️ Go to Context](#context)
+
+### Class & Object
+
+- **Class** - Blueprint for creating objects
+
+  ```py
+  class Person:
+      pass
+  ```
+
+- **Object** - Instance of a class
+
+  ```py
+  p = Person()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Constructor (`__init__`)
+
+- **Basic Constructor**
+
+  ```py
+  class Person:
+      def __init__(self):
+          print("Object created")
+
+  p = Person()
+  ```
+
+- **Constructor with Parameters**
+
+  ```py
+  class Person:
+      def __init__(self, name, age):
+          self.name = name
+          self.age = age
+
+  p = Person("Rahim", 20)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### `self` Keyword
+
+- Refers to the **current object**
+
+  ```py
+  class Student:
+      def __init__(self, name):
+          self.name = name
+
+  s = Student("Ayesha")
+  print(s.name)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Instance Variables
+
+- Variables unique to each object
+
+  ```py
+  class User:
+      def __init__(self, username):
+          self.username = username
+
+  u1 = User("admin")
+  u2 = User("guest")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Class Variables
+
+- Shared among all objects
+
+  ```py
+  class Company:
+      name = "Google"
+
+  c1 = Company()
+  c2 = Company()
+  print(c1.name)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Instance Methods
+
+- Methods that work with object data
+
+  ```py
+  class Car:
+      def start(self):
+          print("Car started")
+
+  c = Car()
+  c.start()
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Class vs Object**
+
+[⬆️ Go to Context](#context)
+
+### Class
+
+- A class is a **blueprint / template**
+- It defines **properties (variables)** - and **behaviors (methods)**
+
+- **Purpose**
+  - Used to create multiple objects
+  - Does not occupy memory until object is created
+
+- **Example**
+
+  ```py
+  class Car:
+      def start(self):
+          print("Car started")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Object
+
+- An object is a **real instance*- of a class
+- Created from a class
+
+- **Purpose**
+  - Used to access class variables and methods
+  - Occupies memory
+
+- **Example**
+
+  ```py
+  c1 = Car()
+  c1.start()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Key Differences in Class and Object
+
+- **Blueprint vs Real Thing**
+
+  - Class → Design of a house
+  - Object → Actual house built from the design
+
+- **Memory**
+
+  - Class → No memory allocation
+  - Object → Memory allocated
+
+- **Creation**
+
+  - Class → Created using `class` keyword
+  - Object → Created using `ClassName()`
+
+- **Quantity**
+
+  - Class → One
+  - Object → Can be many
+
+[⬆️ Go to Context](#context)
+
+### Multiple Objects from One Class
+
+- **Same class, different objects**
+
+  ```py
+  class Student:
+      def __init__(self, name):
+          self.name = name
+
+  s1 = Student("Rahim")
+  s2 = Student("Karim")
+  ```
+
+- Class → Logical entity
+- Object → Physical entity
+- Class → Defines methods
+- Object → Uses methods
+- Class creates objects
+- Objects use class features
 
 [⬆️ Go to Context](#context)
