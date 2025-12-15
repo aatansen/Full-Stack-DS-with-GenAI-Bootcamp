@@ -187,7 +187,19 @@
     - [Key Differences in Class and Object](#key-differences-in-class-and-object)
     - [Multiple Objects from One Class](#multiple-objects-from-one-class)
 - [**Day 16 - Writing our first Class in OOP**](#day-16---writing-our-first-class-in-oop)
-  - [ATM Machine Using OOP](#atm-machine-using-oop)
+  - [**ATM Machine Using OOP**](#atm-machine-using-oop)
+- [**Day 17 - Self \& Encapsulation in OOP**](#day-17---self--encapsulation-in-oop)
+  - [**Magic Method/Dunder Method**](#magic-methoddunder-method)
+  - [**Concept of **self** keyword in OOP**](#concept-of-self-keyword-in-oop)
+  - [**How objects access attributes in OOP**](#how-objects-access-attributes-in-oop)
+  - [**Reference Variable in OOP**](#reference-variable-in-oop)
+  - [**Pass by reference**](#pass-by-reference)
+  - [**Mutability of object in OOP**](#mutability-of-object-in-oop)
+  - [**What is instance variable**](#what-is-instance-variable)
+  - [**Encapsulation in OOP**](#encapsulation-in-oop)
+    - [Types of Access Control](#types-of-access-control)
+    - [Getter \& Setter (Encapsulation Tool)](#getter--setter-encapsulation-tool)
+    - [Name Mangling (Private Variable Internals)](#name-mangling-private-variable-internals)
 
 # **Day 01 - Induction Session**
 
@@ -5276,7 +5288,7 @@ print(counter)
 
 # **Day 16 - Writing our first Class in OOP**
 
-## ATM Machine Using OOP
+## **ATM Machine Using OOP**
 
   ```py
   class AtmMachine:
@@ -5367,5 +5379,220 @@ print(counter)
   primebank = AtmMachine()
   citybank = AtmMachine()
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 17 - Self & Encapsulation in OOP**
+
+## **Magic Method/Dunder Method**
+
+- Special methods with double underscore: `__method__`
+- Automatically called by Python
+- Used to control class behavior
+- **Common Magic Methods**
+
+  ```py
+  class Test:
+      def __init__(self):
+          print("Object created")
+
+      def __str__(self):
+          return "Test Object"
+
+  t = Test()
+  print(t)
+  ```
+
+- **Usecase**
+
+  - Object creation → `__init__`
+  - Object printing → `__str__`
+  - Object deletion → `__del__`
+
+[⬆️ Go to Context](#context)
+
+## **Concept of **self** keyword in OOP**
+
+- `self` refers to the **current object**
+- Used to access object variables and methods
+- **Why `self` is needed**
+  - To differentiate object data from local variables
+
+  ```py
+  class Person:
+      def set_name(self, name):
+          self.name = name
+
+  p = Person()
+  p.set_name("Rahim")
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **How objects access attributes in OOP**
+
+- **Using dot (`.`) operator**
+
+  ```py
+  class Student:
+      def __init__(self):
+          self.name = "Ayesha"
+
+  s = Student()
+  print(s.name)
+  ```
+
+- **Access order**
+  - Object → Instance variables
+  - Class → Class variables
+
+[⬆️ Go to Context](#context)
+
+## **Reference Variable in OOP**
+
+- Variable that points to an object in memory
+- Object can have multiple reference variables
+
+  ```py
+  class Demo:
+      pass
+
+  a = Demo()
+  b = a   # both refer to same object
+  ```
+
+- **Key point**
+
+  - Object is not copied
+  - Only reference is shared
+
+[⬆️ Go to Context](#context)
+
+## **Pass by reference**
+
+- Python passes **object references**
+- Changes inside function affect original object (if mutable)
+
+  ```py
+  def update(lst):
+      lst.append(4)
+
+  nums = [1, 2, 3]
+  update(nums)
+  print(nums)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Mutability of object in OOP**
+
+- Can be changed after creation
+- List, Dictionary, Set, Class Objects
+
+  ```py
+  lst = [1, 2]
+  lst.append(3)
+  ```
+
+- **Immutable Objects**
+  - Cannot be changed
+  - int, float, string, tuple
+
+  ```py
+  x = 10
+  x = 20
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **What is instance variable**
+
+- Variable that belongs to an **object**
+- Different for each object
+- **Created inside constructor**
+
+  ```py
+  class User:
+      def __init__(self, name):
+          self.name = name
+
+  u1 = User("Admin")
+  u2 = User("Guest")
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Encapsulation in OOP**
+
+- Wrapping data and methods together
+- Protecting data from direct access
+
+[⬆️ Go to Context](#context)
+
+### Types of Access Control
+
+- **Public Variable**
+
+  ```py
+  self.name = "Rahim"
+  ```
+
+- **Protected Variable**- (`_var`)
+  - Should not be accessed directly (by convention)
+
+  ```py
+  self._email = "test@mail.com"
+  ```
+
+- **Private Variable**- (`__var`)
+  - Cannot be accessed directly outside class
+
+  ```py
+  self.__password = "1234"
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Getter & Setter (Encapsulation Tool)
+
+- **Safe access to private data**
+
+  ```py
+  class Account:
+      def __init__(self):
+          self.__balance = 0
+
+      def get_balance(self):
+          return self.__balance
+
+      def set_balance(self, amount):
+          self.__balance = amount
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Name Mangling (Private Variable Internals)
+
+- **How Python stores private variables**
+
+  ```py
+  print(account._Account__balance)
+  ```
+
+- **Why**
+  - Prevent accidental access
+  - Not true security, but protection
+- **Encapsulation Benefits**
+  - Data protection
+  - Controlled access
+  - Easier maintenance
+  - Better code structure
+- **Summary**
+  - `self` → current object
+  - Dunder methods → automatic behavior
+  - Reference variable → points to object
+  - Mutable → changeable
+  - Instance variable → object-specific
+  - Encapsulation → data protection
 
 [⬆️ Go to Context](#context)
