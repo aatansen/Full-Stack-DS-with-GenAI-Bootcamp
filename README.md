@@ -200,6 +200,13 @@
     - [Types of Access Control](#types-of-access-control)
     - [Getter \& Setter (Encapsulation Tool)](#getter--setter-encapsulation-tool)
     - [Name Mangling (Private Variable Internals)](#name-mangling-private-variable-internals)
+- [**Day 18 - Inheritance in OOP**](#day-18---inheritance-in-oop)
+  - [**Collection Of Class Objects**](#collection-of-class-objects)
+  - [**Static Variable in OOP**](#static-variable-in-oop)
+  - [**Instance vs Static Variable in OOP**](#instance-vs-static-variable-in-oop)
+  - [**Aggregation**](#aggregation)
+  - [**DRY Principle**](#dry-principle)
+  - [**Inheritance**](#inheritance)
 
 # **Day 01 - Induction Session**
 
@@ -5594,5 +5601,217 @@ print(counter)
   - Mutable → changeable
   - Instance variable → object-specific
   - Encapsulation → data protection
+
+[⬆️ Go to Context](#context)
+
+# **Day 18 - Inheritance in OOP**
+
+## **Collection Of Class Objects**
+
+A collection of class objects allows you to manage multiple instances of the same class (or related classes) as a single unit. This is fundamental for modeling groups of real-world entities.
+
+- **Homogeneous Collection:** Typically, the collection holds objects of the same class type (e.g., a list of `Employee` objects).
+- **Iteration:** You can easily loop through the collection to access and process the data/methods of each individual object.
+- **Encapsulation:** While the collection manages the group, each object maintains its own unique state (attributes).
+
+**Python Example (Using a List):**
+
+  ```py
+  class Person:
+
+    def __init__(self, name, country):
+      self.name = name
+      self.country = country
+
+  p1 = Person("Bappy", "UK")
+  p2 = Person("Alex", "USA")
+  p3 = Person("Ahmed", "india")
+
+  L = [p1, p2, p3]
+  print(L)
+
+  for i in L:
+    print(i.name, i.country)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Static Variable in OOP**
+
+A static variable (also commonly called a **class variable** in languages like Python) is a variable that is shared across all instances (objects) of a class. Unlike instance variables, which are unique to each object, the static variable maintains a single, persistent copy in memory for the entire class.
+
+- **Single Copy:** Only one memory location is allocated for the static variable, no matter how many objects you create.
+- **Shared State:** Any object can access and modify this single value. A change made by one object is immediately visible to all other objects.
+- **Access Method:** It is typically accessed and modified using the **Class Name** directly, rather than through an object instance.
+- **Common Use Case:** Counting the total number of objects created, storing a global constant specific to the class (e.g., maximum size), or logging class-wide activity.
+
+  ```py
+  class Atm:
+
+    #static variable
+    __customer_id = 0
+
+    #constructor(special function) - superpower
+    def __init__(self):
+      self.pin = ""
+      self.balance = 0
+      Atm.__customer_id += 1
+      print(Atm.__customer_id)
+    ...
+
+  obj1 = Atm() # 1
+  obj2 = Atm() # 2
+  ```
+
+- For safety we define the static as private variable `__customer_id`
+- To get value of static we use static method decorator
+
+  ```py
+  @staticmethod
+  def get_customer_id():
+    print(Atm.__customer_id)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Instance vs Static Variable in OOP**
+
+The key difference between an Instance Variable and a Static (or Class) Variable lies in **ownership, memory allocation, and sharing** among the objects of a class.
+
+- **Ownership:** Belongs to the **object** (instance) of the class.
+- **Definition:** Declared inside the class, typically within the constructor (`__init__` in Python) and associated with the `self` or `this` keyword.
+- **Memory:** A **separate copy** of the variable is created in **Heap Memory** for **every object** created from the class.
+- **Sharing:** They are **not shared**. Changes made to an instance variable in one object do not affect the value in any other object.
+- **Purpose:** To store data that is unique and specific to each instance (e.g., an employee's name, a car's color).
+- **Access:** Accessed using the object reference (e.g., `object_name.instance_var`).
+
+| Feature         | Instance Variable                                            | Static Variable (Class Variable)                                |
+| :-------------- | :----------------------------------------------------------- | :-------------------------------------------------------------- |
+| **Ownership**   | Belongs to the **object (instance)**.                        | Belongs to the **class**.                                       |
+| **Memory**      | A **separate copy** for every object (in Heap Memory).       | **One single copy** shared by all objects (at the class level). |
+| **Declaration** | Inside the class, typically in the constructor (`__init__`). | Inside the class, but outside all methods.                      |
+| **Access**      | Requires an object reference (`obj.instance_var`).           | Accessed via the class name (`Class.static_var`).               |
+| **Uniqueness**  | **Unique** value for each object.                            | **Same** shared value for all objects.                          |
+| **Lifetime**    | Exists as long as the object exists.                         | Exists as long as the class is loaded (program lifetime).       |
+
+[⬆️ Go to Context](#context)
+
+## **Aggregation**
+
+- Non-private attribute
+- Non-private methods
+- Aggregation method is deprecated currently used `Inheritance`
+
+  ```py
+  class Customer:
+      def __init__(self,name,gender,address):
+          self.name = name
+          self.gender = gender
+          self.address = address
+
+      def print_info(self):
+          print(f"Name: {self.name}, Gender: {self.gender}, Address: {self.address.city}, {self.address.pin}, {self.address.state}")
+
+
+
+  class Address:
+      def __init__(self, city, pin, state):
+          self.city = city
+          self.pin = pin
+          self.state = state
+
+  adds = Address("Dhaka", 1230, "Bangladesh")
+  cus = Customer("Bappy", "Male",adds)
+  cus.print_info()
+  ```
+
+- Aggregation Diagram
+
+  ![aggregation diagram](https://i.imgur.com/Pz1o1SY.png)
+
+[⬆️ Go to Context](#context)
+
+## **DRY Principle**
+
+DRY stands for **"Don't Repeat Yourself."** It is a fundamental software development principle that aims to reduce redundancy and repetition of information, logic, or knowledge within a system.
+
+Every piece of knowledge must have a **single, unambiguous, authoritative representation** within the system.
+
+| Benefit             | Description                                                                                                                                                            |
+| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Maintainability** | When a piece of logic needs updating, you only change it in **one central place**, reducing effort and time.                                                           |
+| **Fewer Bugs**      | By centralizing logic, you eliminate the risk of introducing inconsistencies or bugs that occur when a fix is applied in one duplicated location but missed in others. |
+| **Readability**     | Less repetitive code is shorter, more organized, and easier for other developers (and your future self) to read and understand.                                        |
+| **Consistency**     | Ensures that a specific functionality or calculation behaves exactly the same way every time it is used.                                                               |
+
+[⬆️ Go to Context](#context)
+
+## **Inheritance**
+
+Inheritance allows us to define a class that inherits all the methods and properties from another class. Parent class is the class being inherited from, also called base class. Child class is the class that inherits from another class, also called derived class.
+
+- Non-private attribute
+- Non-private methods
+
+  ```py
+  class User: #parent class
+    def __init__(self):
+      self.name = "Bappy"
+      self.gender = "Male"
+    def login(self):
+      print("Login Done!")
+    def register(self):
+      print("register Done!")
+
+  class Student(User): #child class
+    def __init__(self):
+      self.rollno = 12
+    def enroll(self):
+      print("Enrolled the course!")
+    def review(self):
+      print("Reviewing the course!")
+
+  class Instructor(User): #child class
+    def __init__(self):
+      self.idno = 120
+    def create(self):
+      print("created the course!")
+    def reply(self):
+      print("Reply to student!")
+
+  s = Student()
+  s.enroll()
+  s.register()
+  s.login()
+
+  I = Instructor()
+  I.create()
+  I.login()
+  I.register()
+  ```
+
+- When a child class is instantiated and does not define its own `__init__`, Python automatically and implicitly calls the Parent class's `__init__`.
+- When the child class defines its own `__init__`, it **overrides** the parent's `__init__`.
+- The `super()` function allows you to explicitly call methods from the parent class, primarily the parent's constructor.
+
+  ```py
+  class User: #parent class
+    def __init__(self):
+      self.name = "Bappy"
+      self.gender = "Male"
+    def login(self):
+      print("Login Done!")
+    def register(self):
+      print("register Done!")
+
+  class Student(User): #child class
+    def __init__(self):
+      self.rollno = 12
+    def enroll(self):
+      print("Enrolled the course!")
+
+  s = Student()
+  s.name # error as child has constructor `self.rollno = 12`
+  ```
 
 [⬆️ Go to Context](#context)
