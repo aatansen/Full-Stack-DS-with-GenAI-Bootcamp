@@ -207,6 +207,19 @@
   - [**Aggregation**](#aggregation)
   - [**DRY Principle**](#dry-principle)
   - [**Inheritance**](#inheritance)
+- [**Day 19 - Polymorphism, Abstraction \& Modular Coding**](#day-19---polymorphism-abstraction--modular-coding)
+  - [**Types of Inheritance**](#types-of-inheritance)
+    - [Single Inheritance](#single-inheritance)
+    - [Multilevel Inheritance](#multilevel-inheritance)
+    - [Multiple Inheritance](#multiple-inheritance)
+    - [Hierarchical Inheritance](#hierarchical-inheritance)
+    - [Hybrid Inheritance](#hybrid-inheritance)
+    - [Diamond Problem (Special Case)](#diamond-problem-special-case)
+  - [**Method Overriding**](#method-overriding)
+  - [**Super Keyword in OOP**](#super-keyword-in-oop)
+  - [**Multilevel Inheritance**](#multilevel-inheritance-1)
+  - [**Polymorphism**](#polymorphism)
+  - [**Abstraction**](#abstraction)
 
 # **Day 01 - Induction Session**
 
@@ -5812,6 +5825,341 @@ Inheritance allows us to define a class that inherits all the methods and proper
 
   s = Student()
   s.name # error as child has constructor `self.rollno = 12`
+  ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 19 - Polymorphism, Abstraction & Modular Coding**
+
+## **Types of Inheritance**
+
+### Single Inheritance
+
+- One child inherits from **one parent**.
+
+  ```py
+  class Parent:
+      def show(self):
+          print("Parent class")
+
+  class Child(Parent):
+      pass
+
+  obj = Child()
+  obj.show()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Multilevel Inheritance
+
+- A class inherits from a class that already inherits from another class.
+
+  ```py
+  class A:
+      def a(self):
+          print("A")
+
+  class B(A):
+      def b(self):
+          print("B")
+
+  class C(B):
+      def c(self):
+          print("C")
+
+  obj = C()
+  obj.a()
+  obj.b()
+  obj.c()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Multiple Inheritance
+
+- A class inherits from **more than one parent class**.
+
+  ```py
+  class Father:
+      def skill(self):
+          print("Driving")
+
+  class Mother:
+      def talent(self):
+          print("Cooking")
+
+  class Child(Father, Mother):
+      pass
+
+  obj = Child()
+  obj.skill()
+  obj.talent()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Hierarchical Inheritance
+
+- Multiple child classes inherit from **one parent**.
+
+  ```py
+  class Animal:
+      def sound(self):
+          print("Animal sound")
+
+  class Dog(Animal):
+      pass
+
+  class Cat(Animal):
+      pass
+
+  Dog().sound()
+  Cat().sound()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Hybrid Inheritance
+
+- Combination of **two or more** inheritance types.
+
+  ```py
+  class A:
+      def a(self):
+          print("A")
+
+  class B(A):
+      def b(self):
+          print("B")
+
+  class C(A):
+      def c(self):
+          print("C")
+
+  class D(B, C):
+      def d(self):
+          print("D")
+
+  obj = D()
+  obj.a()
+  obj.b()
+  obj.c()
+  obj.d()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Diamond Problem (Special Case)
+
+- Occurs in multiple inheritance when a class inherits from two classes that share a common parent.
+
+  ```py
+  class A:
+      def show(self):
+          print("A")
+
+  class B(A):
+      def show(self):
+          print("B")
+
+  class C(A):
+      def show(self):
+          print("C")
+
+  class D(B, C):
+      pass
+
+  obj = D()
+  obj.show()
+  print(D.mro())
+  ```
+
+> [!NOTE]
+>
+> - Single        → One parent, one child
+> - Multilevel    → Parent → Child → Grandchild
+> - Multiple      → Multiple parents, one child
+> - Hierarchical  → One parent, multiple children
+> - Hybrid        → Combination of inheritance types
+
+[⬆️ Go to Context](#context)
+
+## **Method Overriding**
+
+- Method overriding happens when a child class provides its own implementation of a method that already exists in the parent class
+  - It allows a child class to change or extend the behavior of a parent class method while keeping the same method name.
+  - A feature of inheritance
+  - Same method name
+  - Same parameters
+  - Defined in parent and child class
+  - Child method replaces parent method behavior
+- When we inherite the parant class the child class also need those argument when child class object is created
+
+  ```py
+  class Phone:
+    def __init__(self, price, brand, camera):
+      print("Inside Phone constructor")
+      self.__price = price
+      self.brand = brand
+      self.camera = camera
+
+    def get_price(self):
+      return self.__price
+
+    def buy(self):
+      print("Buying a Phone inside Phone constructor")
+
+  class SmartPhone(Phone):
+    def buy(self):
+      print("Buying a Phone inside SmartPhone constructor")
+
+  S  = SmartPhone(200000, "apple", 3) # output: Inside Phone constructor
+  S.buy() # overriding parent buy() output: Buying a Phone inside SmartPhone constructor
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Super Keyword in OOP**
+
+- `super()` allows a child class to safely access parent class methods and constructors, especially powerful in multiple inheritance.
+  - Built-in function in Python
+  - Refers to the parent (super) class
+  - Used inside child class
+  - Commonly used in method overriding
+
+  ```py
+  class Parent:
+      def show(self):
+          print("This is Parent class")
+
+  class Child(Parent):
+      def show(self):
+          super().show()   # call parent method
+          print("This is Child class")
+
+  obj = Child()
+  obj.show()
+  ```
+
+- Accessing parent constructor properties
+
+  ```py
+  class Person:
+      def __init__(self, name):
+          self.name = name
+
+  class Student(Person):
+      def __init__(self, name, roll):
+          super().__init__(name)   # call parent constructor
+          self.roll = roll
+
+  s = Student("Rahim", 101)
+  print(s.name, s.roll)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Multilevel Inheritance**
+
+- Inheritance allows one class to acquire properties and methods from another class. In multilevel inheritance, a class is derived from a class that is already derived from another class.
+  - Involves more than two classes
+  - Each class inherits from the previous class
+  - Forms a hierarchy
+  - Common in real-world modeling
+
+  ```py
+  class GrandParent:
+      def house(self):
+          print("Owns a house")
+
+  class Parent(GrandParent):
+      def car(self):
+          print("Owns a car")
+
+  class Child(Parent):
+      def bike(self):
+          print("Owns a bike")
+
+  c = Child()
+  c.house()
+  c.car()
+  c.bike()
+  ```
+
+  ```py
+  class Device:
+      def power_on(self):
+          print("Device powered on")
+
+  class Mobile(Device):
+      def call(self):
+          print("Calling...")
+
+  class SmartPhone(Mobile):
+      def internet(self):
+          print("Browsing internet")
+
+  phone = SmartPhone()
+  phone.power_on()
+  phone.call()
+  phone.internet()
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Polymorphism**
+
+- In Object-Oriented Programming, different objects may need to respond to the same method name in different ways.
+  - One interface, many forms
+  - Same method name, different behavior
+  - Achieved at runtime in Python
+  - Strongly linked with inheritance
+
+  ```py
+  class Animal:
+      def speak(self):
+          print("Animal makes a sound")
+
+  class Dog(Animal):
+      def speak(self):
+          print("Dog barks")
+
+  class Cat(Animal):
+      def speak(self):
+          print("Cat meows")
+
+  animals = [Dog(), Cat()]
+
+  for a in animals:
+      a.speak()
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Abstraction**
+
+- In large systems, exposing all internal details makes code complex and hard to maintain.
+  - Hides internal implementation
+  - Shows essential features only
+  - Focuses on what an object does, not how
+  - Achieved using abstract classes & interfaces (conceptually)
+
+  ```py
+  from abc import ABC, abstractmethod
+
+  class Payment(ABC):
+      @abstractmethod
+      def pay(self):
+          pass
+
+  class Bkash(Payment):
+      def pay(self):
+          print("Payment using bKash")
+
+  class Card(Payment):
+      def pay(self):
+          print("Payment using Card")
   ```
 
 [⬆️ Go to Context](#context)
