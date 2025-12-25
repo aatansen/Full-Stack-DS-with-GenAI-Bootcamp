@@ -220,6 +220,7 @@
   - [**Multilevel Inheritance**](#multilevel-inheritance-1)
   - [**Polymorphism**](#polymorphism)
   - [**Abstraction**](#abstraction)
+  - [**Modular Coding**](#modular-coding)
 
 # **Day 01 - Induction Session**
 
@@ -6160,6 +6161,54 @@ Inheritance allows us to define a class that inherits all the methods and proper
   class Card(Payment):
       def pay(self):
           print("Payment using Card")
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Modular Coding**
+
+- Breaking a large program into smaller modules
+- Each module is a separate file
+- Modules can contain functions, classes, or variables
+- Modules are imported where needed
+- Improves readability
+- Easier maintenance
+- Encourages reuse
+- Simplifies testing
+- Supports team collaboration
+- Example
+  - `calculator.py` file content
+
+    ```py
+    # calculator.py
+    def add(a, b):
+        return a + b
+
+    def sub(a, b):
+        return a - b
+    ```
+
+  - Using `calculator.py` function in `main.py`
+
+    ```py
+    # main.py
+    import calculator
+
+    print(calculator.add(10, 5))
+    print(calculator.sub(10, 5))
+    ```
+
+- Project structure of [ATM Machine](./Day%2019%20-%20Polymorphism,%20Abstraction%20&%20Modular%20Coding/atm_project/)
+
+  ```txt
+  atm_project
+  ├── 📁 core
+  │   ├── 🐍 __init__.py
+  │   ├── 🐍 auth.py
+  │   ├── 🐍 database.py
+  │   └── 🐍 transactions.py
+  ├── 📝 README.md
+  └── 🐍 main.py
   ```
 
 [⬆️ Go to Context](#context)
