@@ -244,6 +244,8 @@
     - [Generator Expression](#generator-expression)
     - [`yield` vs `return`](#yield-vs-return)
     - [Where To Use Generators](#where-to-use-generators)
+- [**Day 22 - User Interface (UI) Creation**](#day-22---user-interface-ui-creation)
+  - [**Design simple UI**](#design-simple-ui)
 
 # **Day 01 - Induction Session**
 
@@ -6783,5 +6785,16 @@ int()
 - Avoid generators when need to reuse values multiple times
 - Prefer generator expressions for simple transformations
 - Always close resources properly
+
+[⬆️ Go to Context](#context)
+
+# **Day 22 - User Interface (UI) Creation**
+
+## **Design simple UI**
+
+- Official docs: [Streamlit Fundamentals](https://docs.streamlit.io/get-started/fundamentals/main-concepts)
+- Transform CLI interface of [Day 20 - Mega OOP Project](./Day%2020%20-%20Mega%20OOP%20Project/) to [Day 22 - User Interface (UI) Creation](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/) GUI interface
+- To save data locally `st.session_state` is used
+- Full code can be found in [Day 22 - User Interface (UI) Creation/app.py](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/app.py)
 
 [⬆️ Go to Context](#context)
