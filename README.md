@@ -246,6 +246,14 @@
     - [Where To Use Generators](#where-to-use-generators)
 - [**Day 22 - User Interface (UI) Creation**](#day-22---user-interface-ui-creation)
   - [**Design simple UI**](#design-simple-ui)
+- [**Day 23 - PyPI Package Discussion**](#day-23---pypi-package-discussion)
+  - [**PyPI Package**](#pypi-package)
+    - [What is a Python Package?](#what-is-a-python-package)
+    - [Package Manager: `pip`](#package-manager-pip)
+    - [Requirements File](#requirements-file)
+    - [Virtual Environments](#virtual-environments)
+    - [How a Package is Structured](#how-a-package-is-structured)
+    - [Publishing a Package to PyPI](#publishing-a-package-to-pypi)
 
 # **Day 01 - Induction Session**
 
@@ -6796,5 +6804,97 @@ int()
 - Transform CLI interface of [Day 20 - Mega OOP Project](./Day%2020%20-%20Mega%20OOP%20Project/) to [Day 22 - User Interface (UI) Creation](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/) GUI interface
 - To save data locally `st.session_state` is used
 - Full code can be found in [Day 22 - User Interface (UI) Creation/app.py](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/app.py)
+
+[⬆️ Go to Context](#context)
+
+# **Day 23 - PyPI Package Discussion**
+
+## **PyPI Package**
+
+- **PyPI (Python Package Index)** is the official repository where Python developers publish and share reusable Python packages.
+- Website: pypi.org
+- Similar idea to
+  - npm for JavaScript
+  - Maven Central for Java
+
+[⬆️ Go to Context](#context)
+
+### What is a Python Package?
+
+- A **package** is a collection of Python modules bundled together.
+- Used to:
+  - Reuse code
+  - Avoid writing everything from scratch
+  - Share solutions with others
+- Examples:
+  - requests → HTTP requests
+  - numpy → numerical computing
+  - django → web framework
+
+[⬆️ Go to Context](#context)
+
+### Package Manager: `pip`
+
+- `pip` is the tool used to install packages from PyPI.
+
+- Common commands:
+  - `pip install package_name`
+  - `pip uninstall package_name`
+  - `pip list`
+  - `pip show package_name`
+  - `pip install --upgrade package_name`
+
+[⬆️ Go to Context](#context)
+
+### Requirements File
+
+- Used to manage dependencies `requirements.txt`
+
+  ```txt
+  django==4.2.3
+  requests>=2.28
+  numpy
+  ```
+
+- Installation
+  - `pip install -r requirements.txt`
+
+[⬆️ Go to Context](#context)
+
+### Virtual Environments
+
+- Isolate project dependencies.
+- Prevent version conflicts.
+  - `python -m venv venv`
+  - `venv\Scripts\activate`
+
+[⬆️ Go to Context](#context)
+
+### How a Package is Structured
+
+- Basic structure:
+
+  ```txt
+  mypackage/
+    ├── mypackage/
+    │    ├── __init__.py
+    │    └── core.py
+    ├── setup.py / pyproject.toml
+    ├── README.md
+    └── LICENSE
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Publishing a Package to PyPI
+
+- Create account on PyPI
+- Prepare package metadata
+- Build distribution
+- Upload using `twine`
+- Modern tools
+  - `setuptools`
+  - `poetry`
+  - `flit`
 
 [⬆️ Go to Context](#context)
