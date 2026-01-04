@@ -254,6 +254,10 @@
     - [Virtual Environments](#virtual-environments)
     - [How a Package is Structured](#how-a-package-is-structured)
     - [Publishing a Package to PyPI](#publishing-a-package-to-pypi)
+- [**Day 24,25 - Publish Package to PyPI**](#day-2425---publish-package-to-pypi)
+  - [**Youtube Notebook Embed Package**](#youtube-notebook-embed-package)
+    - [Day 24 - Project Setup](#day-24---project-setup)
+    - [Day 25 - Publish to PyPI](#day-25---publish-to-pypi)
 
 # **Day 01 - Induction Session**
 
@@ -6896,5 +6900,40 @@ int()
   - `setuptools`
   - `poetry`
   - `flit`
+
+[⬆️ Go to Context](#context)
+
+# **Day 24,25 - Publish Package to PyPI**
+
+## **Youtube Notebook Embed Package**
+
+### Day 24 - Project Setup
+
+- Create `.venv`
+- Generate project structure by running `template.py`
+- Add required packages in `requirements.txt` and `requirements-dev.txt`
+- Write `setup.py` and `setup.cfg`
+- Now define `pyproject.toml`
+- Install `requirements-dev.txt`
+- Define `logger.py` and `custom_exception.py` inside `src/ytnb-embed` path
+- Write test run in `tox.ini` and create `tests/integration/test_int.py` & `tests/unit/test_unit.py` files
+- Now to integrate CI/CD create `.github/workflows/ci.yml` for CI integration
+- Push to github to see the github action running
+
+[⬆️ Go to Context](#context)
+
+### Day 25 - Publish to PyPI
+
+- Add youtube embed functionality in `src/ytnb_embed/youtube.py`
+- Now create [PyPI account](https://pypi.org/account/register/)
+- Get API
+- Setup secrete in Github Action secrete
+  - [https://github.com/aatansen/REPO_NAME/settings/secrets/actions](https://github.com/aatansen/REPO_NAME/settings/secrets/actions)
+  - Add `PYPI_API_TOKEN` in New repository secret
+- Now in every push it will test using `tox` and in every release it will release it to the `PyPI`
+
+> [!NOTE]
+>
+> - Final Project Repository --> [ytnb-embed](https://github.com/aatansen/ytnb-embed)
 
 [⬆️ Go to Context](#context)
