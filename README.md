@@ -246,6 +246,7 @@
     - [Where To Use Generators](#where-to-use-generators)
 - [**Day 22 - User Interface (UI) Creation**](#day-22---user-interface-ui-creation)
   - [**Design simple UI**](#design-simple-ui)
+- [**Assignment 05**](#assignment-05)
 - [**Day 23 - PyPI Package Discussion**](#day-23---pypi-package-discussion)
   - [**PyPI Package**](#pypi-package)
     - [What is a Python Package?](#what-is-a-python-package)
@@ -6808,6 +6809,12 @@ int()
 - Transform CLI interface of [Day 20 - Mega OOP Project](./Day%2020%20-%20Mega%20OOP%20Project/) to [Day 22 - User Interface (UI) Creation](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/) GUI interface
 - To save data locally `st.session_state` is used
 - Full code can be found in [Day 22 - User Interface (UI) Creation/app.py](./Day%2022%20-%20User%20Interface%20(UI)%20Creation/app.py)
+
+[⬆️ Go to Context](#context)
+
+# **Assignment 05**
+
+- [Personal AI Project](https://github.com/aatansen/Personal-AI-Assistant/)
 
 [⬆️ Go to Context](#context)
 

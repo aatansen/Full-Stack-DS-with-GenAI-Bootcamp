@@ -45,6 +45,8 @@
     - [**Assignment 03 Result \& Correction**](#assignment-03-result--correction)
   - [**Assignment 04**](#assignment-04)
     - [Assignment 04 Solution](#assignment-04-solution)
+  - [**Assignment 05**](#assignment-05)
+    - [Assignment 05 Solution](#assignment-05-solution)
 
 # **Assignments**
 
@@ -573,5 +575,158 @@ Print:
 [⬆️ Go to Context](#context)
 
 ### [Assignment 04 Solution](https://github.com/aatansen/Jarvis-AI/)
+
+[⬆️ Go to Context](#context)
+
+## **Assignment 05**
+
+- Personal AI Assistant (Gemini API + OOP + Streamlit)
+  - Students will design and develop a Personal AI assistant capable of:
+    - Answering questions
+    - Helping with learning & productivity
+    - Acting like a smart digital assistant
+  - The project must follow Object-Oriented Programming (OOP) principles and use Gemini API as the intelligence engine with a Streamlit UI.
+
+- Tech Stack
+  - Python 3.10+
+  - Streamlit
+  - Google Gemini API
+  - python-dotenv
+  - OOP Architecture
+    - Classes & Objects
+    - Encapsulation
+    - Inheritance
+    - Modular Coding
+
+- Core Capabilities
+  - Greet the user like a personal assistant
+  - Answer general questions using Gemini
+  - Act as:
+    - Tutor
+    - Coding assistant
+    - Career helper
+  - Maintain conversation memory using a JSON file
+  - Follow system-level instructions
+  - Error handling & graceful fallback
+
+- Mandatory Project Structure
+
+  ```txt
+  personal_assistant/
+  ├── app.py # Streamlit UI
+  │
+  ├── jarvis/
+  │ ├── assistant.py # assistant brain
+  │ ├── gemini_engine.py # Gemini API handler
+  │ ├── prompt_controller.py # System behavior & role
+  │ └── memory.py # Conversation memory
+  │
+  ├── config/
+  │ └── settings.py # Environment & config
+  │
+  ├── .env # API key
+  ├── requirements.txt
+  └── README.md
+  ```
+
+- Class Design (Optional, Can be change)
+
+  - `GeminiEngine` Class (`gemini_engine.py`)
+
+    ```py
+    class GeminiEngine:
+      def __init__(self, api_key):
+        pass
+      def generate(self, prompt):
+        pass
+    ```
+
+- Responsibilities
+  - Connect to Gemini API
+  - Send prompt
+  - Return AI response
+  - Handle API errors
+
+- `PromptController` Class (`prompt_controller.py`)
+
+  ```py
+  class PromptController:
+    def build_prompt(self, user_input, memory):
+    pass
+  ```
+
+- Responsibilities
+  - Define Assistant personality
+  - Inject system instructions
+  - Format conversation context
+
+- `Memory` Class (`memory.py`)
+
+  ```py
+  class Memory:
+    def add(self, role, message):
+      pass
+    def get_history(self):
+      pass
+  ```
+
+- Responsibilities
+  - Store conversation history in JSON file
+  - Load the previous conversation from JSON file and send to the model
+  - Return formatted context
+
+- `JarvisAssistant` Class (`assistant.py`)
+
+  ```py
+  class JarvisAssistant:
+    def __init__(self, engine, prompt_controller, memory):
+      pass
+    def respond(self, user_input):
+      pass
+  ```
+
+- Responsibilities
+  - Control assistant workflow
+  - Coordinate memory → prompt → Gemini → response
+
+- `Settings` Class (`settings.py`)
+
+  ```py
+  class Settings:
+    def load_api_key(self):
+      pass
+  ```
+
+- Responsibilities
+  - Securely load environment variables
+
+- Streamlit UI Requirements(Optional, Can be change) (`app.py`)
+  - Students must implement:
+    - JARVIS-themed UI
+    - Chat-style interface
+    - Sidebar controls:
+      - Assistant role (Tutor / Coder / Mentor)
+      - Clear memory
+    - Chat history display
+  - Example:
+
+    ```py
+    st.title("🧠 JARVIS – Your AI Assistant")
+    user_input = st.chat_input("Ask JARVIS...")
+    ```
+
+- Security & Best Practices
+  - API key must be stored in .env
+  - .env must be ignored from GitHub
+  - No Gemini logic inside app.py
+
+- Bonus Features (Optional but Powerful)
+  - Voice input (speech-to-text)
+  - Streaming responses
+  - Chat export
+
+[⬆️ Go to Context](#context)
+
+### [Assignment 05 Solution](https://github.com/aatansen/Personal-AI-Assistant)
 
 [⬆️ Go to Context](#context)
