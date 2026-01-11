@@ -1,0 +1,17 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 27 - MySQL Using Python"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+ipykernel = ">=7.1.0,<8"
+pandas = ">=2.3.3,<3"
+
+[pypi-dependencies]
+mysql-connector-python = ">=9.5.0, <10"
+python-dotenv = ">=1.2.1, <2"

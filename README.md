@@ -263,6 +263,10 @@
   - [**SQL vs NoSQL**](#sql-vs-nosql)
   - [**MongoDB Diagram**](#mongodb-diagram)
   - [**MongoDB Setup And Operations**](#mongodb-setup-and-operations)
+- [**Day 27 - MySQL Using Python**](#day-27---mysql-using-python)
+  - [**Setup MySQL**](#setup-mysql)
+  - [**MySQL Diagram**](#mysql-diagram)
+  - [**MySQL Operations**](#mysql-operations)
 
 # **Day 01 - Induction Session**
 
@@ -7084,6 +7088,7 @@ flowchart TD
   - Connect cluster
     - Select driver (stable python api)
     - Get connection string code `mongodb+srv://...`
+  - Create [venv](#create-conda-environment)
   - Install [ipykernel](https://pypi.org/project/ipykernel/), [pandas](https://pypi.org/project/pandas/) and [pymongo](https://pypi.org/project/pymongo/)
 
   ```py
@@ -7237,6 +7242,221 @@ flowchart TD
   cursor = collection.find().limit(10)
   for doc in cursor:
       print(doc)
+  ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 27 - MySQL Using Python**
+
+## **Setup MySQL**
+
+- Download [MySQL Installer (v8.0.44)](https://dev.mysql.com/downloads/installer/)
+- Open and install it with all default selected option
+- Create [venv](#create-conda-environment)
+- Install [ipykernel](https://pypi.org/project/ipykernel/), [mysql-connector-python](https://pypi.org/project/mysql-connector-python/) and [pandas](https://pypi.org/project/pandas/)
+
+## **MySQL Diagram**
+
+![mysql_diagram](https://i.imgur.com/A8xC0JY.png)
+
+## **MySQL Operations**
+
+- Connection & Setup
+
+  ```py
+  import mysql.connector   # or: import pymysql
+
+  conn = mysql.connector.connect(
+      host="HOST",
+      user="USER",
+      password="PASSWORD",
+      database="DB_NAME"
+  )
+
+  cursor = conn.cursor(dictionary=True)   # dictionary=True → rows as dicts
+  conn.is_connected()                      # check connection
+  ```
+
+- Create Database
+
+  ```py
+  cursor.execute("CREATE DATABASE IF NOT EXISTS db_name")
+  cursor.execute("SHOW DATABASES")
+  cursor.fetchall()
+  ```
+
+- Database & Table Utilities
+
+  ```py
+  cursor.execute("SHOW DATABASES")
+  cursor.fetchall()
+
+  cursor.execute("SHOW TABLES")
+  cursor.fetchall()
+
+  cursor.execute("DESCRIBE table_name")
+  cursor.fetchall()
+  ```
+
+- Insert Operations
+
+  ```py
+  cursor.execute(
+      "INSERT INTO table_name (col1, col2) VALUES (%s, %s)",
+      (val1, val2)
+  )
+
+  cursor.executemany(
+      "INSERT INTO table_name (col1, col2) VALUES (%s, %s)",
+      data_list
+  )
+
+  # Single insert with direct values
+  cursor.execute(
+      "INSERT INTO StudentDetails VALUES ('1132','Sachin','Kumar','1997-11-11','Eleventh','A')"
+  )
+
+  conn.commit()                            # REQUIRED after insert/update/delete
+  cursor.rowcount                          # affected rows
+  ```
+
+- Insert CSV data to MySQL shown in notebook -> [Day 27 - MySQL Using Python/MySQL.ipynb](./Day%2027%20-%20MySQL%20Using%20Python/MySQL.ipynb)
+
+- Read / Fetch Operations
+
+  ```py
+  cursor.execute("SELECT * FROM table_name")
+  rows = cursor.fetchall()
+
+  cursor.execute("SELECT * FROM table_name LIMIT 10")
+  cursor.fetchall()
+
+  cursor.execute("SELECT * FROM table_name LIMIT 10 OFFSET 10")
+  cursor.fetchall()
+  ```
+
+- Filtering (WHERE clause)
+
+  ```py
+  cursor.execute(
+      "SELECT * FROM table_name WHERE status = %s",
+      ("Approved",)
+  )
+
+  cursor.execute(
+      "SELECT * FROM table_name WHERE salary > %s",
+      (80000,)
+  )
+
+  cursor.execute(
+      "SELECT * FROM table_name WHERE year BETWEEN %s AND %s",
+      (2020, 2024)
+  )
+  ```
+
+- Projection (Select columns)
+
+  ```py
+  cursor.execute(
+      "SELECT col1, col2 FROM table_name"
+  )
+  cursor.fetchall()
+  ```
+
+- Sorting
+
+  ```py
+  cursor.execute(
+      "SELECT * FROM table_name ORDER BY year ASC"
+  )
+
+  cursor.execute(
+      "SELECT * FROM table_name ORDER BY salary DESC"
+  )
+  ```
+
+- Update Operations
+
+  ```py
+  cursor.execute(
+      "UPDATE table_name SET status = %s WHERE status = %s",
+      ("Processed", "Pending")
+  )
+
+  cursor.execute(
+      "UPDATE table_name SET count = count + 1 WHERE id = %s",
+      (1,)
+  )
+
+  conn.commit()
+  ```
+
+- Delete Operations
+
+  ```py
+  # Delete rows from a table
+  cursor.execute(
+      "DELETE FROM table_name WHERE status = %s",
+      ("Obsolete",)
+  )
+
+  conn.commit()
+
+  # Delete an entire database by name
+  cursor.execute("DROP DATABASE IF EXISTS db_name")
+  ```
+
+- Indexing (Performance)
+
+  ```py
+  cursor.execute(
+      "CREATE INDEX idx_status ON table_name(status)"
+  )
+
+  cursor.execute(
+      "SHOW INDEX FROM table_name"
+  )
+
+  cursor.execute(
+      "DROP INDEX idx_status ON table_name"
+  )
+  ```
+
+- Aggregation / Analytics
+
+  ```py
+  cursor.execute(
+      """
+      SELECT category, COUNT(*) AS count
+      FROM table_name
+      WHERE status = %s
+      GROUP BY category
+      ORDER BY count DESC
+      LIMIT 5
+      """,
+      ("Approved",)
+  )
+
+  cursor.fetchall()
+  ```
+
+- MySQL ↔ pandas Bridge
+
+  ```py
+  import pandas as pd
+
+  cursor.execute("SELECT * FROM table_name LIMIT 1000")
+  df = pd.DataFrame(cursor.fetchall())
+  df.head()
+  ```
+
+- Cursor & Connection Safety
+
+  ```py
+  cursor.fetchone()        # fetch one row
+  cursor.fetchall()        # fetch all rows
+  cursor.close()           # close cursor
+  conn.close()             # close connection
   ```
 
 [⬆️ Go to Context](#context)
