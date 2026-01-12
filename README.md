@@ -273,6 +273,10 @@
   - [**Arduino Jarvis System Diagram**](#arduino-jarvis-system-diagram)
   - [**JARVIS Smart Home Setup and Usage**](#jarvis-smart-home-setup-and-usage)
   - [**How to Run JARVIS Smart Home**](#how-to-run-jarvis-smart-home)
+- [**Day 29 - Flask API**](#day-29---flask-api)
+  - [**Flask and Postman Setup**](#flask-and-postman-setup)
+  - [**Flask Usages**](#flask-usages)
+  - [**Project Structure of Flask**](#project-structure-of-flask)
 
 # **Day 01 - Induction Session**
 
@@ -7606,5 +7610,289 @@ The system allows you to control lights, fan, and TV using voice commands proces
   - "Turn on everything"
   - "Turn off fan"
   - "Turn on TV"
+
+[⬆️ Go to Context](#context)
+
+# **Day 29 - Flask API**
+
+## **Flask and Postman Setup**
+
+- Create [venv](#create-conda-environment)
+- Install [Flask](https://pypi.org/project/Flask/)
+- Download and install [Postman](https://www.postman.com/downloads/)
+
+## **Flask Usages**
+
+- App Setup & Initialization
+
+  ```py
+  from flask import Flask
+
+  app = Flask(__name__)
+
+  if __name__ == "__main__":
+      app.run(debug=True)
+  ```
+
+- Basic Routing
+
+  ```py
+  @app.route("/")
+  def home():
+      return "Hello, Flask!"
+  ```
+
+  ```py
+  @app.route("/about")
+  def about():
+      return "About Page"
+  ```
+
+- Routing with HTTP Methods
+
+  ```py
+  from flask import request
+
+  @app.route("/login", methods=["GET", "POST"])
+  def login():
+      if request.method == "POST":
+          return "POST request"
+      return "GET request"
+  ```
+
+- URL Parameters (Dynamic Routes)
+
+  ```py
+  @app.route("/user/<username>")
+  def user_profile(username):
+      return f"User: {username}"
+  ```
+
+  ```py
+  @app.route("/post/<int:post_id>")
+  def show_post(post_id):
+      return f"Post ID: {post_id}"
+  ```
+
+- Query Parameters
+
+  ```py
+  @app.route("/search")
+  def search():
+      keyword = request.args.get("q")
+      return f"Search for: {keyword}"
+  ```
+
+- JSON Response (API)
+
+  ```py
+  from flask import jsonify
+
+  @app.route("/api/status")
+  def status():
+      return jsonify({
+          "status": "ok",
+          "service": "flask"
+      })
+  ```
+
+- Request Data (Form & JSON)
+
+  ```py
+  @app.route("/submit", methods=["POST"])
+  def submit():
+      name = request.form.get("name")
+      return f"Name: {name}"
+  ```
+
+  ```py
+  @app.route("/submit-json", methods=["POST"])
+  def submit_json():
+      data = request.get_json()
+      return jsonify(data)
+  ```
+
+- Templates (Jinja2)
+
+  ```py
+  from flask import render_template
+
+  @app.route("/profile")
+  def profile():
+      return render_template(
+          "profile.html",
+          username="TT",
+          age=20
+      )
+  ```
+
+- Static Files (CSS / JS)
+
+  ```py
+  # Folder structure:
+  # /static/style.css
+  # /templates/index.html
+  ```
+
+  ```html
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  ```
+
+- Redirects & URL Building
+
+  ```py
+  from flask import redirect, url_for
+
+  @app.route("/old")
+  def old():
+      return redirect(url_for("home"))
+  ```
+
+- Error Handling
+
+  ```py
+  @app.errorhandler(404)
+  def not_found(e):
+      return "Page not found", 404
+  ```
+
+  ```py
+  @app.errorhandler(500)
+  def server_error(e):
+      return "Server error", 500
+  ```
+
+- Blueprints (Project Structure)
+
+  ```py
+  from flask import Blueprint
+
+  auth = Blueprint("auth", __name__)
+
+  @auth.route("/login")
+  def login():
+      return "Login Page"
+  ```
+
+  ```py
+  app.register_blueprint(auth, url_prefix="/auth")
+  ```
+
+- Configuration & Environment Variables
+
+  ```py
+  import os
+
+  app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+  app.config["DEBUG"] = True
+  ```
+
+- Middleware (Before & After Request)
+
+  ```py
+  @app.before_request
+  def before_request():
+      print("Before request")
+
+  @app.after_request
+  def after_request(response):
+      return response
+  ```
+
+- Database Integration (Flask + MySQ)
+
+  ```py
+  import mysql.connector
+
+  def get_db():
+      return mysql.connector.connect(
+          host="HOST",
+          user="USER",
+          password="PASSWORD",
+          database="DB_NAME"
+      )
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Project Structure of Flask**
+
+- Minimal Flask App Structure
+
+  ```txt
+  flask_app/
+  ├─ app.py
+  ├─ requirements.txt
+  └─ README.md
+  ```
+
+- Standard Structure
+
+  ```txt
+  flask_app/
+  ├─ app/
+  │  ├─ __init__.py          # create_app(), app config
+  │  ├─ routes.py            # main routes
+  │  ├─ models.py            # database models
+  │  ├─ extensions.py        # db, login_manager, etc.
+  │  ├─ config.py            # configuration classes
+  │  │
+  │  ├─ templates/
+  │  │  ├─ base.html
+  │  │  ├─ index.html
+  │  │  └─ auth/
+  │  │     └─ login.html
+  │  │
+  │  └─ static/
+  │     ├─ css/
+  │     │  └─ style.css
+  │     ├─ js/
+  │     │  └─ main.js
+  │     └─ images/
+  │
+  ├─ migrations/             # Flask-Migrate (Alembic)
+  │
+  ├─ tests/
+  │  ├─ __init__.py
+  │  └─ test_routes.py
+  │
+  ├─ .env
+  ├─ .gitignore
+  ├─ requirements.txt
+  └─ run.py                  # entry point
+  ```
+
+- Large / Scalable Structure (Production-style)
+
+  ```txt
+  flask_app/
+  ├─ app/
+  │  ├─ __init__.py
+  │  ├─ auth/
+  │  │  ├─ __init__.py
+  │  │  ├─ routes.py
+  │  │  ├─ forms.py
+  │  │  └─ models.py
+  │  │
+  │  ├─ blog/
+  │  │  ├─ __init__.py
+  │  │  ├─ routes.py
+  │  │  └─ models.py
+  │  │
+  │  ├─ templates/
+  │  │  ├─ base.html
+  │  │  ├─ auth/
+  │  │  └─ blog/
+  │  │
+  │  ├─ static/
+  │  │
+  │  └─ extensions.py
+  │
+  ├─ migrations/
+  ├─ tests/
+  ├─ .env
+  ├─ requirements.txt
+  └─ run.py
+  ```
 
 [⬆️ Go to Context](#context)

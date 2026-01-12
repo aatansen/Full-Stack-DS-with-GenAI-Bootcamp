@@ -1,0 +1,14 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 29 - Flask API"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+
+[pypi-dependencies]
+flask = ">=3.1.2, <4"
