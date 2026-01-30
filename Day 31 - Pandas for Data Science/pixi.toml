@@ -1,0 +1,16 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 31 - Pandas for Data Science"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+ipykernel = ">=7.1.0,<8"
+pandas = ">=3.0.0,<4"
+numpy = ">=2.4.1,<3"
+pyarrow = ">=23.0.0,<24"
+openpyxl = ">=3.1.5,<4"
