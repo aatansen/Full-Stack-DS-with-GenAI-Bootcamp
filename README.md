@@ -259,6 +259,7 @@
   - [**Youtube Notebook Embed Package**](#youtube-notebook-embed-package)
     - [Day 24 - Project Setup](#day-24---project-setup)
     - [Day 25 - Publish to PyPI](#day-25---publish-to-pypi)
+    - [Day 34 - Documentation of Python Package](#day-34---documentation-of-python-package)
 - [**Day 26 - MongoDB with Python**](#day-26---mongodb-with-python)
   - [**SQL vs NoSQL**](#sql-vs-nosql)
   - [**MongoDB Diagram**](#mongodb-diagram)
@@ -409,6 +410,7 @@
     - [Multiple Lines / Columns](#multiple-lines--columns)
     - [Styling \& Layout](#styling--layout)
     - [When to Use Cufflinks](#when-to-use-cufflinks)
+- [**Day 34 - Documentation of Python Package**](#day-34---documentation-of-python-package-1)
 
 # **Day 01 - Induction Session**
 
@@ -7094,6 +7096,36 @@ int()
 
 [⬆️ Go to Context](#context)
 
+### Day 34 - Documentation of Python Package
+
+- Make sure [mkdocs-material](https://pypi.org/project/mkdocs-material/) is insatall
+- Create those files
+
+  ```txt
+  ytnb-embed
+  ├── 📁 .github
+  │   └── 📁 workflows
+  │       └── ⚙️ docs.yml
+  ├── 📁 docs
+  │   ├── 📁 usage
+  │   │   ├── 📝 advanced.md
+  │   │   ├── 📝 basic.md
+  │   │   └── 📝 examples.md
+  │   ├── 📝 api.md
+  │   ├── 📝 contributing.md
+  │   ├── 📝 index.md
+  │   ├── 📝 installation.md
+  │   ├── 📝 license.md
+  │   ├── 📝 privacy.md
+  │   └── 📝 quick-start.md
+  └── ⚙️ mkdocs.yml
+  ```
+
+- Project repository: [ytnb-embed](https://github.com/aatansen/ytnb-embed)
+- Docs : [ytnb-embed documentation](https://aatansen.github.io/ytnb-embed/)
+
+[⬆️ Go to Context](#context)
+
 # **Day 26 - MongoDB with Python**
 
 ## **SQL vs NoSQL**
@@ -11435,5 +11467,13 @@ The system allows you to control lights, fan, and TV using voice commands proces
 - Exploratory Data Analysis (EDA)
 - Dashboard visualizations (offline HTML or notebooks)
 - Interactive inspection of ML datasets
+
+[⬆️ Go to Context](#context)
+
+# **Day 34 - Documentation of Python Package**
+
+- It is continuation of [Day 24,25 - Publish Package to PyPI](#day-2425---publish-package-to-pypi)
+- Project repository: [ytnb-embed](https://github.com/aatansen/ytnb-embed)
+- Docs : [ytnb-embed documentation](https://aatansen.github.io/ytnb-embed/)
 
 [⬆️ Go to Context](#context)
