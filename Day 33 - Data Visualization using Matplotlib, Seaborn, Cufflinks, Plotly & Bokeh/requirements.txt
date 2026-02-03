@@ -1,0 +1,6 @@
+ipykernel==7.1.0
+matplotlib==3.10.8
+seaborn==0.13.2
+plotly==6.5.2
+bokeh==3.8.2
+cufflinks==0.17.3

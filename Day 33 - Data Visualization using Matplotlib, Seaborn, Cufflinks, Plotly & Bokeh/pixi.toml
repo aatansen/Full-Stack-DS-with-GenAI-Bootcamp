@@ -1,0 +1,19 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 33 - Data Visualization using Matplotlib, Seaborn, Cufflinks, Plotly & Bokeh"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+ipykernel = ">=7.1.0,<8"
+matplotlib = ">=3.10.8,<4"
+seaborn = ">=0.13.2,<0.14"
+plotly = ">=6.5.2,<7"
+bokeh = ">=3.8.2,<4"
+
+[pypi-dependencies]
+cufflinks = ">=0.17.3, <0.18"
