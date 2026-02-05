@@ -443,6 +443,29 @@
     - [Descriptive vs Inferential](#descriptive-vs-inferential)
   - [**When to Use What**](#when-to-use-what)
   - [**Real-Life Use of Statistics**](#real-life-use-of-statistics)
+- [**Day 36 - Measure Of Central Tendency Dispersion Percentiles Quartiles**](#day-36---measure-of-central-tendency-dispersion-percentiles-quartiles)
+  - [**Measure Of Central Tendency**](#measure-of-central-tendency)
+    - [Math on Mean (Population and Sample)](#math-on-mean-population-and-sample)
+      - [Population Mean](#population-mean)
+      - [Sample Mean](#sample-mean)
+      - [Math Problem for Mean](#math-problem-for-mean)
+      - [Mean Math Solution (Population)](#mean-math-solution-population)
+      - [Mean Math Solution (Sample)](#mean-math-solution-sample)
+  - [**Dispersion**](#dispersion)
+    - [Math on Variance (Population and Sample)](#math-on-variance-population-and-sample)
+      - [Population Variance](#population-variance)
+      - [Sample Variance](#sample-variance)
+      - [Math Problem for Variance](#math-problem-for-variance)
+      - [Variance Math Solution (Population)](#variance-math-solution-population)
+      - [Variance Math Solution (Sample)](#variance-math-solution-sample)
+    - [Math on Standard Deviation](#math-on-standard-deviation)
+      - [Standard Deviation Is The Square Root Of Variance](#standard-deviation-is-the-square-root-of-variance)
+      - [1st Standard Deviation](#1st-standard-deviation)
+      - [2nd Standard Deviation](#2nd-standard-deviation)
+      - [3rd Standard Deviation](#3rd-standard-deviation)
+  - [**Percentiles and Quartiles**](#percentiles-and-quartiles)
+    - [Percentiles](#percentiles)
+    - [Quartiles](#quartiles)
 
 # **Day 01 - Induction Session**
 
@@ -12021,6 +12044,29 @@ The system allows you to control lights, fan, and TV using voice commands proces
   print(std_dev)
   ```
 
+- Bell Curve (Normal Distribution)
+
+  - Graphical representation of data dispersion
+  - Most values cluster around the **mean**
+  - Standard deviation controls the **width of the bell**
+
+  ```py
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from scipy.stats import norm
+
+  mean = 50
+  std_dev = 10
+  x = np.linspace(20, 80, 1000)
+  y = norm.pdf(x, mean, std_dev)
+
+  plt.plot(x, y)
+  plt.title("Bell Curve Showing Dispersion")
+  plt.xlabel("Values")
+  plt.ylabel("Probability Density")
+  plt.show()
+  ```
+
 [⬆️ Go to Context](#context)
 
 #### Measures of Shape
@@ -12499,5 +12545,464 @@ The system allows you to control lights, fan, and TV using voice commands proces
 - Sports analysis
 - Machine learning & AI
 - Government surveys
+
+[⬆️ Go to Context](#context)
+
+# **Day 36 - Measure Of Central Tendency Dispersion Percentiles Quartiles**
+
+## **Measure Of Central Tendency**
+
+- [Measure Of Central Tendency](#measures-of-central-tendency)
+
+### Math on Mean (Population and Sample)
+
+#### Population Mean
+
+- In statistics, the **population mean** is the average of **all values** in the population.
+- Formula (Population Mean)
+
+  ```math
+  \mu = \frac{\sum_{i=1}^{N} x_i}{N}
+  ```
+
+- Here
+  - $( \mu )$ = population mean
+  - $( x_i )$ = each value in the population
+  - $( N )$ = total number of population elements
+
+[⬆️ Go to Context](#context)
+
+#### Sample Mean
+
+- The **sample mean** is the average of **some values** taken from the population.
+- Formula (Sample Mean)
+
+  ```math
+  \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+  ```
+
+- Here
+  - $( \bar{x} )$ = sample mean
+  - $( x_i )$ = each value in the sample
+  - $( n )$ = sample size
+
+[⬆️ Go to Context](#context)
+
+#### Math Problem for Mean
+
+- Suppose the marks of **5 students** are:
+
+  ```math
+  10,\ 20,\ 30,\ 40,\ 50
+  ```
+
+- Case 1: Treat as **Population**
+- Here:
+  - Total values $( N = 5 )$
+
+[⬆️ Go to Context](#context)
+
+#### Mean Math Solution (Population)
+
+```math
+\mu = \frac{10 + 20 + 30 + 40 + 50}{5}
+```
+
+```math
+\mu = \frac{150}{5} = 30
+```
+
+> **Population mean = 30**
+
+- Case 2: Treat as Sample
+- Same values, but assume they are a **sample**.
+- Here:
+  - Sample size $( n = 5 )$
+
+[⬆️ Go to Context](#context)
+
+#### Mean Math Solution (Sample)
+
+```math
+\bar{x} = \frac{10 + 20 + 30 + 40 + 50}{5}
+```
+
+```math
+\bar{x} = \frac{150}{5} = 30
+```
+
+> **Sample mean = 30**
+
+[⬆️ Go to Context](#context)
+
+## **Dispersion**
+
+- [Measure Of Dispersion](#measures-of-dispersion)
+
+[⬆️ Go to Context](#context)
+
+### Math on Variance (Population and Sample)
+
+#### Population Variance
+
+- **Population variance** measures how much the **entire population** deviates from the population mean.
+
+- Formula (Population Variance)
+
+  ```math
+  \sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N}
+  ```
+
+- Here
+  - $( \sigma^2 )$ = population variance
+  - $( x_i )$ = each value in the population
+  - $( \mu )$ = population mean
+  - $( N )$ = population size
+
+[⬆️ Go to Context](#context)
+
+#### Sample Variance
+
+- **Sample variance** measures how much the **sample data** deviates from the sample mean.
+
+  > Notice we divide by $( n-1 )$ (degrees of freedom) instead of $( n )$.
+
+- Formula (Sample Variance)
+
+  ```math
+  s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+  ```
+
+- Here
+  - $( s^2 )$ = sample variance
+  - $( x_i )$ = each value in the sample
+  - $( \bar{x} )$ = sample mean
+  - $( n )$ = sample size
+
+[⬆️ Go to Context](#context)
+
+#### Math Problem for Variance
+
+- Marks of 5 students:
+
+  ```math
+  10, 20, 30, 40, 50
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### Variance Math Solution (Population)
+
+- Population mean:
+
+  ```math
+  \mu = \frac{10+20+30+40+50}{5} = 30
+  ```
+
+- Deviations squared:
+
+  ```math
+  (10-30)^2 = 400
+  (20-30)^2 = 100
+  (30-30)^2 = 0
+  (40-30)^2 = 100
+  (50-30)^2 = 400
+  ```
+
+- Population variance:
+
+  ```math
+  \sigma^2 = \frac{400+100+0+100+400}{5} = \frac{1000}{5} = 200
+  ```
+
+> Population variance = **200**
+
+[⬆️ Go to Context](#context)
+
+#### Variance Math Solution (Sample)
+
+- Sample mean:
+
+  ```math
+  \bar{x} = 30
+  ```
+
+- Deviations squared = same as above
+
+- Sample variance:
+
+  ```math
+  s^2 = \frac{400+100+0+100+400}{5-1} = \frac{1000}{4} = 250
+  ```
+
+> Sample variance = **250**
+
+[⬆️ Go to Context](#context)
+
+### Math on Standard Deviation
+
+- Formulas
+  - **Population Standard Deviation:**
+
+  ```math
+  \sigma = \sqrt{\sigma^2}
+  ```
+
+  - **Sample Standard Deviation:**
+
+  ```math
+  s = \sqrt{s^2}
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### Standard Deviation Is The Square Root Of Variance
+
+- Population variance: $( \sigma^2 = 200 )$
+
+  ```math
+  \sigma = \sqrt{200} \approx 14.14
+  ```
+
+- Sample variance: $( s^2 = 250 )$
+
+  ```math
+  s = \sqrt{250} \approx 15.81
+  ```
+
+- So
+  - **Population SD ≈ 14.14**
+  - **Sample SD ≈ 15.81**
+
+> [!NOTE]
+>
+> - **Variance** measures the **average squared deviation** from the mean.
+> - **Standard deviation** is the **square root of variance**, bringing the measure **back to the same unit as the data**.
+> - Always check whether you are working with **population** ((N)) or **sample** ((n-1))—this affects both variance and standard deviation.
+> - **Sample SD is usually slightly larger than population SD** for the same data, because it corrects for estimating from a subset.
+
+[⬆️ Go to Context](#context)
+
+
+#### 1st Standard Deviation
+
+> $(( \mu \pm 1\sigma ))$
+
+Let’s denote:
+
+- $( \mu )$ = mean
+- $( \sigma )$ = standard deviation
+
+- Range:
+
+  ```math
+  \mu - \sigma \quad \text{to} \quad \mu + \sigma
+  ```
+
+- Contains approximately **68% of data** (for normal distribution)
+- Example (from previous population data):
+
+  ```math
+  \mu = 30, \quad \sigma \approx 14.14
+  ```
+
+  ```math
+  30 - 14.14 \approx 15.86
+  30 + 14.14 \approx 44.14
+  ```
+
+> **1st SD range: 15.86 → 44.14**
+
+[⬆️ Go to Context](#context)
+
+#### 2nd Standard Deviation
+
+> $(( \mu \pm 2\sigma ))$
+
+- Range:
+
+  ```math
+  \mu - 2\sigma \quad \text{to} \quad \mu + 2\sigma
+  ```
+
+- Contains approximately **95% of data**
+- Example:
+
+  ```math
+  30 - 2(14.14) \approx 1.72
+  30 + 2(14.14) \approx 58.28
+  ```
+
+> **2nd SD range: 1.72 → 58.28**
+
+[⬆️ Go to Context](#context)
+
+#### 3rd Standard Deviation
+
+> $(( \mu \pm 3\sigma ))$
+
+- Range:
+
+  ```math
+  \mu - 3\sigma \quad \text{to} \quad \mu + 3\sigma
+  ```
+
+- Contains approximately **99.7% of data**
+- Example:
+
+  ```math
+  30 - 3(14.14) \approx -12.42
+  30 + 3(14.14) \approx 72.42
+  ```
+
+> **3rd SD range: -12.42 → 72.42**
+
+---
+
+> [!NOTE]
+>
+> - **1 SD** → ~68% of data
+> - **2 SD** → ~95% of data
+> - **3 SD** → ~99.7% of data
+> - Values **outside 3 SD** are considered **rare/outliers**
+
+[⬆️ Go to Context](#context)
+
+## **Percentiles and Quartiles**
+
+```py
+import numpy as np
+
+# Sample data
+data = [10, 20, 30, 40, 50]
+
+# Percentiles
+p40 = np.percentile(data, 40)  # 40th percentile
+p90 = np.percentile(data, 90)  # 90th percentile
+
+print(f"40th Percentile: {p40}")
+print(f"90th Percentile: {p90}")
+
+# Quartiles
+q1 = np.percentile(data, 25)   # 1st Quartile
+q2 = np.percentile(data, 50)   # Median / 2nd Quartile
+q3 = np.percentile(data, 75)   # 3rd Quartile
+
+print(f"Q1: {q1}, Q2 (Median): {q2}, Q3: {q3}")
+
+# Interquartile Range (IQR)
+iqr = q3 - q1
+print(f"IQR: {iqr}")
+```
+
+- **Output**
+
+  ```sh
+  40th Percentile: 24.0
+  90th Percentile: 46.0
+  Q1: 15.0, Q2 (Median): 30.0, Q3: 45.0
+  IQR: 30.0
+  ```
+
+### Percentiles
+
+- A **percentile** indicates the **relative position of a value** in a dataset.
+- The **k-th percentile (Pk)** is the value below which **k% of the data falls**.
+
+- Formula (for position in sorted data)
+
+  ```math
+  L = \frac{k}{100} (n + 1)
+  ```
+
+- Here
+  - $( L )$ = position of the k-th percentile in **ordered data**
+  - $( k )$ = desired percentile (e.g., 25, 50, 90)
+  - $( n )$ = number of data points
+
+- Example
+
+  - Data (sorted):
+
+    ```math
+    10, 20, 30, 40, 50
+    ```
+
+  - Find the **40th percentile (P40)**
+
+    ```math
+    L = \frac{40}{100} (5 + 1) = 0.4 * 6 = 2.4
+    ```
+
+  - Position 2.4 → between 2nd (20) and 3rd (30) value
+  - Interpolation:
+
+    ```math
+    P40 = 20 + 0.4 * (30 - 20) = 20 + 4 = 24
+    ```
+
+  > **40th percentile = 24**
+
+[⬆️ Go to Context](#context)
+
+### Quartiles
+
+- **Quartiles** divide data into **4 equal parts**.
+- There are **3 quartiles**:
+
+  | Quartile | Description                               |
+  | -------- | ----------------------------------------- |
+  | Q1       | 25% of data below (1st quartile)          |
+  | Q2       | 50% of data below (median / 2nd quartile) |
+  | Q3       | 75% of data below (3rd quartile)          |
+
+- Formula (Approximate Position)
+
+  ```math
+  Q1 = \frac{1(n+1)}{4}, \quad Q2 = \frac{2(n+1)}{4}, \quad Q3 = \frac{3(n+1)}{4}
+  ```
+
+- $( n )$ = total number of data points
+
+- Example (same data)
+
+  - Data:
+
+    ```math
+    10, 20, 30, 40, 50
+    ```
+
+  - Q1 position:
+
+    ```math
+    L = (1*(5+1))/4 = 6/4 = 1.5
+    ```
+
+  - Q1 = between 1st (10) and 2nd (20) value
+
+    ```math
+    Q1 = 10 + 0.5*(20-10) = 15
+    ```
+
+  - Q2 (median):
+
+    ```math
+    L = 2*(5+1)/4 = 12/4 = 3 → 3rd value = 30
+    ```
+
+  - Q3:
+
+    ```math
+    L = 3*(5+1)/4 = 18/4 = 4.5
+    Q3 = 40 + 0.5*(50-40) = 45
+    ```
+
+  > Quartiles: **Q1=15, Q2=30, Q3=45**
+
+> [!NOTE]
+>
+> - **Percentiles**: any percentage of data below a point
+> - **Quartiles**: special percentiles (Q1=25th, Q2=50th, Q3=75th)
+> - Quartiles are used to calculate **Interquartile Range (IQR = Q3 - Q1)**, useful for **dispersion and outlier detection**
 
 [⬆️ Go to Context](#context)
