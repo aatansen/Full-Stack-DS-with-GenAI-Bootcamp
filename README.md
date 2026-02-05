@@ -411,6 +411,38 @@
     - [Styling \& Layout](#styling--layout)
     - [When to Use Cufflinks](#when-to-use-cufflinks)
 - [**Day 34 - Documentation of Python Package**](#day-34---documentation-of-python-package-1)
+- [**Day 35 – Introduction to Statistics**](#day-35--introduction-to-statistics)
+  - [**Data**](#data)
+    - [Types of Data](#types-of-data)
+      - [Qualitative Data](#qualitative-data)
+      - [Quantitative Data](#quantitative-data)
+    - [Quantitative Data Types](#quantitative-data-types)
+      - [Discrete Data](#discrete-data)
+      - [Continuous Data](#continuous-data)
+  - [**Population**](#population)
+  - [**Sample**](#sample)
+    - [Why Use a Sample](#why-use-a-sample)
+    - [Sampling Techniques](#sampling-techniques)
+      - [Probability Sampling](#probability-sampling)
+      - [Non-Probability Sampling](#non-probability-sampling)
+  - [**Variables**](#variables-1)
+    - [Types of Variables](#types-of-variables)
+      - [Qualitative (Categorical) Variables](#qualitative-categorical-variables)
+      - [Quantitative (Numerical) Variables](#quantitative-numerical-variables)
+  - [**Statistics Types**](#statistics-types)
+    - [Descriptive Statistics](#descriptive-statistics)
+      - [Measures of Central Tendency](#measures-of-central-tendency)
+      - [Measures of Dispersion](#measures-of-dispersion)
+      - [Measures of Shape](#measures-of-shape)
+      - [Data Visualization in Descriptive Statistics](#data-visualization-in-descriptive-statistics)
+    - [Inferential Statistics](#inferential-statistics)
+      - [Estimation](#estimation)
+      - [Hypothesis Testing](#hypothesis-testing)
+      - [Correlation Analysis](#correlation-analysis)
+      - [Regression Analysis](#regression-analysis)
+    - [Descriptive vs Inferential](#descriptive-vs-inferential)
+  - [**When to Use What**](#when-to-use-what)
+  - [**Real-Life Use of Statistics**](#real-life-use-of-statistics)
 
 # **Day 01 - Induction Session**
 
@@ -11475,5 +11507,997 @@ The system allows you to control lights, fan, and TV using voice commands proces
 - It is continuation of [Day 24,25 - Publish Package to PyPI](#day-2425---publish-package-to-pypi)
 - Project repository: [ytnb-embed](https://github.com/aatansen/ytnb-embed)
 - Docs : [ytnb-embed documentation](https://aatansen.github.io/ytnb-embed/)
+
+[⬆️ Go to Context](#context)
+
+# **Day 35 – Introduction to Statistics**
+
+- Statistics is the science of collecting, organizing, analyzing, and interpreting data
+- Helps us make decisions based on data, not guesses
+
+## **Data**
+
+- A piece of information
+
+- Can be numbers, text, images, measurements, etc.
+
+- Examples
+
+  - Age of students
+  - Exam marks
+  - Temperature readings
+  - Number of visitors on a website
+
+[⬆️ Go to Context](#context)
+
+### Types of Data
+
+#### Qualitative Data
+
+- Describes qualities or categories
+
+- Non-numerical
+
+- Examples
+
+  - Gender
+  - Color
+  - Country
+  - Grade (A, B, C)
+
+[⬆️ Go to Context](#context)
+
+#### Quantitative Data
+
+- Numerical data
+
+- Can be measured or counted
+
+- Examples
+
+  - Height
+  - Weight
+  - Marks
+  - Number of pets
+
+[⬆️ Go to Context](#context)
+
+### Quantitative Data Types
+
+#### Discrete Data
+
+- Countable values
+
+- Usually whole numbers
+
+- Examples
+
+  - Number of students
+  - Number of cars
+  - Number of goals
+
+[⬆️ Go to Context](#context)
+
+#### Continuous Data
+
+- Measurable values
+
+- Can have decimals
+
+- Examples
+
+  - Height
+  - Weight
+  - Time
+  - Temperature
+
+[⬆️ Go to Context](#context)
+
+## **Population**
+
+- Entire group we want information about
+
+- Examples
+
+  - All students in a school
+  - All voters in a country
+
+[⬆️ Go to Context](#context)
+
+## **Sample**
+
+- A small part of the population
+
+- Used when population is too large
+
+- Example
+
+  - 100 students selected from a school of 2000
+
+[⬆️ Go to Context](#context)
+
+### Why Use a Sample
+
+- Saves time
+- Saves money
+- Easier to collect and analyze
+
+[⬆️ Go to Context](#context)
+
+### Sampling Techniques
+
+- Techniques used to select a **sample from a population**
+- Divided into **Probability** and **Non-probability** sampling
+
+[⬆️ Go to Context](#context)
+
+#### Probability Sampling
+
+- Every element has a **known, non-zero chance** of selection
+- Selection is **random**
+- Results are **more accurate and reliable**
+- **Less bias** in sample selection
+- Suitable for **large populations**
+- Supports **statistical inference**
+- Requires **more time and cost**
+
+- Types
+  - Simple Random Sampling
+  - Stratified Random Sampling
+  - Cluster Sampling
+  - Systematic Sampling
+  - Multistage Sampling
+
+- **Simple Random Sampling**
+  - Each member has an **equal chance**
+  - Uses random selection
+
+    ```py
+    import random
+
+    population = list(range(1, 1001))
+    sample = random.sample(population, 100)
+
+    print(sample)
+    ```
+
+- **Stratified Random Sampling**
+  - Population divided into **strata**
+  - Random samples taken from each stratum
+
+    ```py
+    import random
+
+    male = list(range(1, 501))
+    female = list(range(501, 1001))
+
+    sample = random.sample(male, 50) + random.sample(female, 50)
+    print(sample)
+    ```
+
+- **Cluster Sampling**
+  - Population divided into **clusters**
+  - Entire clusters are selected randomly
+
+    ```py
+    import random
+
+    clusters = {
+        "C1": list(range(1, 101)),
+        "C2": list(range(101, 201)),
+        "C3": list(range(201, 301))
+    }
+
+    selected = random.sample(list(clusters.keys()), 2)
+    sample = []
+
+    for c in selected:
+        sample.extend(clusters[c])
+
+    print(sample)
+    ```
+
+- **Systematic Sampling**
+  - Selects every **k-th** element
+  - Requires ordered data
+
+    ```py
+    population = list(range(1, 1001))
+    k = 10
+
+    sample = population[::k]
+    print(sample)
+    ```
+
+- **Multistage Sampling**
+  - Sampling done in **multiple steps**
+  - Combination of sampling methods
+
+    ```py
+    import random
+
+    districts = {
+        "D1": {"S1": list(range(1, 51)), "S2": list(range(51, 101))},
+        "D2": {"S3": list(range(101, 151)), "S4": list(range(151, 201))}
+    }
+
+    selected_district = random.choice(list(districts.keys()))
+    selected_school = random.choice(list(districts[selected_district].keys()))
+    sample = random.sample(districts[selected_district][selected_school], 20)
+
+    print(sample)
+    ```
+
+[⬆️ Go to Context](#context)
+
+#### Non-Probability Sampling
+
+- Selection is **not random**
+- Chance of selection is **unknown**
+- Results may be **biased**
+- **Faster and cheaper** than probability sampling
+- Useful when population is **hard to reach**
+- Does **not support strong generalization**
+- Suitable for **exploratory research**
+
+- Types
+  - Quota Sampling
+  - Snowball Sampling
+  - Judgment (Purposive) Sampling
+  - Convenience Sampling
+
+- **Quota Sampling**
+  - Sample selected to meet **fixed quotas**
+
+  ```py
+  boys = ["B1", "B2", "B3", "B4"]
+  girls = ["G1", "G2", "G3", "G4"]
+
+  sample = boys[:2] + girls[:2]
+  print(sample)
+  ```
+
+- **Snowball Sampling**
+  - Existing participants **refer new participants**
+  - Used for hard-to-reach populations
+
+    ```py
+    initial = ["A"]
+    referrals = {
+        "A": ["B", "C"],
+        "B": ["D"],
+        "C": ["E"]
+    }
+
+    sample = initial + referrals["A"] + referrals["B"]
+    print(sample)
+    ```
+
+- **Judgment (Purposive) Sampling**
+  - Selected based on **researcher’s judgment**
+
+    ```py
+    students = {
+        "S1": 92,
+        "S2": 85,
+        "S3": 95,
+        "S4": 70
+    }
+
+    sample = [s for s, m in students.items() if m > 90]
+    print(sample)
+    ```
+
+- **Convenience Sampling**
+  - Sample chosen based on **availability**
+
+    ```py
+    population = list(range(1, 1001))
+    sample = population[:50]
+
+    print(sample)
+    ```
+
+[⬆️ Go to Context](#context)
+
+## **Variables**
+
+- A **variable** is a characteristic or attribute that can **change or vary**
+- It represents the **data values** collected in a study
+- Can take **different values** for different individuals or observations
+
+[⬆️ Go to Context](#context)
+
+### Types of Variables
+
+- Qualitative (Categorical) Variables
+- Quantitative (Numerical) Variables
+
+[⬆️ Go to Context](#context)
+
+#### Qualitative (Categorical) Variables
+
+- Describe **qualities or categories**
+- Do **not** involve numerical measurement
+- Types
+  - Nominal Variables
+  - Ordinal Variables
+
+- **Nominal Variables**
+  - Categories with **no specific order**
+  - Examples
+    - Gender
+    - Blood group
+    - Eye color
+
+- **Ordinal Variables**
+  - Categories with a **logical order**
+  - Difference between categories is **not measurable**
+  - Examples
+
+    - Education level (Primary, Secondary, Higher)
+    - Satisfaction level (Low, Medium, High)
+
+[⬆️ Go to Context](#context)
+
+#### Quantitative (Numerical) Variables
+
+- Represent **numbers**
+- Values can be **measured or counted**
+- Types
+  - Discrete Variables
+  - Continuous Variables
+
+- **Discrete Variables**
+  - Countable values
+  - Usually whole numbers
+  - Examples
+    - Number of students in a class
+    - Number of cars in a parking lot
+
+- **Continuous Variables**
+  - Can take **any value within a range**
+  - Can include decimals
+  - Examples
+    - Height
+    - Weight
+    - Time
+
+- **Independent Variable**
+  - Variable that is **manipulated or controlled**
+  - Causes change in another variable
+  - Example
+    - Study hours
+
+- **Dependent Variable**
+  - Variable that **responds** to changes
+  - Outcome being measured
+  - Example
+    - Exam score
+
+- **Control Variable**
+  - Variables kept **constant**
+  - Prevents external influence on results
+  - Example
+    - Same classroom environment
+
+[⬆️ Go to Context](#context)
+
+## **Statistics Types**
+
+### Descriptive Statistics
+
+- Descriptive statistics is the branch of statistics that **summarizes and describes data**
+- It consists of organizing and summarizing of data
+- It helps us **understand patterns, trends, and distributions**
+- It does **not** make predictions or generalizations beyond the data
+
+  - Mean
+  - Median
+  - Mode
+  - Range
+  - Charts (bar, histogram, pie)
+
+- Example
+
+  - Average score of a class is **75**
+  - Highest temperature this week was **34°C**
+
+  ```py
+  import numpy as np
+
+  data = [60, 70, 80, 90]
+  print("Mean:", np.mean(data))
+  print("Max:", max(data))
+  ```
+
+- Purpose of Descriptive Statistics
+
+  - Simplify large datasets
+  - Present data in a meaningful way
+  - Identify patterns and outliers
+  - Support decision-making and further analysis
+
+- Types of Descriptive Statistics
+
+  - Measures of Central Tendency
+  - Measures of Dispersion
+  - Measures of Shape
+  - Data Visualization
+
+[⬆️ Go to Context](#context)
+
+#### Measures of Central Tendency
+
+- Describe the **center** or typical value of data
+- Commonly used to represent data with a single value
+
+---
+
+- Mean (Average)
+
+  - Sum of all values divided by number of values
+  - Sensitive to extreme values (outliers)
+
+- **Formula**
+
+- $$Mean = (Sum of values) / (Number of values)$$
+
+  ```py
+  import numpy as np
+
+  data = [10, 20, 30, 40, 50]
+  mean = np.mean(data)
+  print(mean)
+  ```
+
+- Median
+
+  - The **middle value** when data is sorted
+  - Less affected by outliers
+
+    ```py
+    import numpy as np
+
+    data = [10, 20, 100, 30, 40]
+    median = np.median(data)
+    print(median)
+    ```
+
+- Mode
+
+  - The value that **appears most frequently**
+  - Can have more than one mode
+
+    ```py
+    from statistics import mode
+
+    data = [1, 2, 2, 3, 4]
+    print(mode(data))
+    ```
+
+[⬆️ Go to Context](#context)
+
+#### Measures of Dispersion
+
+- Describe how **spread out** the data is
+- Show variability in data
+
+---
+
+- Range
+
+  - Difference between maximum and minimum values
+
+    ```py
+    data = [5, 10, 15, 20]
+    range_value = max(data) - min(data)
+    print(range_value)
+    ```
+
+- Variance
+
+  - Average of squared differences from the mean
+  - Shows how far values deviate from the mean
+
+  ```py
+  import numpy as np
+
+  data = [10, 20, 30, 40]
+  variance = np.var(data)
+  print(variance)
+  ```
+
+- Standard Deviation
+
+  - Square root of variance
+  - Shows dispersion in the same unit as data
+
+  ```py
+  import numpy as np
+
+  data = [10, 20, 30, 40]
+  std_dev = np.std(data)
+  print(std_dev)
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### Measures of Shape
+
+- Describe the **distribution shape** of data
+
+---
+
+- Skewness
+
+  - Measures data asymmetry
+  - Positive skew → tail on the right
+  - Negative skew → tail on the left
+
+  ```py
+  from scipy.stats import skew
+
+  data = [1, 2, 3, 4, 10]
+  print(skew(data))
+  ```
+
+- Kurtosis
+
+  - Measures how peaked or flat the distribution is
+  - High kurtosis → sharp peak
+  - Low kurtosis → flat distribution
+
+  ```py
+  from scipy.stats import kurtosis
+
+  data = [1, 2, 3, 4, 10]
+  print(kurtosis(data))
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### Data Visualization in Descriptive Statistics
+
+- Helps visually understand data
+- Makes patterns easier to identify
+
+- Common Visualization Methods
+
+  - Histogram
+  - Bar chart
+  - Box plot
+  - Pie chart
+
+- **Histogram**
+
+  - Shows the **distribution of numerical data**
+  - Useful to understand **frequency and spread**
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  data = [10, 20, 20, 30, 30, 30, 40]
+
+  plt.hist(data)
+  plt.xlabel("Values")
+  plt.ylabel("Frequency")
+  plt.show()
+  ```
+
+- **Bar Chart**
+
+  - Used to **compare values across categories**
+  - Each bar represents a **category**
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  categories = ["A", "B", "C", "D"]
+  values = [10, 25, 15, 30]
+
+  plt.bar(categories, values)
+  plt.xlabel("Categories")
+  plt.ylabel("Values")
+  plt.show()
+  ```
+
+- **Box Plot**
+
+  - Shows **data spread, median, and outliers**
+  - Helpful for **comparing distributions**
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  data = [10, 20, 30, 40, 50]
+
+  plt.boxplot(data)
+  plt.show()
+  ```
+
+- **Pie Chart**
+
+  - Displays **proportions of a whole**
+  - Best when total equals **100%**
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  labels = ["Python", "Java", "C++", "JavaScript"]
+  sizes = [40, 25, 20, 15]
+
+  plt.pie(sizes, labels=labels, autopct="%1.1f%%")
+  plt.show()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Inferential Statistics
+
+- Inferential statistics is the branch of statistics that **draws conclusions about a population using sample data**
+- Uses sample data to make conclusions about population
+- It helps make **predictions, estimates, and decisions**
+- Uses **probability theory**
+
+- Common tools
+  - Predictions
+  - Estimations
+  - Hypothesis testing
+  - Confidence intervals
+  - Regression analysis
+
+- Results are expressed with **confidence levels and margins of error**
+
+  - Hypothesis testing
+  - Confidence intervals
+  - Probability distributions
+  - Regression & correlation
+
+- Example
+
+  - Predicting **average income** of a country using a sample
+  - Testing whether a **new medicine works better** than an old one
+
+    ```py
+    import numpy as np
+
+    sample = [68, 70, 72, 74, 76]
+    print("Sample Mean:", np.mean(sample))
+    ```
+
+- Example
+
+  - From 100 voters, predict election result
+  - From sample students, estimate average marks of whole school
+
+    ```py
+    import numpy as np
+
+    sample = [72, 75, 78, 80, 74]
+    population_mean_estimate = np.mean(sample)
+    print("Estimated population mean:", population_mean_estimate)
+    ```
+
+- Purpose of Inferential Statistics
+  - Make predictions about a population
+  - Test assumptions or claims
+  - Measure uncertainty
+  - Support data-driven decisions
+
+- Types of Inferential Statistics
+  - Estimation
+  - Hypothesis Testing
+  - Correlation Analysis
+  - Regression Analysis
+
+[⬆️ Go to Context](#context)
+
+#### Estimation
+
+- **Purpose of Estimation**
+  - Use **sample data** to estimate **unknown population parameters**
+  - Quantify uncertainty in estimates
+
+- **Population vs Sample** *(Foundation for Estimation)*
+
+  - **Population**
+    - Entire group of interest
+    - Parameters are usually **unknown**
+
+  - **Sample**
+    - Subset taken from the population
+    - Used to compute **estimates**
+
+      ```py
+      population = list(range(1, 1001))
+      sample = population[:50]
+      print(len(sample))
+      ```
+
+- **Probability** *(Tool used in Estimation)*
+  - Measures how likely an event is to occur
+  - Describes **randomness and uncertainty**
+  - Helps quantify **how reliable an estimate is**
+  - Values range from **0 to 1**
+
+  - Formula
+  - $$Probability = (Favorable Outcomes) / (Total Outcomes)$$
+
+    ```py
+    favorable = 1
+    total = 6
+    print(favorable / total)
+    ```
+
+- **Point Estimation**
+  - Single numerical value used to estimate a population parameter
+  - Common point estimates:
+    - Sample mean → population mean
+    - Sample proportion → population proportion
+
+      ```py
+      import numpy as np
+
+      data = [50, 52, 53, 51, 54]
+      print(np.mean(data))
+      ```
+
+- **Confidence Interval**
+  - Interval estimate of a population parameter
+  - Range of values likely to contain the **true population parameter**
+  - Provides a **range** rather than a single value
+  - Expressed with a **confidence level (e.g., 95%)**
+
+    ```py
+    import numpy as np
+    from scipy import stats
+
+    data = [50, 52, 53, 51, 54]
+    mean = np.mean(data)
+    ci = stats.sem(data) * stats.t.ppf((1 + 0.95) / 2, len(data)-1)
+    print(mean - ci, mean + ci)
+    ```
+
+- Population vs Sample → **foundation**
+- Probability → **supporting tool**
+- Point Estimation + Confidence Interval → **actual estimation**
+
+[⬆️ Go to Context](#context)
+
+#### Hypothesis Testing
+
+- Used to test a claim about a population
+- Two hypotheses:
+  - **Null hypothesis (H₀)** → no effect
+  - **Alternative hypothesis (H₁)** → effect exists
+
+- **Steps of Hypothesis Testing**
+  - State hypotheses
+  - Choose significance level (α)
+  - Perform statistical test
+  - Make a decision
+
+- **Z Test**
+
+  - Tests population mean when variance is known or sample size is large
+  - Based on normal distribution
+
+    ```py
+    import numpy as np
+    from statsmodels.stats.weightstats import ztest
+
+    data = np.array([52, 55, 50, 53, 54])
+    z_stat, p_value = ztest(data, value=50)
+    print("p-value:", p_value)
+    ```
+
+- **F Test**
+
+  - Compares variances of two samples
+  - Used as a basis for ANOVA
+
+    ```py
+    import numpy as np
+
+    data1 = [10, 12, 14, 16]
+    data2 = [8, 9, 11, 13]
+
+    f_stat = np.var(data1, ddof=1) / np.var(data2, ddof=1)
+    print("F statistic:", f_stat)
+    ```
+
+- **t-Test**
+
+  - Compares the means of a sample with a known value
+  - Commonly used for small samples
+
+    ```py
+    from scipy.stats import ttest_1samp
+
+    data = [68, 70, 72, 74, 76]
+    t_stat, p_value = ttest_1samp(data, 70)
+    print("p-value:", p_value)
+    ```
+
+- **ANOVA Test**
+
+  - Compares means of more than two groups
+  - Determines if at least one group differs significantly
+
+    ```py
+    from scipy.stats import f_oneway
+
+    g1 = [10, 12, 14]
+    g2 = [20, 22, 24]
+    g3 = [30, 32, 34]
+
+    f_stat, p_value = f_oneway(g1, g2, g3)
+    print("p-value:", p_value)
+    ```
+
+- **Wilcoxon Signed Rank Test**
+
+  - Non-parametric alternative to paired t-test
+  - Used when data is not normally distributed
+
+    ```py
+    from scipy.stats import wilcoxon
+
+    before = [10, 12, 14, 16]
+    after = [11, 13, 15, 17]
+
+    stat, p_value = wilcoxon(before, after)
+    print("p-value:", p_value)
+    ```
+
+- **Mann-Whitney U Test**
+
+  - Non-parametric alternative to independent t-test
+  - Compares two independent groups
+
+    ```py
+    from scipy.stats import mannwhitneyu
+
+    group1 = [10, 12, 14]
+    group2 = [20, 22, 24]
+
+    stat, p_value = mannwhitneyu(group1, group2)
+    print("p-value:", p_value)
+    ```
+
+[⬆️ Go to Context](#context)
+
+#### Correlation Analysis
+
+- Measures **relationship strength** between variables
+- Value ranges from **-1 to +1**
+
+  ```py
+  import numpy as np
+
+  x = [1, 2, 3, 4, 5]
+  y = [2, 4, 6, 8, 10]
+
+  corr = np.corrcoef(x, y)
+  print(corr)
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### Regression Analysis
+
+- Examines how one variable **predicts another**
+- Commonly used for forecasting
+
+- **Linear Regression**
+
+  - Predicts a continuous dependent variable
+  - Assumes linear relationship
+
+    ```py
+    from sklearn.linear_model import LinearRegression
+    import numpy as np
+
+    X = np.array([1, 2, 3, 4]).reshape(-1, 1)
+    y = [2, 4, 6, 8]
+
+    model = LinearRegression()
+    model.fit(X, y)
+    print(model.predict([[5]]))
+    ```
+
+- **Nominal Regression**
+
+  - Used when dependent variable has unordered categories
+  - Multiclass classification problem
+
+    ```py
+    import statsmodels.api as sm
+
+    X = sm.add_constant([[1], [2], [3], [4]])
+    y = [0, 1, 2, 1]
+
+    model = sm.MNLogit(y, X)
+    result = model.fit()
+    print(result.summary())
+    ```
+
+- **Logistic Regression**
+
+  - Used for binary outcomes
+  - Outputs probability between 0 and 1
+
+    ```py
+    from sklearn.linear_model import LogisticRegression
+
+    X = [[1], [2], [3], [4]]
+    y = [0, 0, 1, 1]
+
+    model = LogisticRegression()
+    model.fit(X, y)
+    print(model.predict([[2.5]]))
+    ```
+
+- **Ordinal Regression**
+
+  - Used when dependent variable is ordered
+  - Categories have a meaningful order
+
+    ```py
+    from statsmodels.miscmodels.ordinal_model import OrderedModel
+
+    X = [[1], [2], [3], [4]]
+    y = [1, 2, 2, 3]
+
+    model = OrderedModel(y, X, distr='logit')
+    result = model.fit(method='bfgs')
+    print(result.summary())
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Descriptive vs Inferential
+
+- Descriptive → **summarizes data**
+- Inferential → **predicts and concludes**
+- Descriptive → no uncertainty
+- Inferential → includes uncertainty
+
+- **Descriptive**
+
+  - Describes what happened
+  - Uses full dataset
+  - No uncertainty
+
+- **Inferential**
+
+  - Predicts or generalizes
+  - Uses sample
+  - Includes uncertainty
+
+[⬆️ Go to Context](#context)
+
+## **When to Use What**
+
+- Use **Descriptive**
+
+  - To summarize data
+  - To visualize information
+
+- Use **Inferential**
+
+  - To make decisions
+  - To predict future or unseen data
+
+[⬆️ Go to Context](#context)
+
+## **Real-Life Use of Statistics**
+
+- Business decisions
+- Medical research
+- Sports analysis
+- Machine learning & AI
+- Government surveys
 
 [⬆️ Go to Context](#context)
