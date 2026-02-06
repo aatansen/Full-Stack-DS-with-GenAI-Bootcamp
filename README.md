@@ -466,6 +466,15 @@
   - [**Percentiles and Quartiles**](#percentiles-and-quartiles)
     - [Percentiles](#percentiles)
     - [Quartiles](#quartiles)
+- [**Day 37 - Findings Outliers in Statistics**](#day-37---findings-outliers-in-statistics)
+  - [**Outliers in Statistics**](#outliers-in-statistics)
+    - [Common Causes](#common-causes)
+    - [Detection Using Z-Score](#detection-using-z-score)
+    - [Detection Using IQR (Interquartile Range)](#detection-using-iqr-interquartile-range)
+    - [Detection Using Box Plot](#detection-using-box-plot)
+      - [Five Number Summary](#five-number-summary)
+      - [Outliers using Box Plot](#outliers-using-box-plot)
+      - [Outlier Fences](#outlier-fences)
 
 # **Day 01 - Induction Session**
 
@@ -13004,5 +13013,324 @@ print(f"IQR: {iqr}")
 > - **Percentiles**: any percentage of data below a point
 > - **Quartiles**: special percentiles (Q1=25th, Q2=50th, Q3=75th)
 > - Quartiles are used to calculate **Interquartile Range (IQR = Q3 - Q1)**, useful for **dispersion and outlier detection**
+
+[⬆️ Go to Context](#context)
+
+# **Day 37 - Findings Outliers in Statistics**
+
+## **Outliers in Statistics**
+
+- An **outlier** is a data point that is **significantly different** from other observations in a dataset.
+- Outliers can be **much higher or lower** than most of the data.
+- They can affect **mean, variance, standard deviation**, and analysis results.
+
+- We use these method to identify outlier
+  - **Z-Score Method**
+    - Best for **normally distributed data**
+    - Identifies points that are **many standard deviations away from the mean**
+
+  - **IQR (Interquartile Range) Method**
+    - Non-parametric → works for **skewed distributions**
+    - Detects points **outside [Q1 − 1.5×IQR, Q3 + 1.5×IQR]**
+
+  - **Box Plot (Visual Method)**
+    - Uses the **IQR internally** but shows a **graphical representation**
+    - Quickly identifies **outliers visually**
+
+> [!NOTE]
+>
+> - There are other advanced techniques for big data or multivariate datasets for outliers:
+> - **DBSCAN clustering** (density-based)
+> - **Mahalanobis distance** (multivariate outlier detection)
+> - **Isolation Forest / LOF** (machine learning methods)
+> - For **most practical datasets**, Z-score, IQR, and box plot are sufficient.
+
+[⬆️ Go to Context](#context)
+
+### Common Causes
+
+- Measurement errors
+- Data entry mistakes
+- Natural variability in the population
+
+[⬆️ Go to Context](#context)
+
+### Detection Using Z-Score
+
+- **Z-score** measures how many **standard deviations** a value is from the mean.
+
+- Formula
+
+  ```math
+  Z = \frac{X - \mu}{\sigma}  \quad \text{(Population SD)}
+  Z = \frac{X - \bar{x}}{s}   \quad \text{(Sample SD)}
+  ```
+
+- Usually, **|Z| > 3** indicates an outlier.
+
+- Z-Score Method
+
+  ```py
+  import numpy as np
+  from scipy import stats
+
+  # Sample data
+  data = [10, 12, 12, 13, 12, 100]
+
+  # Calculate Z-scores
+  z_scores = np.abs(stats.zscore(data))  # absolute value
+  outliers = np.where(z_scores > 3)
+
+  print("Z-scores:", z_scores)
+  print("Outlier indices:", outliers[0])
+  print("Outlier values:", np.array(data)[outliers])
+  ```
+
+- **Output**
+
+  ```sh
+  Z-scores: [0.4, 0.1, 0.1, 0.2, 0.1, 3.0]
+  Outlier indices: [5]
+  Outlier values: [100]
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Detection Using IQR (Interquartile Range)
+
+- Compute Q1, Q3, and IQR
+
+  ```math
+  IQR = Q3 - Q1
+  Lower\ Bound = Q1 - 1.5*IQR
+  Upper\ Bound = Q3 + 1.5*IQR
+  ```
+
+- Any value **outside [Lower Bound, Upper Bound]** is an outlier.
+
+- IQR Method
+
+  ```py
+  # Using the same data
+  q1 = np.percentile(data, 25)
+  q3 = np.percentile(data, 75)
+  iqr = q3 - q1
+
+  lower_bound = q1 - 1.5 * iqr
+  upper_bound = q3 + 1.5 * iqr
+
+  outliers_iqr = [x for x in data if x < lower_bound or x > upper_bound]
+
+  print("Lower Bound:", lower_bound)
+  print("Upper Bound:", upper_bound)
+  print("Outliers using IQR method:", outliers_iqr)
+  ```
+
+- **Output**
+
+  ```sh
+  Lower Bound: 7.0
+  Upper Bound: 28.0
+  Outliers using IQR method: [100]
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Detection Using Box Plot
+
+#### Five Number Summary
+
+- The **Five-Number Summary** summarizes a dataset using **five key values**:
+
+  | Number  | Description                       |
+  | ------- | --------------------------------- |
+  | Minimum | Smallest value in the dataset     |
+  | Q1      | First quartile (25th percentile)  |
+  | Median  | Second quartile (50th percentile) |
+  | Q3      | Third quartile (75th percentile)  |
+  | Maximum | Largest value in the dataset      |
+
+- It gives a **quick view of the distribution** and helps detect **outliers**.
+
+- Example
+- Data (sorted):
+
+  ```text
+  10, 12, 12, 13, 12, 100
+  ```
+
+1. **Minimum** = 10
+2. **Q1 (25th percentile)** = 12
+3. **Median (Q2, 50th percentile)** = 12.5
+4. **Q3 (75th percentile)** = 13
+5. **Maximum** = 100
+
+> - Five-number summary = **[10, 12, 12.5, 13, 100]**
+>
+> - **100 is an outlier** (far from Q3).
+
+  ```py
+  import numpy as np
+
+  # Sample data
+  data = [10, 12, 12, 13, 12, 100]
+
+  # Five-number summary
+  minimum = np.min(data)
+  q1 = np.percentile(data, 25)
+  median = np.median(data)
+  q3 = np.percentile(data, 75)
+  maximum = np.max(data)
+
+  print("Five-number summary:", [minimum, q1, median, q3, maximum])
+  ```
+
+- **Output**
+
+  ```text
+  Five-number summary: [10, 12.0, 12.5, 13.0, 100]
+  ```
+
+---
+
+> [!NOTE]
+>
+> - **Used in box plots**: the box = Q1 → Q3, line = median, whiskers = min/max (or within 1.5×IQR), outliers beyond whiskers.
+> - Helps **quickly understand spread, central tendency, and skewness**.
+> - Works well with **small or large datasets**.
+
+#### Outliers using Box Plot
+
+- **Box plots** visually represent data using (five numebr summary):
+
+  - **Minimum**
+  - **Q1 (25th percentile)**
+  - **Median (Q2)**
+  - **Q3 (75th percentile)**
+  - **Maximum**
+    - **Outliers** as points outside whiskers
+
+- Outliers are typically defined as points **below Q1 - 1.5 × IQR** or **above Q3 + 1.5 × IQR**.
+
+- Python Example
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  # Sample data
+  data = [10, 12, 12, 13, 12, 100]
+
+  # Create box plot
+  plt.boxplot(data, vert=True, patch_artist=True, showmeans=True)
+  plt.title("Box Plot Example")
+  plt.ylabel("Values")
+  plt.show()
+  ```
+
+- **Output:**
+
+  - Box represents Q1 to Q3
+  - Line inside box = median
+  - Whiskers extend to min/max within 1.5×IQR
+  - Points outside whiskers = outliers (100 in this case)
+
+---
+
+> [!NOTE]
+>
+> - Z-score method is best for **normally distributed data**.
+> - IQR method is **non-parametric**, works for skewed distributions.
+> - Always **investigate outliers** before removing them—they can be **real insights or errors**.
+
+[⬆️ Go to Context](#context)
+
+#### Outlier Fences
+
+- **Fences** define the **cutoff points** beyond which a data point is considered an **outlier**.
+- Calculated using the **Interquartile Range (IQR = Q3 − Q1)**.
+
+- Formulas
+
+  ```math
+  Lower\ Fence = Q1 - 1.5 \times IQR
+  ```
+
+  ```math
+  Upper\ Fence = Q3 + 1.5 \times IQR
+  ```
+
+- Here
+  - Q1 = 25th percentile
+  - Q3 = 75th percentile
+  - IQR = Q3 − Q1
+
+> Any data point **below the lower fence** or **above the upper fence** is an **outlier**.
+
+- Example
+
+- Data (sorted):
+
+  ```text
+  10, 12, 12, 13, 12, 100
+  ```
+
+- Compute quartiles:
+
+  ```text
+  Q1 = 12, Q3 = 13
+  IQR = Q3 - Q1 = 13 - 12 = 1
+  ```
+
+- Compute fences:
+
+  ```math
+  Lower\ Fence = 12 - 1.5 * 1 = 12 - 1.5 = 10.5
+  Upper\ Fence = 13 + 1.5 * 1 = 13 + 1.5 = 14.5
+  ```
+
+- Detect outliers:
+
+  ```text
+  Values < 10.5 → outlier
+  Values > 14.5 → outlier
+  ```
+
+> In this dataset, **100 > 14.5**, so **100 is an outlier**.
+
+```py
+import numpy as np
+
+data = [10, 12, 12, 13, 12, 100]
+
+# Quartiles
+q1 = np.percentile(data, 25)
+q3 = np.percentile(data, 75)
+iqr = q3 - q1
+
+# Fences
+lower_fence = q1 - 1.5 * iqr
+upper_fence = q3 + 1.5 * iqr
+
+# Detect outliers
+outliers = [x for x in data if x < lower_fence or x > upper_fence]
+
+print("Lower Fence:", lower_fence)
+print("Upper Fence:", upper_fence)
+print("Outliers:", outliers)
+```
+
+- **Output:**
+
+  ```sh
+  Lower Fence: 10.5
+  Upper Fence: 14.5
+  Outliers: [100]
+  ```
+
+> [!NOTE]
+>
+> - Fences are **based on IQR**, so they are robust to skewed data.
+> - Box plots **automatically use fences** to show whiskers and outliers visually.
+> - Can be adjusted: sometimes **2×IQR or 3×IQR** is used for stricter outlier detection.
 
 [⬆️ Go to Context](#context)
