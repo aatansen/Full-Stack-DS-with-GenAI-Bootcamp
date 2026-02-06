@@ -12570,9 +12570,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 - In statistics, the **population mean** is the average of **all values** in the population.
 - Formula (Population Mean)
 
-  ```math
-  \mu = \frac{\sum_{i=1}^{N} x_i}{N}
-  ```
+```math
+\mu = \frac{\sum_{i=1}^{N} x_i}{N}
+```
 
 - Here
   - $( \mu )$ = population mean
@@ -12586,9 +12586,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 - The **sample mean** is the average of **some values** taken from the population.
 - Formula (Sample Mean)
 
-  ```math
-  \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
-  ```
+```math
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+```
 
 - Here
   - $( \bar{x} )$ = sample mean
@@ -12601,9 +12601,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Suppose the marks of **5 students** are:
 
-  ```math
-  10,\ 20,\ 30,\ 40,\ 50
-  ```
+```math
+10,\ 20,\ 30,\ 40,\ 50
+```
 
 - Case 1: Treat as **Population**
 - Here:
@@ -12658,9 +12658,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Formula (Population Variance)
 
-  ```math
-  \sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N}
-  ```
+```math
+\sigma^2 = \frac{\sum_{i=1}^{N} (x_i - \mu)^2}{N}
+```
 
 - Here
   - $( \sigma^2 )$ = population variance
@@ -12678,9 +12678,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Formula (Sample Variance)
 
-  ```math
-  s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
-  ```
+```math
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+```
 
 - Here
   - $( s^2 )$ = sample variance
@@ -12694,9 +12694,9 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Marks of 5 students:
 
-  ```math
-  10, 20, 30, 40, 50
-  ```
+```math
+10, 20, 30, 40, 50
+```
 
 [⬆️ Go to Context](#context)
 
@@ -12704,25 +12704,25 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Population mean:
 
-  ```math
-  \mu = \frac{10+20+30+40+50}{5} = 30
-  ```
+```math
+\mu = \frac{10+20+30+40+50}{5} = 30
+```
 
 - Deviations squared:
 
-  ```math
-  (10-30)^2 = 400
-  (20-30)^2 = 100
-  (30-30)^2 = 0
-  (40-30)^2 = 100
-  (50-30)^2 = 400
-  ```
+```math
+(10-30)^2 = 400
+(20-30)^2 = 100
+(30-30)^2 = 0
+(40-30)^2 = 100
+(50-30)^2 = 400
+```
 
 - Population variance:
 
-  ```math
-  \sigma^2 = \frac{400+100+0+100+400}{5} = \frac{1000}{5} = 200
-  ```
+```math
+\sigma^2 = \frac{400+100+0+100+400}{5} = \frac{1000}{5} = 200
+```
 
 > Population variance = **200**
 
@@ -12732,17 +12732,17 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Sample mean:
 
-  ```math
-  \bar{x} = 30
-  ```
+```math
+\bar{x} = 30
+```
 
 - Deviations squared = same as above
 
 - Sample variance:
 
-  ```math
-  s^2 = \frac{400+100+0+100+400}{5-1} = \frac{1000}{4} = 250
-  ```
+```math
+s^2 = \frac{400+100+0+100+400}{5-1} = \frac{1000}{4} = 250
+```
 
 > Sample variance = **250**
 
@@ -12769,15 +12769,15 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 - Population variance: $( \sigma^2 = 200 )$
 
-  ```math
-  \sigma = \sqrt{200} \approx 14.14
-  ```
+```math
+\sigma = \sqrt{200} \approx 14.14
+```
 
 - Sample variance: $( s^2 = 250 )$
 
-  ```math
-  s = \sqrt{250} \approx 15.81
-  ```
+```math
+s = \sqrt{250} \approx 15.81
+```
 
 - So
   - **Population SD ≈ 14.14**
@@ -12804,21 +12804,21 @@ Let’s denote:
 
 - Range:
 
-  ```math
-  \mu - \sigma \quad \text{to} \quad \mu + \sigma
-  ```
+```math
+\mu - \sigma \quad \text{to} \quad \mu + \sigma
+```
 
 - Contains approximately **68% of data** (for normal distribution)
 - Example (from previous population data):
 
-  ```math
-  \mu = 30, \quad \sigma \approx 14.14
-  ```
+```math
+\mu = 30, \quad \sigma \approx 14.14
+```
 
-  ```math
-  30 - 14.14 \approx 15.86
-  30 + 14.14 \approx 44.14
-  ```
+```math
+30 - 14.14 \approx 15.86
+30 + 14.14 \approx 44.14
+```
 
 > **1st SD range: 15.86 → 44.14**
 
@@ -12830,17 +12830,17 @@ Let’s denote:
 
 - Range:
 
-  ```math
-  \mu - 2\sigma \quad \text{to} \quad \mu + 2\sigma
-  ```
+```math
+\mu - 2\sigma \quad \text{to} \quad \mu + 2\sigma
+```
 
 - Contains approximately **95% of data**
 - Example:
 
-  ```math
-  30 - 2(14.14) \approx 1.72
-  30 + 2(14.14) \approx 58.28
-  ```
+```math
+30 - 2(14.14) \approx 1.72
+30 + 2(14.14) \approx 58.28
+```
 
 > **2nd SD range: 1.72 → 58.28**
 
@@ -12852,17 +12852,17 @@ Let’s denote:
 
 - Range:
 
-  ```math
-  \mu - 3\sigma \quad \text{to} \quad \mu + 3\sigma
-  ```
+```math
+\mu - 3\sigma \quad \text{to} \quad \mu + 3\sigma
+```
 
 - Contains approximately **99.7% of data**
 - Example:
 
-  ```math
-  30 - 3(14.14) \approx -12.42
-  30 + 3(14.14) \approx 72.42
-  ```
+```math
+30 - 3(14.14) \approx -12.42
+30 + 3(14.14) \approx 72.42
+```
 
 > **3rd SD range: -12.42 → 72.42**
 
@@ -12920,9 +12920,9 @@ print(f"IQR: {iqr}")
 
 - Formula (for position in sorted data)
 
-  ```math
-  L = \frac{k}{100} (n + 1)
-  ```
+```math
+L = \frac{k}{100} (n + 1)
+```
 
 - Here
   - $( L )$ = position of the k-th percentile in **ordered data**
@@ -12933,22 +12933,22 @@ print(f"IQR: {iqr}")
 
   - Data (sorted):
 
-    ```math
-    10, 20, 30, 40, 50
-    ```
+  ```math
+  10, 20, 30, 40, 50
+  ```
 
   - Find the **40th percentile (P40)**
 
-    ```math
-    L = \frac{40}{100} (5 + 1) = 0.4 * 6 = 2.4
-    ```
+  ```math
+  L = \frac{40}{100} (5 + 1) = 0.4 * 6 = 2.4
+  ```
 
   - Position 2.4 → between 2nd (20) and 3rd (30) value
   - Interpolation:
 
-    ```math
-    P40 = 20 + 0.4 * (30 - 20) = 20 + 4 = 24
-    ```
+  ```math
+  P40 = 20 + 0.4 * (30 - 20) = 20 + 4 = 24
+  ```
 
   > **40th percentile = 24**
 
@@ -12967,9 +12967,9 @@ print(f"IQR: {iqr}")
 
 - Formula (Approximate Position)
 
-  ```math
-  Q1 = \frac{1(n+1)}{4}, \quad Q2 = \frac{2(n+1)}{4}, \quad Q3 = \frac{3(n+1)}{4}
-  ```
+```math
+Q1 = \frac{1(n+1)}{4}, \quad Q2 = \frac{2(n+1)}{4}, \quad Q3 = \frac{3(n+1)}{4}
+```
 
 - $( n )$ = total number of data points
 
@@ -12977,34 +12977,34 @@ print(f"IQR: {iqr}")
 
   - Data:
 
-    ```math
-    10, 20, 30, 40, 50
-    ```
+  ```math
+  10, 20, 30, 40, 50
+  ```
 
   - Q1 position:
 
-    ```math
-    L = (1*(5+1))/4 = 6/4 = 1.5
-    ```
+  ```math
+  L = (1*(5+1))/4 = 6/4 = 1.5
+  ```
 
   - Q1 = between 1st (10) and 2nd (20) value
 
-    ```math
-    Q1 = 10 + 0.5*(20-10) = 15
-    ```
+  ```math
+  Q1 = 10 + 0.5*(20-10) = 15
+  ```
 
   - Q2 (median):
 
-    ```math
-    L = 2*(5+1)/4 = 12/4 = 3 → 3rd value = 30
-    ```
+  ```math
+  L = 2*(5+1)/4 = 12/4 = 3 → 3rd value = 30
+  ```
 
   - Q3:
 
-    ```math
-    L = 3*(5+1)/4 = 18/4 = 4.5
-    Q3 = 40 + 0.5*(50-40) = 45
-    ```
+  ```math
+  L = 3*(5+1)/4 = 18/4 = 4.5
+  Q3 = 40 + 0.5*(50-40) = 45
+  ```
 
   > Quartiles: **Q1=15, Q2=30, Q3=45**
 
@@ -13061,10 +13061,10 @@ print(f"IQR: {iqr}")
 
 - Formula
 
-  ```math
-  Z = \frac{X - \mu}{\sigma}  \quad \text{(Population SD)}
-  Z = \frac{X - \bar{x}}{s}   \quad \text{(Sample SD)}
-  ```
+```math
+Z = \frac{X - \mu}{\sigma}  \quad \text{(Population SD)}
+Z = \frac{X - \bar{x}}{s}   \quad \text{(Sample SD)}
+```
 
 - Usually, **|Z| > 3** indicates an outlier.
 
@@ -13100,11 +13100,11 @@ print(f"IQR: {iqr}")
 
 - Compute Q1, Q3, and IQR
 
-  ```math
-  IQR = Q3 - Q1
-  Lower\ Bound = Q1 - 1.5*IQR
-  Upper\ Bound = Q3 + 1.5*IQR
-  ```
+```math
+IQR = Q3 - Q1
+Lower\ Bound = Q1 - 1.5*IQR
+Upper\ Bound = Q3 + 1.5*IQR
+```
 
 - Any value **outside [Lower Bound, Upper Bound]** is an outlier.
 
@@ -13251,13 +13251,13 @@ print(f"IQR: {iqr}")
 
 - Formulas
 
-  ```math
-  Lower\ Fence = Q1 - 1.5 \times IQR
-  ```
+```math
+Lower\ Fence = Q1 - 1.5 \times IQR
+```
 
-  ```math
-  Upper\ Fence = Q3 + 1.5 \times IQR
-  ```
+```math
+Upper\ Fence = Q3 + 1.5 \times IQR
+```
 
 - Here
   - Q1 = 25th percentile
@@ -13283,10 +13283,10 @@ print(f"IQR: {iqr}")
 
 - Compute fences:
 
-  ```math
-  Lower\ Fence = 12 - 1.5 * 1 = 12 - 1.5 = 10.5
-  Upper\ Fence = 13 + 1.5 * 1 = 13 + 1.5 = 14.5
-  ```
+```math
+Lower\ Fence = 12 - 1.5 * 1 = 12 - 1.5 = 10.5
+Upper\ Fence = 13 + 1.5 * 1 = 13 + 1.5 = 14.5
+```
 
 - Detect outliers:
 
