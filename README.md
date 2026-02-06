@@ -504,6 +504,14 @@
   - [**Q–Q Plot (Quantile–Quantile Plot)**](#qq-plot-quantilequantile-plot)
   - [**Features and Target Variables**](#features-and-target-variables)
   - [**Correlation and Pair Plot**](#correlation-and-pair-plot)
+- [**Day 40 - Hypothesis Testing, Probability Density, Mass \& Cumulative**](#day-40---hypothesis-testing-probability-density-mass--cumulative)
+  - [**Hypothesis Testing Diagram**](#hypothesis-testing-diagram)
+  - [**Types of Hypotheses**](#types-of-hypotheses)
+  - [**Probability Distributions**](#probability-distributions)
+    - [Probability Mass Function (PMF)](#probability-mass-function-pmf)
+    - [Probability Density Function (PDF)](#probability-density-function-pdf)
+    - [Cumulative Distribution Function (CDF)](#cumulative-distribution-function-cdf)
+    - [Probability Distributions Differences](#probability-distributions-differences)
 
 # **Day 01 - Induction Session**
 
@@ -12350,6 +12358,7 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 #### Hypothesis Testing
 
+- Hypothesis testing is a form of statistical inference that uses data from a sample to draw conclusions about a population parameter or a population probability distribution
 - Used to test a claim about a population
 - Two hypotheses:
   - **Null hypothesis (H₀)** → no effect
@@ -12365,6 +12374,7 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
   - Tests population mean when variance is known or sample size is large
   - Based on normal distribution
+  - [z-table](https://z-table.com/)
 
     ```py
     import numpy as np
@@ -13698,5 +13708,170 @@ Example:
   ```py
   sns.pairplot(df)
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 40 - Hypothesis Testing, Probability Density, Mass & Cumulative**
+
+## **Hypothesis Testing Diagram**
+
+```mermaid
+graph LR
+    A[Sample Data] -- conclusion --> B[Population Data]
+
+    C[Hypothesis Testing] -.-> D
+    D --> A
+    D --> B
+
+    style A stroke:#00FF00,stroke-width:2px,fill:none,color:#00FF00
+    style B stroke:#00FF00,stroke-width:2px,fill:none,color:#00FF00
+    style C fill:none,stroke:none,color:#00FF00
+    style D fill:none,stroke:none
+```
+
+- **Sample Data**
+
+  - Data collected from a small part of the population
+  - Used because collecting population data is often impractical
+
+- **Hypothesis Testing**
+
+  - A statistical method to decide whether there is enough evidence in a sample to support a certain belief about the population.
+  - A statistical method applied to sample data
+  - Tests assumptions (hypotheses) about the population
+  - Acts as the **bridge** between sample data and population inference
+
+- **Conclusion**
+
+  - Result obtained after performing hypothesis testing
+  - Based on evidence from the sample
+
+- **Population Data**
+
+  - Represents characteristics of the entire population
+  - Inferred, not directly measured, using sample results
+
+- **Relationship shown in the diagram**
+
+  - Sample data leads to a conclusion
+  - Hypothesis testing influences both:
+
+  - How sample data is interpreted
+  - How conclusions about the population are drawn
+
+## **Types of Hypotheses**
+
+- **Null hypothesis (H₀)**
+
+  - Assumes **no effect** or **no difference** in the data
+  - Example: A new drug has **no effect** on blood pressure
+
+- **Alternative hypothesis (H₁)**
+
+  - Assumes an **effect exists** or there **is a difference**
+  - Example: A new drug **lowers blood pressure**
+
+[⬆️ Go to Context](#context)
+
+## **Probability Distributions**
+
+Probability distributions describe **how likely different values are** in a random variable.
+
+There are **three key concepts**:
+
+- Probability **Mass** Function (PMF)
+- Probability **Density** Function (PDF)
+- **Cumulative** Distribution Function (CDF)
+
+[⬆️ Go to Context](#context)
+
+### Probability Mass Function (PMF)
+
+- Used for **discrete** random variables
+
+- Gives probability of **exact values**
+
+- Probabilities are **countable**
+
+- **Example variables**
+
+  - Dice outcomes (1–6)
+  - Number of students present
+  - Number of heads in coin tosses
+
+- **Property**
+
+  - Sum of all probabilities = **1**
+
+- **Example**
+
+  - P(X = 3) = 1/6 (fair dice)
+
+[⬆️ Go to Context](#context)
+
+### Probability Density Function (PDF)
+
+- Used for **continuous** random variables
+
+- Gives **density**, not exact probability
+
+- Probability at an **exact point is 0**
+
+- **Example variables**
+
+  - Height
+  - Weight
+  - Time
+  - Temperature
+
+- **Property**
+
+  - Area under the curve = **1**
+
+- **Key idea**
+
+  - Probability is found over a **range**, not a single value
+  - Example: P(160 < Height < 170)
+
+[⬆️ Go to Context](#context)
+
+### Cumulative Distribution Function (CDF)
+
+- Used for **both discrete and continuous** variables
+
+- Shows probability that a value is **less than or equal to x**
+
+- **Definition**
+
+  - CDF(x) = P(X ≤ x)
+
+- **Properties**
+
+  - Always increases
+  - Values range from **0 to 1**
+
+- **Relation**
+
+  - PMF → summed to get CDF (discrete)
+  - PDF → integrated to get CDF (continuous)
+
+[⬆️ Go to Context](#context)
+
+### Probability Distributions Differences
+
+- **PMF**
+
+  - Discrete data
+  - Exact probabilities
+
+- **PDF**
+
+  - Continuous data
+  - Area gives probability
+
+- **CDF**
+
+  - Accumulated probability
+  - Used to compare probabilities up to a value
 
 [⬆️ Go to Context](#context)
