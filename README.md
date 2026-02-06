@@ -475,6 +475,15 @@
       - [Five Number Summary](#five-number-summary)
       - [Outliers using Box Plot](#outliers-using-box-plot)
       - [Outlier Fences](#outlier-fences)
+- [**Day 38 - Different Plot, Distribution \& Theorem in Statistics**](#day-38---different-plot-distribution--theorem-in-statistics)
+  - [**Normal Distribution**](#normal-distribution)
+    - [**Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)**](#empirical-rule-6895997-rule--3-sigma-rule)
+  - [**Central Limit Theorem (CLT)**](#central-limit-theorem-clt)
+  - [**Log-Normal Distribution**](#log-normal-distribution)
+  - [**Power Law Distribution**](#power-law-distribution)
+    - [**Box-Cox Transformation**](#box-cox-transformation)
+  - [**Pareto Distribution**](#pareto-distribution)
+  - [**Comparison of Distribution**](#comparison-of-distribution)
 
 # **Day 01 - Induction Session**
 
@@ -12792,7 +12801,6 @@ s = \sqrt{250} \approx 15.81
 
 [⬆️ Go to Context](#context)
 
-
 #### 1st Standard Deviation
 
 > $(( \mu \pm 1\sigma ))$
@@ -13332,5 +13340,91 @@ print("Outliers:", outliers)
 > - Fences are **based on IQR**, so they are robust to skewed data.
 > - Box plots **automatically use fences** to show whiskers and outliers visually.
 > - Can be adjusted: sometimes **2×IQR or 3×IQR** is used for stricter outlier detection.
+
+[⬆️ Go to Context](#context)
+
+# **Day 38 - Different Plot, Distribution & Theorem in Statistics**
+
+## **Normal Distribution**
+
+Often called the **"Bell Curve,"** this is the most famous distribution. It is symmetric around the mean, showing that data near the mean are more frequent in occurrence than data far from the mean.
+
+- **Real-world example:** Human heights, IQ scores, or measurement errors.
+- **Key Math:** Defined by its mean () and standard deviation ().
+
+[⬆️ Go to Context](#context)
+
+### **Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)**
+
+In a **Normal Distribution**, data follows a predictable pattern:
+
+- **68%** of data lies within **±1σ** (one standard deviation) of the mean
+
+- **95%** of data lies within **±2σ** of the mean
+
+- **99.7%** of data lies within **±3σ** of the mean
+
+- This rule helps:
+
+  - Understand **data spread**
+  - Detect **outliers**
+  - Estimate probabilities quickly **without complex math**
+
+[⬆️ Go to Context](#context)
+
+## **Central Limit Theorem (CLT)**
+
+The CLT is the "magic" of statistics. It states that if you take enough samples from **any** population (no matter how messy the original distribution is), the distribution of the *sample means* will eventually look like a Normal Distribution.
+
+- **Why it matters:** This allows statisticians to make accurate inferences about a population even when they don't know its underlying shape.
+
+[⬆️ Go to Context](#context)
+
+## **Log-Normal Distribution**
+
+A distribution is "log-normal" if the logarithm of the random variable is normally distributed. Unlike the Normal distribution, this one is **skewed to the right** and cannot contain negative values.
+
+- **Real-world example:** Income (most people earn near the average, but a few earn significantly more), or the length of comments on a social media post.
+
+[⬆️ Go to Context](#context)
+
+## **Power Law Distribution**
+
+A functional relationship between two quantities, where a relative change in one quantity results in a proportional relative change in the other. It features a "long tail," meaning extreme events are rare but much more likely than in a Normal distribution.
+
+- **Real-world example:** The frequency of words in a language or the size of craters on the moon.
+
+[⬆️ Go to Context](#context)
+
+### **Box-Cox Transformation**
+
+The **Box-Cox transformation** is a statistical technique used to **transform skewed data** so that it becomes **more normally distributed**. It is commonly applied when data does not meet the assumptions of normality.
+
+- **Purpose:** Reduce skewness and stabilize variance in data.
+
+- **Key Idea:** Applies a power transformation controlled by a parameter **λ (lambda)**.
+
+- **Important condition:** Data values must be **positive**.
+
+- **Real-world use:** Preparing income, sales, or biological data before applying regression or hypothesis tests.
+
+[⬆️ Go to Context](#context)
+
+## **Pareto Distribution**
+
+A specific type of Power Law, often associated with the **80/20 rule** (e.g., 80% of the consequences come from 20% of the causes). It describes a situation where a large portion of a total is concentrated in a small fraction of the population.
+
+- **Real-world example:** Wealth distribution (a small percentage of the population holds the majority of the wealth) or city populations.
+
+> It also can be normal distribution using *Box-Cox transformation*
+
+## **Comparison of Distribution**
+
+| Distribution   | Shape          | Key Characteristic                                |
+| -------------- | -------------- | ------------------------------------------------- |
+| **Normal**     | Symmetric Bell | Most data points are "average."                   |
+| **Log-Normal** | Right-Skewed   | Starts at zero; heavy right tail.                 |
+| **Power Law**  | "L" Shape      | Extremely "thick" tail; no true "average" member. |
+| **Pareto**     | "L" Shape      | Focuses on inequality and concentration.          |
 
 [⬆️ Go to Context](#context)
