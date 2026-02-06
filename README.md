@@ -512,6 +512,16 @@
     - [Probability Density Function (PDF)](#probability-density-function-pdf)
     - [Cumulative Distribution Function (CDF)](#cumulative-distribution-function-cdf)
     - [Probability Distributions Differences](#probability-distributions-differences)
+- [**Day 41 - Type 1 And Type 2 Error, Chi Square Test**](#day-41---type-1-and-type-2-error-chi-square-test)
+  - [**Type I and Type II Error**](#type-i-and-type-ii-error)
+    - [Type I Error (α – False Positive)](#type-i-error-α--false-positive)
+    - [Type II Error (β – False Negative)](#type-ii-error-β--false-negative)
+    - [Confusion Matrix View](#confusion-matrix-view)
+  - [**Chi-Square Test**](#chi-square-test)
+    - [Uses of Chi-Square Test](#uses-of-chi-square-test)
+    - [Chi-Square Test of Independence](#chi-square-test-of-independence)
+    - [Chi-Square Test of Goodness of Fit](#chi-square-test-of-goodness-of-fit)
+    - [Chi-Square \& Errors Link](#chi-square--errors-link)
 
 # **Day 01 - Induction Session**
 
@@ -13873,5 +13883,157 @@ There are **three key concepts**:
 
   - Accumulated probability
   - Used to compare probabilities up to a value
+
+[⬆️ Go to Context](#context)
+
+# **Day 41 - Type 1 And Type 2 Error, Chi Square Test**
+
+## **Type I and Type II Error**
+
+- Occur in **hypothesis testing** and **classification problems**
+- Represent **incorrect decisions**
+
+### Type I Error (α – False Positive)
+
+- Rejecting a **true null hypothesis**
+- Concluding an effect exists when it **does not**
+- **In confusion matrix**
+- Type I Error → **False Positive (FP)**
+
+- **Example**
+  - Spam filter marks a normal email as spam
+  - Medical test says disease exists when it does not
+
+[⬆️ Go to Context](#context)
+
+### Type II Error (β – False Negative)
+
+- Failing to reject a **false null hypothesis**
+- Missing a real effect
+- **In confusion matrix**
+- Type II Error → **False Negative (FN)**
+
+- **Example**
+- Spam email marked as normal
+- Medical test misses a real disease
+
+[⬆️ Go to Context](#context)
+
+### Confusion Matrix View
+
+| Actual \ Predicted | Positive            | Negative            |
+| ------------------ | ------------------- | ------------------- |
+| **Positive**       | True Positive (TP)  | False Negative (FN) |
+| **Negative**       | False Positive (FP) | True Negative (TN)  |
+
+- Mapping Summary
+  - Type I Error → False Positive (FP)
+  - Type II Error → False Negative (FN)
+  - Lower **α** → Fewer false alarms
+  - Lower **β** → Fewer missed detections
+
+- Confusion Matrix Example
+
+  ```py
+  from sklearn.metrics import confusion_matrix
+
+  y_true = [1, 0, 1, 1, 0, 0, 1]
+  y_pred = [1, 1, 1, 0, 0, 0, 1]
+
+  cm = confusion_matrix(y_true, y_pred)
+  TN, FP, FN, TP = cm.ravel()
+
+  print("Type I Error (FP):", FP)
+  print("Type II Error (FN):", FN)
+  ```
+
+- Error Rates
+
+  ```py
+  alpha = FP / (FP + TN)
+  beta = FN / (FN + TP)
+
+  print("Type I Error Rate (α):", alpha)
+  print("Type II Error Rate (β):", beta)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Chi-Square Test**
+
+- A **non-parametric statistical test**
+- Used for **categorical data**
+- Works with **frequency (count) values**
+- Compares **observed vs expected** frequencies
+- [chi-square-table](https://math.arizona.edu/~jwatkins/chi-square-table.pdf)
+
+[⬆️ Go to Context](#context)
+
+### Uses of Chi-Square Test
+
+- Test of **Independence**
+- Test of **Goodness of Fit**
+
+[⬆️ Go to Context](#context)
+
+### Chi-Square Test of Independence
+
+- Checks whether two categorical variables are **related**
+
+- **Example**
+  - Gender vs Product Preference
+  - Education vs Job Type
+
+- Chi-Square Example
+
+  ```py
+  import numpy as np
+  from scipy.stats import chi2_contingency
+
+  observed = np.array([
+      [30, 20],
+      [25, 35]
+  ])
+
+  chi2, p, dof, expected = chi2_contingency(observed)
+
+  print("Chi-square value:", chi2)
+  print("p-value:", p)
+  print("Degrees of freedom:", dof)
+  print("Expected frequencies:\n", expected)
+  ```
+
+- **Decision rule**
+  - `p < 0.05` → Reject null hypothesis
+  - `p ≥ 0.05` → Fail to reject null hypothesis
+
+[⬆️ Go to Context](#context)
+
+### Chi-Square Test of Goodness of Fit
+
+- Checks whether observed data follows an **expected distribution**
+
+- **Example**
+  - Testing fairness of a dice
+  - Chi-Square Example
+
+  ```py
+  from scipy.stats import chisquare
+
+  observed = [8, 9, 10, 11, 12, 10]
+  expected = [10, 10, 10, 10, 10, 10]
+
+  chi2, p = chisquare(observed, expected)
+
+  print("Chi-square value:", chi2)
+  print("p-value:", p)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Chi-Square & Errors Link
+
+- Rejecting a true null hypothesis → **Type I Error**
+- Failing to detect real difference → **Type II Error**
 
 [⬆️ Go to Context](#context)
