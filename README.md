@@ -5,6 +5,7 @@
 </div>
 
 # **Context**
+
 - [**Context**](#context)
 - [**Day 01 - Induction Session**](#day-01---induction-session)
   - [**Session and Overview**](#session-and-overview)
@@ -477,13 +478,32 @@
       - [Outlier Fences](#outlier-fences)
 - [**Day 38 - Different Plot, Distribution \& Theorem in Statistics**](#day-38---different-plot-distribution--theorem-in-statistics)
   - [**Normal Distribution**](#normal-distribution)
-    - [**Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)**](#empirical-rule-6895997-rule--3-sigma-rule)
+    - [Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)](#empirical-rule-6895997-rule--3-sigma-rule)
   - [**Central Limit Theorem (CLT)**](#central-limit-theorem-clt)
   - [**Log-Normal Distribution**](#log-normal-distribution)
   - [**Power Law Distribution**](#power-law-distribution)
     - [**Box-Cox Transformation**](#box-cox-transformation)
   - [**Pareto Distribution**](#pareto-distribution)
   - [**Comparison of Distribution**](#comparison-of-distribution)
+- [**Day 39 - Statistics Practical Implementation**](#day-39---statistics-practical-implementation)
+  - [**Measure of Central Tendency**](#measure-of-central-tendency-1)
+    - [Mean](#mean)
+    - [Median](#median)
+    - [Mode](#mode)
+    - [Box Plot (Outlier Detection)](#box-plot-outlier-detection)
+  - [**Five Number Summary**](#five-number-summary-1)
+  - [**Measure of Dispersion**](#measure-of-dispersion)
+    - [Variance](#variance)
+    - [Standard Deviation](#standard-deviation)
+  - [**Histograms and Probability Density Function (PDF)**](#histograms-and-probability-density-function-pdf)
+    - [Using Real Dataset (Iris)](#using-real-dataset-iris)
+  - [**Normal Distribution using Python**](#normal-distribution-using-python)
+  - [**Other Distributions**](#other-distributions)
+    - [Log-Normal Distribution](#log-normal-distribution-1)
+    - [Effect of Log Transformation](#effect-of-log-transformation)
+  - [**Q–Q Plot (Quantile–Quantile Plot)**](#qq-plot-quantilequantile-plot)
+  - [**Features and Target Variables**](#features-and-target-variables)
+  - [**Correlation and Pair Plot**](#correlation-and-pair-plot)
 
 # **Day 01 - Induction Session**
 
@@ -1651,7 +1671,6 @@ print("Hello World")
   ```
 
 - `isidentifier()`: Checks if a string is a **valid Python identifier** (variable, function, class name).
-
 
   ```py
   s1 = "variable1"
@@ -13354,7 +13373,7 @@ Often called the **"Bell Curve,"** this is the most famous distribution. It is s
 
 [⬆️ Go to Context](#context)
 
-### **Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)**
+### Empirical Rule (68–95–99.7 Rule / 3-Sigma Rule)
 
 In a **Normal Distribution**, data follows a predictable pattern:
 
@@ -13426,5 +13445,258 @@ A specific type of Power Law, often associated with the **80/20 rule** (e.g., 80
 | **Log-Normal** | Right-Skewed   | Starts at zero; heavy right tail.                 |
 | **Power Law**  | "L" Shape      | Extremely "thick" tail; no true "average" member. |
 | **Pareto**     | "L" Shape      | Focuses on inequality and concentration.          |
+
+[⬆️ Go to Context](#context)
+
+# **Day 39 - Statistics Practical Implementation**
+
+## **Measure of Central Tendency**
+
+- Describes the **central or typical value** of a dataset
+- Helps summarize data with a **single representative number**
+
+### Mean
+
+- Arithmetic average of all values
+- Sensitive to **outliers**
+
+  ```py
+  import numpy as np
+  import statistics
+
+  ages = [23,24,32,45,12,43,67,45,32,56,32,420]
+
+  print(np.mean(ages))
+  print(statistics.mean(ages))
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Median
+
+- Middle value after sorting the data
+- Less affected by outliers
+
+  ```py
+  print(np.median(ages))
+  print(statistics.median(ages))
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Mode
+
+- Most frequently occurring value
+- Useful for categorical or repeated data
+
+  ```py
+  print(statistics.mode(ages))
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Box Plot (Outlier Detection)
+
+- Visualizes data spread
+- Helps detect **outliers** using quartiles
+
+  ```py
+  import seaborn as sns
+  sns.boxplot(ages)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Five Number Summary**
+
+- Minimum
+- Q1 (25th percentile)
+- Median
+- Q3 (75th percentile)
+- Maximum
+
+Used to calculate **outlier fences**
+
+  ```py
+  q1, q3 = np.percentile(ages, [25, 75])
+  print(q1, q3)
+
+  IQR = q3 - q1
+  lower_fence = q1 - 1.5 * IQR
+  upper_fence = q3 + 1.5 * IQR
+
+  print(lower_fence, upper_fence)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Measure of Dispersion**
+
+- Shows **how spread out** the data is
+- Complements central tendency
+
+### Variance
+
+- Measures average squared deviation from mean
+- Higher variance = more spread
+
+  ```py
+  import statistics
+
+  ages = [23,24,32,45,12,43,67,45,32,56,32]
+
+  statistics.variance(ages)      # Sample variance
+  statistics.pvariance(ages)     # Population variance
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Standard Deviation
+
+- Square root of variance
+- Expressed in same unit as data
+
+  ```py
+  statistics.stdev(ages)         # Sample standard deviation
+  ```
+
+  ```py
+  import math
+  math.sqrt(statistics.pvariance(ages))
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Histograms and Probability Density Function (PDF)**
+
+- Histogram shows **frequency distribution**
+- KDE line represents **probability density**
+
+  ```py
+  ages = [23,24,32,45,12,43,67,45,32,56,32,120]
+  sns.histplot(ages, kde=True)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Using Real Dataset (Iris)
+
+  ```py
+  df = sns.load_dataset("iris")
+  df.head()
+  ```
+
+  ```py
+  sns.histplot(df['sepal_length'], kde=True)
+  sns.histplot(df['sepal_width'], kde=True)
+  sns.histplot(df['petal_length'], kde=True)
+  sns.histplot(df['petal_width'], kde=True)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Normal Distribution using Python**
+
+- Symmetrical bell-shaped curve
+- Mean = Median = Mode
+
+  ```py
+  import numpy as np
+
+  s = np.random.normal(0.5, 0.2, 1000)
+  sns.histplot(s, kde=True)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Other Distributions**
+
+### Log-Normal Distribution
+
+- Data whose logarithm follows normal distribution
+- Common in income, stock prices
+
+  ```py
+  mu, sigma = 3., 1.
+  s = np.random.lognormal(mu, sigma, 1000)
+
+  sns.histplot(s, kde=True)
+  sns.histplot(np.log(s), kde=True)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Effect of Log Transformation
+
+- Reduces skewness
+- Makes data more normally distributed
+
+  ```py
+  sns.histplot(ages, kde=True)
+  sns.histplot(np.log(ages), kde=True)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Q–Q Plot (Quantile–Quantile Plot)**
+
+- Checks if data follows **normal distribution**
+- Points close to straight line → normal
+
+  ```py
+  import matplotlib.pyplot as plt
+  import scipy.stats as stat
+  import pylab
+
+  def plot_data(sample):
+      plt.figure(figsize=(10,6))
+
+      plt.subplot(1,2,1)
+      sns.histplot(sample, kde=True)
+
+      plt.subplot(1,2,2)
+      stat.probplot(sample, dist='norm', plot=pylab)
+
+      plt.show()
+  ```
+
+  ```py
+  s = np.random.normal(0.5, 0.2, 1000)
+  plot_data(s)
+
+  plot_data(df['sepal_width'])
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Features and Target Variables**
+
+- **Input features**: Independent variables
+- **Target feature**: Dependent variable to predict
+
+Example:
+
+- area, nroom → Input features
+- price → Target feature
+
+[⬆️ Go to Context](#context)
+
+## **Correlation and Pair Plot**
+
+- Correlation measures **relationship strength**
+- Pair plot visualizes relationships between variables
+
+  ```py
+  df = sns.load_dataset('tips')
+  df.head()
+  ```
+
+  ```py
+  df.corr(numeric_only=True)
+  ```
+
+  ```py
+  sns.pairplot(df)
+  ```
 
 [⬆️ Go to Context](#context)
