@@ -529,6 +529,11 @@
     - [Matrices](#matrices)
     - [Core Matrix Properties and Decompositions](#core-matrix-properties-and-decompositions)
   - [**Statistics \& Probability**](#statistics--probability)
+- [**Day 43 - Mathematics For Data Science 02**](#day-43---mathematics-for-data-science-02)
+  - [**Calculus**](#calculus)
+    - [Differential Calculus](#differential-calculus)
+    - [Integral Calculus](#integral-calculus)
+  - [**Optimization**](#optimization)
 
 # **Day 01 - Induction Session**
 
@@ -14049,7 +14054,19 @@ There are **three key concepts**:
 
 ## **Linear Algebra**
 
-- Linear Algebra is the most important math topic in Data Science. Used in `ML models`, `neural networks`, `embeddings`, `PCA`, `SVD`, etc.
+- **Linear Algebra** is a branch of mathematics that studies **vectors, matrices, and linear equations**, and how they transform and relate to each other.In simple terms, linear algebra is the mathematics of working with structured numbers arranged in rows and columns to model relationships between variables.
+- It is the most important math topic in Data Science. Used in `ML models`, `neural networks`, `embeddings`, `PCA`, `SVD`, etc.
+
+- It provides the mathematical framework for representing and solving systems like:
+
+```math
+Ax = b
+```
+
+- Here
+  - $A$ is a matrix
+  - $x$ is a vector of variables
+  - $b$ is a result vector
 
 [⬆️ Go to Context](#context)
 
@@ -14412,6 +14429,356 @@ There are **three key concepts**:
     values = np.array([1, 2, 3, 4, 5])
     probabilities = np.array([0.1, 0.2, 0.3, 0.2, 0.2])
     expected_value = np.sum(values * probabilities)
+    ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 43 - Mathematics For Data Science 02**
+
+## **Calculus**
+
+### Differential Calculus
+
+- **Derivative**: Instantaneous rate of change
+  - **Formula**: f'(x) = lim(h→0) [f(x+h) - f(x)] / h
+  - **Where used**: Gradient descent, backpropagation, optimization
+
+    ```python
+    # Numerical derivative
+    def derivative(f, x, h=1e-5):
+        return (f(x + h) - f(x - h)) / (2 * h)
+
+    f = lambda x: x**2
+    df = derivative(f, 3)  # ≈ 6
+    ```
+
+- **Common Derivatives**: Frequently used derivative rules
+  - **Formulas**:
+    - d/dx(x^n) = nx^(n-1) (Power Rule)
+    - d/dx(e^x) = e^x
+    - d/dx(ln(x)) = 1/x
+    - d/dx(sin(x)) = cos(x)
+    - d/dx(cos(x)) = -sin(x)
+    - d/dx(tan(x)) = sec²(x)
+    - d/dx(c) = 0 (constant)
+  - **Where used**: Building blocks for complex derivatives
+
+    ```python
+    import sympy as sp
+    x = sp.Symbol('x')
+    f = x**3 + sp.exp(x) + sp.sin(x)
+    df = sp.diff(f, x)  # 3*x**2 + exp(x) + cos(x)
+    ```
+
+- **Chain Rule**: Derivative of composite functions
+  - **Formula**: d/dx[f(g(x))] = f'(g(x)) × g'(x)
+  - **Where used**: Backpropagation in neural networks, nested function derivatives
+
+    ```python
+    # If y = (2x + 1)^3, then dy/dx = 3(2x+1)^2 × 2 = 6(2x+1)^2
+    x = sp.Symbol('x')
+    y = (2*x + 1)**3
+    dy_dx = sp.diff(y, x)  # 6*(2*x + 1)**2
+    ```
+
+- **Product Rule**: Derivative of product of functions
+  - **Formula**: d/dx[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)
+  - **Where used**: Complex derivative calculations, physics equations
+
+    ```python
+    # d/dx[x^2 * sin(x)] = 2x*sin(x) + x^2*cos(x)
+    x = sp.Symbol('x')
+    f = x**2 * sp.sin(x)
+    df = sp.diff(f, x)
+    ```
+
+- **Quotient Rule**: Derivative of quotient of functions
+  - **Formula**: d/dx[f(x)/g(x)] = [f'(x)g(x) - f(x)g'(x)] / [g(x)]²
+  - **Where used**: Complex derivative calculations, rate problems
+
+    ```python
+    # d/dx[x^2 / (x+1)]
+    x = sp.Symbol('x')
+    f = x**2 / (x + 1)
+    df = sp.diff(f, x)
+    ```
+
+- **Partial Derivative**: Derivative with respect to one variable
+  - **Formula**: ∂f/∂x = lim(h→0) [f(x+h, y) - f(x, y)] / h
+  - **Where used**: Multivariable optimization, neural network gradients
+
+    ```python
+    import torch
+    x = torch.tensor([2.0, 3.0], requires_grad=True)
+    y = x[0]**2 + x[1]**3
+    y.backward()
+    print(x.grad)  # [4.0, 27.0] - partial derivatives
+    ```
+
+- **Gradient**: Vector of all partial derivatives
+  - **Formula**: ∇f = [∂f/∂x₁, ∂f/∂x₂, ..., ∂f/∂xₙ]
+  - **Where used**: Optimization algorithms, direction of steepest ascent
+
+    ```python
+    def f(x):
+        return x[0]**2 + 2*x[1]**2
+
+    # Gradient: [2x, 4y]
+    x = np.array([1.0, 2.0])
+    gradient = np.array([2*x[0], 4*x[1]])  # [2.0, 8.0]
+    ```
+
+- **Directional Derivative**: Rate of change in a specific direction
+  - **Formula**: D_u f = ∇f · u (where u is unit vector)
+  - **Where used**: Finding rate of change in any direction, optimization
+
+    ```python
+    gradient = np.array([2.0, 8.0])
+    direction = np.array([1, 1]) / np.sqrt(2)  # Unit vector
+    directional_deriv = np.dot(gradient, direction)
+    ```
+
+- **Higher-Order Derivatives**: Second, third, etc. derivatives
+  - **Formula**: f''(x), f'''(x), ..., f^(n)(x)
+  - **Where used**: Convexity analysis, Newton's method, Taylor series
+
+    ```python
+    x = sp.Symbol('x')
+    f = x**4 + 2*x**2
+    f_prime = sp.diff(f, x)      # First derivative
+    f_double_prime = sp.diff(f, x, 2)  # Second derivative
+    ```
+
+- **Hessian Matrix**: Matrix of second-order partial derivatives
+  - **Formula**: H = [[∂²f/∂x₁², ∂²f/∂x₁∂x₂], [∂²f/∂x₂∂x₁, ∂²f/∂x₂²]]
+  - **Where used**: Newton's method, convexity testing, optimization
+
+    ```python
+    from scipy.optimize import rosen, rosen_hess
+    x = np.array([1.0, 1.0])
+    hessian = rosen_hess(x)
+    ```
+
+- **Jacobian Matrix**: Matrix of first-order partial derivatives
+  - **Formula**: J = [[∂f₁/∂x₁, ∂f₁/∂x₂], [∂f₂/∂x₁, ∂f₂/∂x₂]]
+  - **Where used**: Neural networks, coordinate transformations, optimization
+
+    ```python
+    import torch
+    x = torch.tensor([[1.0, 2.0]], requires_grad=True)
+    y = torch.stack([x[0,0]**2, x[0,1]**3])
+    jacobian = torch.autograd.functional.jacobian(lambda x: y, x)
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Integral Calculus
+
+- **Indefinite Integral (Antiderivative)**: Reverse of differentiation
+  - **Formula**: ∫f(x)dx = F(x) + C, where F'(x) = f(x)
+  - **Where used**: Probability calculations, area under curve (AUC)
+
+    ```python
+    import sympy as sp
+    x = sp.Symbol('x')
+    f = x**2
+    integral = sp.integrate(f, x)  # x**3/3 + C
+    ```
+
+- **Common Integrals**: Frequently used integration formulas
+  - **Formulas**:
+    - ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)
+    - ∫1/x dx = ln|x| + C
+    - ∫e^x dx = e^x + C
+    - ∫sin(x) dx = -cos(x) + C
+    - ∫cos(x) dx = sin(x) + C
+  - **Where used**: Probability density functions, cumulative distributions
+
+    ```python
+    x = sp.Symbol('x')
+    integrals = {
+        'power': sp.integrate(x**3, x),      # x**4/4
+        'exponential': sp.integrate(sp.exp(x), x),  # exp(x)
+        'sine': sp.integrate(sp.sin(x), x)   # -cos(x)
+    }
+    ```
+
+- **Definite Integral**: Area under curve between bounds
+  - **Formula**: ∫ₐᵇ f(x)dx = F(b) - F(a)
+  - **Where used**: Expected value calculations, probability distributions
+
+    ```python
+    from scipy import integrate
+    # Integrate x^2 from 0 to 1
+    result, error = integrate.quad(lambda x: x**2, 0, 1)  # = 1/3
+    ```
+
+- **Fundamental Theorem of Calculus**: Links differentiation and integration
+  - **Formula**:
+    - Part 1: d/dx[∫ₐˣ f(t)dt] = f(x)
+    - Part 2: ∫ₐᵇ f(x)dx = F(b) - F(a), where F'(x) = f(x)
+  - **Where used**: Theoretical foundation for calculus operations
+
+    ```python
+    # Area under normal distribution curve
+    from scipy.stats import norm
+    area = norm.cdf(1) - norm.cdf(-1)  # ~68% within 1 std dev
+    ```
+
+- **Riemann Sum**: Approximation of definite integral
+  - **Formula**: ∫ₐᵇ f(x)dx ≈ Σᵢ f(xᵢ)Δx, where Δx = (b-a)/n
+  - **Where used**: Numerical integration, understanding integration concept
+
+    ```python
+    def riemann_sum(f, a, b, n=1000):
+        dx = (b - a) / n
+        x = np.linspace(a, b, n)
+        return np.sum(f(x) * dx)
+
+    result = riemann_sum(lambda x: x**2, 0, 1)  # ≈ 0.333
+    ```
+
+- **Integration by Parts**: Product integral rule
+  - **Formula**: ∫u dv = uv - ∫v du
+  - **Where used**: Complex integration problems, probability calculations
+
+    ```python
+    # ∫x*e^x dx
+    x = sp.Symbol('x')
+    f = x * sp.exp(x)
+    integral = sp.integrate(f, x)  # x*exp(x) - exp(x)
+    ```
+
+- **Integration by Substitution**: Chain rule in reverse
+  - **Formula**: ∫f(g(x))g'(x)dx = ∫f(u)du, where u = g(x)
+  - **Where used**: Simplifying complex integrals, probability transformations
+
+    ```python
+    # ∫2x*cos(x^2) dx, let u = x^2
+    x = sp.Symbol('x')
+    f = 2*x * sp.cos(x**2)
+    integral = sp.integrate(f, x)  # sin(x**2)
+    ```
+
+- **Double Integral**: Integration over 2D region
+  - **Formula**: ∬ᴿ f(x,y) dA = ∫ₐᵇ ∫_c^d f(x,y) dy dx
+  - **Where used**: Joint probability distributions, volume calculations
+
+    ```python
+    from scipy import integrate
+    # ∫∫ xy dxdy over [0,1]×[0,1]
+    def f(y, x):
+        return x * y
+    result = integrate.dblquad(f, 0, 1, 0, 1)  # = 0.25
+    ```
+
+- **Numerical Integration**: Approximating integrals computationally
+  - **Methods**: Trapezoidal rule, Simpson's rule, Monte Carlo
+  - **Where used**: When analytical solutions don't exist
+
+    ```python
+    from scipy.integrate import trapz, simps
+    x = np.linspace(0, 1, 100)
+    y = x**2
+    area_trapz = trapz(y, x)  # Trapezoidal rule
+    area_simps = simps(y, x)  # Simpson's rule
+    ```
+
+[⬆️ Go to Context](#context)
+
+## **Optimization**
+
+- **Gradient Descent**: Iterative optimization to find minimum
+  - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ), where α is learning rate
+  - **Where used**: Training machine learning models
+
+    ```python
+    learning_rate = 0.01
+    theta = np.random.randn(2)
+    for epoch in range(100):
+        gradient = compute_gradient(loss, theta)
+        theta = theta - learning_rate * gradient
+    ```
+
+- **Stochastic Gradient Descent (SGD)**: Gradient descent with single samples
+  - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ; xᵢ, yᵢ)
+  - **Where used**: Large-scale machine learning, deep learning
+
+    ```python
+    for epoch in range(epochs):
+        for x_i, y_i in zip(X, y):
+            gradient = compute_gradient(loss, theta, x_i, y_i)
+            theta = theta - learning_rate * gradient
+    ```
+
+- **Mini-Batch Gradient Descent**: Gradient descent with batches
+  - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ; X_batch, y_batch)
+  - **Where used**: Deep learning (balances speed and accuracy)
+
+    ```python
+    batch_size = 32
+    for epoch in range(epochs):
+        for i in range(0, len(X), batch_size):
+            X_batch = X[i:i+batch_size]
+            y_batch = y[i:i+batch_size]
+            gradient = compute_gradient(loss, theta, X_batch, y_batch)
+            theta = theta - learning_rate * gradient
+    ```
+
+- **Learning Rate**: Step size in gradient descent
+  - **Formula**: α (typically between 0.001 and 0.1)
+  - **Where used**: Controlling convergence speed and stability
+
+    ```python
+    # Adaptive learning rate (decay)
+    initial_lr = 0.1
+    decay_rate = 0.95
+    lr = initial_lr * (decay_rate ** epoch)
+    ```
+
+- **Momentum**: Accelerated gradient descent using past gradients
+  - **Formula**: vₜ = βvₜ₋₁ + ∇J(θₜ), θₜ₊₁ = θₜ - αvₜ
+  - **Where used**: Faster convergence, escaping local minima
+
+    ```python
+    velocity = np.zeros_like(theta)
+    beta = 0.9
+    for epoch in range(epochs):
+        gradient = compute_gradient(loss, theta)
+        velocity = beta * velocity + gradient
+        theta = theta - learning_rate * velocity
+    ```
+
+- **Adam Optimizer**: Adaptive learning rates with momentum
+  - **Formula**: mₜ = β₁mₜ₋₁ + (1-β₁)∇J, vₜ = β₂vₜ₋₁ + (1-β₂)(∇J)²
+  - **Where used**: Most popular optimizer for deep learning
+
+    ```python
+    from torch.optim import Adam
+    optimizer = Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999))
+    ```
+
+- **Convex Function**: Function with single global minimum
+  - **Formula**: f(λx + (1-λ)y) ≤ λf(x) + (1-λ)f(y) for λ ∈ [0,1]
+  - **Where used**: Guaranteeing optimization convergence
+
+    ```python
+    # Example: f(x) = x^2 is convex
+    # Loss functions in linear regression, logistic regression are convex
+    ```
+
+- **Loss Function (Cost Function)**: Measure of model error
+  - **Formulas**:
+    - MSE: L = (1/n)Σ(yᵢ - ŷᵢ)²
+    - Cross-Entropy: L = -(1/n)Σ[yᵢlog(ŷᵢ) + (1-yᵢ)log(1-ŷᵢ)]
+  - **Where used**: Model training objective
+
+    ```python
+    # Mean Squared Error
+    mse = np.mean((y_true - y_pred)**2)
+
+    # Binary Cross-Entropy
+    bce = -np.mean(y_true*np.log(y_pred) + (1-y_true)*np.log(1-y_pred))
     ```
 
 [⬆️ Go to Context](#context)
