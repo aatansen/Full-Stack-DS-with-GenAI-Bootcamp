@@ -551,6 +551,9 @@
     - [Time-Based Analysis (if applicable)](#time-based-analysis-if-applicable)
     - [Segmentation Analysis](#segmentation-analysis)
     - [Comprehensive EDA Report](#comprehensive-eda-report)
+- [**Day 45 - Bivariate and Multivariate Analysis in EDA**](#day-45---bivariate-and-multivariate-analysis-in-eda)
+  - [**Bivariate and Multivariate Analysis**](#bivariate-and-multivariate-analysis)
+  - [**Automatic Analysis**](#automatic-analysis)
 
 # **Day 01 - Induction Session**
 
@@ -14460,7 +14463,7 @@ Ax = b
   - **Formula**: f'(x) = lim(h→0) [f(x+h) - f(x)] / h
   - **Where used**: Gradient descent, backpropagation, optimization
 
-    ```python
+    ```py
     # Numerical derivative
     def derivative(f, x, h=1e-5):
         return (f(x + h) - f(x - h)) / (2 * h)
@@ -14480,7 +14483,7 @@ Ax = b
     - d/dx(c) = 0 (constant)
   - **Where used**: Building blocks for complex derivatives
 
-    ```python
+    ```py
     import sympy as sp
     x = sp.Symbol('x')
     f = x**3 + sp.exp(x) + sp.sin(x)
@@ -14491,7 +14494,7 @@ Ax = b
   - **Formula**: d/dx[f(g(x))] = f'(g(x)) × g'(x)
   - **Where used**: Backpropagation in neural networks, nested function derivatives
 
-    ```python
+    ```py
     # If y = (2x + 1)^3, then dy/dx = 3(2x+1)^2 × 2 = 6(2x+1)^2
     x = sp.Symbol('x')
     y = (2*x + 1)**3
@@ -14502,7 +14505,7 @@ Ax = b
   - **Formula**: d/dx[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)
   - **Where used**: Complex derivative calculations, physics equations
 
-    ```python
+    ```py
     # d/dx[x^2 * sin(x)] = 2x*sin(x) + x^2*cos(x)
     x = sp.Symbol('x')
     f = x**2 * sp.sin(x)
@@ -14513,7 +14516,7 @@ Ax = b
   - **Formula**: d/dx[f(x)/g(x)] = [f'(x)g(x) - f(x)g'(x)] / [g(x)]²
   - **Where used**: Complex derivative calculations, rate problems
 
-    ```python
+    ```py
     # d/dx[x^2 / (x+1)]
     x = sp.Symbol('x')
     f = x**2 / (x + 1)
@@ -14524,7 +14527,7 @@ Ax = b
   - **Formula**: ∂f/∂x = lim(h→0) [f(x+h, y) - f(x, y)] / h
   - **Where used**: Multivariable optimization, neural network gradients
 
-    ```python
+    ```py
     import torch
     x = torch.tensor([2.0, 3.0], requires_grad=True)
     y = x[0]**2 + x[1]**3
@@ -14536,7 +14539,7 @@ Ax = b
   - **Formula**: ∇f = [∂f/∂x₁, ∂f/∂x₂, ..., ∂f/∂xₙ]
   - **Where used**: Optimization algorithms, direction of steepest ascent
 
-    ```python
+    ```py
     def f(x):
         return x[0]**2 + 2*x[1]**2
 
@@ -14549,7 +14552,7 @@ Ax = b
   - **Formula**: D_u f = ∇f · u (where u is unit vector)
   - **Where used**: Finding rate of change in any direction, optimization
 
-    ```python
+    ```py
     gradient = np.array([2.0, 8.0])
     direction = np.array([1, 1]) / np.sqrt(2)  # Unit vector
     directional_deriv = np.dot(gradient, direction)
@@ -14559,7 +14562,7 @@ Ax = b
   - **Formula**: f''(x), f'''(x), ..., f^(n)(x)
   - **Where used**: Convexity analysis, Newton's method, Taylor series
 
-    ```python
+    ```py
     x = sp.Symbol('x')
     f = x**4 + 2*x**2
     f_prime = sp.diff(f, x)      # First derivative
@@ -14570,7 +14573,7 @@ Ax = b
   - **Formula**: H = [[∂²f/∂x₁², ∂²f/∂x₁∂x₂], [∂²f/∂x₂∂x₁, ∂²f/∂x₂²]]
   - **Where used**: Newton's method, convexity testing, optimization
 
-    ```python
+    ```py
     from scipy.optimize import rosen, rosen_hess
     x = np.array([1.0, 1.0])
     hessian = rosen_hess(x)
@@ -14580,7 +14583,7 @@ Ax = b
   - **Formula**: J = [[∂f₁/∂x₁, ∂f₁/∂x₂], [∂f₂/∂x₁, ∂f₂/∂x₂]]
   - **Where used**: Neural networks, coordinate transformations, optimization
 
-    ```python
+    ```py
     import torch
     x = torch.tensor([[1.0, 2.0]], requires_grad=True)
     y = torch.stack([x[0,0]**2, x[0,1]**3])
@@ -14595,7 +14598,7 @@ Ax = b
   - **Formula**: ∫f(x)dx = F(x) + C, where F'(x) = f(x)
   - **Where used**: Probability calculations, area under curve (AUC)
 
-    ```python
+    ```py
     import sympy as sp
     x = sp.Symbol('x')
     f = x**2
@@ -14611,7 +14614,7 @@ Ax = b
     - ∫cos(x) dx = sin(x) + C
   - **Where used**: Probability density functions, cumulative distributions
 
-    ```python
+    ```py
     x = sp.Symbol('x')
     integrals = {
         'power': sp.integrate(x**3, x),      # x**4/4
@@ -14624,7 +14627,7 @@ Ax = b
   - **Formula**: ∫ₐᵇ f(x)dx = F(b) - F(a)
   - **Where used**: Expected value calculations, probability distributions
 
-    ```python
+    ```py
     from scipy import integrate
     # Integrate x^2 from 0 to 1
     result, error = integrate.quad(lambda x: x**2, 0, 1)  # = 1/3
@@ -14636,7 +14639,7 @@ Ax = b
     - Part 2: ∫ₐᵇ f(x)dx = F(b) - F(a), where F'(x) = f(x)
   - **Where used**: Theoretical foundation for calculus operations
 
-    ```python
+    ```py
     # Area under normal distribution curve
     from scipy.stats import norm
     area = norm.cdf(1) - norm.cdf(-1)  # ~68% within 1 std dev
@@ -14646,7 +14649,7 @@ Ax = b
   - **Formula**: ∫ₐᵇ f(x)dx ≈ Σᵢ f(xᵢ)Δx, where Δx = (b-a)/n
   - **Where used**: Numerical integration, understanding integration concept
 
-    ```python
+    ```py
     def riemann_sum(f, a, b, n=1000):
         dx = (b - a) / n
         x = np.linspace(a, b, n)
@@ -14659,7 +14662,7 @@ Ax = b
   - **Formula**: ∫u dv = uv - ∫v du
   - **Where used**: Complex integration problems, probability calculations
 
-    ```python
+    ```py
     # ∫x*e^x dx
     x = sp.Symbol('x')
     f = x * sp.exp(x)
@@ -14670,7 +14673,7 @@ Ax = b
   - **Formula**: ∫f(g(x))g'(x)dx = ∫f(u)du, where u = g(x)
   - **Where used**: Simplifying complex integrals, probability transformations
 
-    ```python
+    ```py
     # ∫2x*cos(x^2) dx, let u = x^2
     x = sp.Symbol('x')
     f = 2*x * sp.cos(x**2)
@@ -14681,7 +14684,7 @@ Ax = b
   - **Formula**: ∬ᴿ f(x,y) dA = ∫ₐᵇ ∫_c^d f(x,y) dy dx
   - **Where used**: Joint probability distributions, volume calculations
 
-    ```python
+    ```py
     from scipy import integrate
     # ∫∫ xy dxdy over [0,1]×[0,1]
     def f(y, x):
@@ -14693,7 +14696,7 @@ Ax = b
   - **Methods**: Trapezoidal rule, Simpson's rule, Monte Carlo
   - **Where used**: When analytical solutions don't exist
 
-    ```python
+    ```py
     from scipy.integrate import trapz, simps
     x = np.linspace(0, 1, 100)
     y = x**2
@@ -14709,7 +14712,7 @@ Ax = b
   - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ), where α is learning rate
   - **Where used**: Training machine learning models
 
-    ```python
+    ```py
     learning_rate = 0.01
     theta = np.random.randn(2)
     for epoch in range(100):
@@ -14721,7 +14724,7 @@ Ax = b
   - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ; xᵢ, yᵢ)
   - **Where used**: Large-scale machine learning, deep learning
 
-    ```python
+    ```py
     for epoch in range(epochs):
         for x_i, y_i in zip(X, y):
             gradient = compute_gradient(loss, theta, x_i, y_i)
@@ -14732,7 +14735,7 @@ Ax = b
   - **Formula**: θₜ₊₁ = θₜ - α∇J(θₜ; X_batch, y_batch)
   - **Where used**: Deep learning (balances speed and accuracy)
 
-    ```python
+    ```py
     batch_size = 32
     for epoch in range(epochs):
         for i in range(0, len(X), batch_size):
@@ -14746,7 +14749,7 @@ Ax = b
   - **Formula**: α (typically between 0.001 and 0.1)
   - **Where used**: Controlling convergence speed and stability
 
-    ```python
+    ```py
     # Adaptive learning rate (decay)
     initial_lr = 0.1
     decay_rate = 0.95
@@ -14757,7 +14760,7 @@ Ax = b
   - **Formula**: vₜ = βvₜ₋₁ + ∇J(θₜ), θₜ₊₁ = θₜ - αvₜ
   - **Where used**: Faster convergence, escaping local minima
 
-    ```python
+    ```py
     velocity = np.zeros_like(theta)
     beta = 0.9
     for epoch in range(epochs):
@@ -14770,7 +14773,7 @@ Ax = b
   - **Formula**: mₜ = β₁mₜ₋₁ + (1-β₁)∇J, vₜ = β₂vₜ₋₁ + (1-β₂)(∇J)²
   - **Where used**: Most popular optimizer for deep learning
 
-    ```python
+    ```py
     from torch.optim import Adam
     optimizer = Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999))
     ```
@@ -14779,7 +14782,7 @@ Ax = b
   - **Formula**: f(λx + (1-λ)y) ≤ λf(x) + (1-λ)f(y) for λ ∈ [0,1]
   - **Where used**: Guaranteeing optimization convergence
 
-    ```python
+    ```py
     # Example: f(x) = x^2 is convex
     # Loss functions in linear regression, logistic regression are convex
     ```
@@ -14790,7 +14793,7 @@ Ax = b
     - Cross-Entropy: L = -(1/n)Σ[yᵢlog(ŷᵢ) + (1-yᵢ)log(1-ŷᵢ)]
   - **Where used**: Model training objective
 
-    ```python
+    ```py
     # Mean Squared Error
     mse = np.mean((y_true - y_pred)**2)
 
@@ -14821,7 +14824,7 @@ Ax = b
     - Mode: Most frequent value
   - **Where used**: Summary statistics, understanding typical values
 
-    ```python
+    ```py
     import pandas as pd
     import numpy as np
 
@@ -14841,7 +14844,7 @@ Ax = b
     - IQR: Q3 - Q1
   - **Where used**: Understanding data spread, identifying outliers
 
-    ```python
+    ```py
     # Dispersion measures
     variance = df['Age'].var()
     std_dev = df['Age'].std()
@@ -14859,7 +14862,7 @@ Ax = b
     - Skewness ≈ 0: Symmetric
   - **Where used**: Understanding distribution shape, feature engineering
 
-    ```python
+    ```py
     from scipy.stats import skew
 
     skewness = skew(df['Age'].dropna())
@@ -14882,7 +14885,7 @@ Ax = b
     - Kurtosis ≈ 3: Normal distribution (mesokurtic)
   - **Where used**: Identifying outliers, understanding distribution tails
 
-    ```python
+    ```py
     from scipy.stats import kurtosis
 
     kurt = kurtosis(df['Age'].dropna(), fisher=False)
@@ -14893,7 +14896,7 @@ Ax = b
   - **Purpose**: Show distribution shape, identify modes, detect outliers
   - **Where used**: Continuous numerical variables
 
-    ```python
+    ```py
     import matplotlib.pyplot as plt
 
     plt.figure(figsize=(10, 5))
@@ -14916,7 +14919,7 @@ Ax = b
     - Maximum (Q3 + 1.5×IQR)
   - **Where used**: Identifying outliers, comparing distributions
 
-    ```python
+    ```py
     plt.figure(figsize=(8, 5))
     plt.boxplot(df['Age'].dropna(), vert=True)
     plt.ylabel('Age')
@@ -14936,7 +14939,7 @@ Ax = b
   - **Formula**: KDE uses kernel function K: f̂(x) = (1/nh)Σ K((x-xᵢ)/h)
   - **Where used**: Visualizing continuous distributions smoothly
 
-    ```python
+    ```py
     plt.figure(figsize=(10, 5))
     df['Age'].dropna().plot(kind='density', linewidth=2)
     plt.xlabel('Age')
@@ -14950,7 +14953,7 @@ Ax = b
   - **Purpose**: Compare data distribution to theoretical normal distribution
   - **Where used**: Checking normality assumption for statistical tests
 
-    ```python
+    ```py
     from scipy import stats
 
     plt.figure(figsize=(8, 5))
@@ -14964,7 +14967,7 @@ Ax = b
   - **Purpose**: Understand distribution of categories
   - **Where used**: Categorical variables
 
-    ```python
+    ```py
     # Absolute frequency
     freq_table = df['Pclass'].value_counts().sort_index()
     print("Frequency Table:")
@@ -14980,7 +14983,7 @@ Ax = b
   - **Purpose**: Compare frequencies across categories
   - **Where used**: Categorical variables with few unique values
 
-    ```python
+    ```py
     plt.figure(figsize=(8, 5))
     df['Pclass'].value_counts().sort_index().plot(kind='bar', color='skyblue', edgecolor='black')
     plt.xlabel('Passenger Class')
@@ -14995,7 +14998,7 @@ Ax = b
   - **Purpose**: Display percentage breakdown of categories
   - **Where used**: Categorical variables (best with 2-5 categories)
 
-    ```python
+    ```py
     plt.figure(figsize=(8, 8))
     df['Survived'].value_counts().plot(kind='pie', autopct='%1.1f%%',
                                        labels=['Died', 'Survived'],
@@ -15010,7 +15013,7 @@ Ax = b
   - **Purpose**: Understand data completeness, plan imputation strategy
   - **Where used**: Data quality assessment
 
-    ```python
+    ```py
     # Count missing values
     missing_counts = df.isnull().sum()
     missing_percent = (df.isnull().sum() / len(df)) * 100
@@ -15045,7 +15048,7 @@ Ax = b
     - r = 0: No linear correlation
   - **Where used**: Numerical vs numerical relationships
 
-    ```python
+    ```py
     # Pearson correlation
     correlation = df['Age'].corr(df['Fare'])
     print(f"Pearson Correlation: {correlation:.3f}")
@@ -15060,7 +15063,7 @@ Ax = b
   - **Formula**: ρ = 1 - (6Σdᵢ²) / [n(n²-1)], where dᵢ is rank difference
   - **Where used**: Non-linear monotonic relationships, ordinal data
 
-    ```python
+    ```py
     from scipy.stats import spearmanr
 
     corr, p_value = spearmanr(df['Age'].dropna(), df['Fare'].dropna())
@@ -15071,7 +15074,7 @@ Ax = b
   - **Purpose**: Identify patterns, trends, outliers, correlation direction
   - **Where used**: Numerical vs numerical analysis
 
-    ```python
+    ```py
     plt.figure(figsize=(10, 6))
     plt.scatter(df['Age'], df['Fare'], alpha=0.5, edgecolors='black')
     plt.xlabel('Age')
@@ -15094,7 +15097,7 @@ Ax = b
   - **Purpose**: Display trends, time series patterns
   - **Where used**: Sequential data, time series
 
-    ```python
+    ```py
     # Group by age and calculate mean fare
     age_fare = df.groupby('Age')['Fare'].mean()
 
@@ -15111,7 +15114,7 @@ Ax = b
   - **Metrics**: Mean, median, std, min, max by groups
   - **Where used**: Categorical vs numerical analysis
 
-    ```python
+    ```py
     # Group statistics
     group_stats = df.groupby('Survived')['Age'].agg([
         'count', 'mean', 'median', 'std', 'min', 'max'
@@ -15131,7 +15134,7 @@ Ax = b
   - **Purpose**: Visualize distribution differences between groups
   - **Where used**: Categorical vs numerical analysis
 
-    ```python
+    ```py
     plt.figure(figsize=(10, 6))
     df.boxplot(column='Age', by='Survived', grid=False)
     plt.suptitle('')
@@ -15154,7 +15157,7 @@ Ax = b
   - **Purpose**: Show distribution shape and summary statistics
   - **Where used**: Detailed distribution comparison across groups
 
-    ```python
+    ```py
     import seaborn as sns
 
     plt.figure(figsize=(10, 6))
@@ -15169,7 +15172,7 @@ Ax = b
   - **Formula**: Count of each (Category1, Category2) pair
   - **Where used**: Categorical vs categorical analysis
 
-    ```python
+    ```py
     # Absolute frequency
     crosstab = pd.crosstab(df['Sex'], df['Survived'])
     print("Cross Tabulation:")
@@ -15193,7 +15196,7 @@ Ax = b
     - H₁: Variables are dependent
   - **Where used**: Testing categorical relationships
 
-    ```python
+    ```py
     from scipy.stats import chi2_contingency
 
     crosstab = pd.crosstab(df['Sex'], df['Survived'])
@@ -15213,7 +15216,7 @@ Ax = b
   - **Purpose**: Visualize categorical relationships
   - **Where used**: Categorical vs categorical analysis
 
-    ```python
+    ```py
     # Grouped bar chart
     crosstab = pd.crosstab(df['Sex'], df['Survived'])
 
@@ -15232,7 +15235,7 @@ Ax = b
   - **Purpose**: Display part-to-whole relationships
   - **Where used**: Proportion comparison across categories
 
-    ```python
+    ```py
     crosstab_pct = pd.crosstab(df['Pclass'], df['Survived'], normalize='index') * 100
 
     plt.figure(figsize=(10, 6))
@@ -15250,7 +15253,7 @@ Ax = b
   - **Formula**: t = (x̄₁ - x̄₂) / √[(s₁²/n₁) + (s₂²/n₂)]
   - **Where used**: Testing if group means differ significantly
 
-    ```python
+    ```py
     from scipy.stats import ttest_ind
 
     survived_ages = df[df['Survived'] == 1]['Age'].dropna()
@@ -15270,7 +15273,7 @@ Ax = b
   - **Formula**: F = (Between-group variance) / (Within-group variance)
   - **Where used**: Comparing 3+ group means
 
-    ```python
+    ```py
     from scipy.stats import f_oneway
 
     class1_ages = df[df['Pclass'] == 1]['Age'].dropna()
@@ -15294,7 +15297,7 @@ Ax = b
   - **Formula**: Matrix of Pearson/Spearman correlations
   - **Where used**: Feature selection, multicollinearity detection
 
-    ```python
+    ```py
     # Select numerical columns
     numerical_cols = df.select_dtypes(include=[np.number]).columns
     corr_matrix = df[numerical_cols].corr()
@@ -15320,7 +15323,7 @@ Ax = b
   - **Purpose**: Quickly identify strong correlations
   - **Where used**: Correlation visualization, pattern detection
 
-    ```python
+    ```py
     import seaborn as sns
 
     plt.figure(figsize=(12, 10))
@@ -15336,7 +15339,7 @@ Ax = b
   - **Purpose**: Visualize all pairwise relationships
   - **Where used**: Quick exploration of multiple variable relationships
 
-    ```python
+    ```py
     import seaborn as sns
 
     # Basic pair plot
@@ -15355,7 +15358,7 @@ Ax = b
   - **Purpose**: Summarize data across multiple dimensions
   - **Where used**: Complex aggregations, business intelligence
 
-    ```python
+    ```py
     # Simple pivot table
     pivot = df.pivot_table(values='Survived',
                            index='Pclass',
@@ -15377,7 +15380,7 @@ Ax = b
   - **Purpose**: Understand patterns across group combinations
   - **Where used**: Segmentation analysis, pattern discovery
 
-    ```python
+    ```py
     # Group by multiple variables
     grouped = df.groupby(['Pclass', 'Sex', 'Survived']).agg({
         'Age': ['mean', 'count'],
@@ -15399,7 +15402,7 @@ Ax = b
   - **Purpose**: Visualize data across multiple categorical dimensions
   - **Where used**: Comparing distributions across subgroups
 
-    ```python
+    ```py
     import seaborn as sns
 
     # Create FacetGrid
@@ -15421,7 +15424,7 @@ Ax = b
   - **Purpose**: Show relationships in 3D space
   - **Where used**: Exploring 3-variable relationships
 
-    ```python
+    ```py
     from mpl_toolkits.mplot3d import Axes3D
 
     fig = plt.figure(figsize=(12, 8))
@@ -15449,7 +15452,7 @@ Ax = b
   - **Purpose**: Show patterns across multiple numerical variables
   - **Where used**: High-dimensional data visualization
 
-    ```python
+    ```py
     from pandas.plotting import parallel_coordinates
 
     # Normalize data for better visualization
@@ -15474,7 +15477,7 @@ Ax = b
   - **Formula**: Mahalanobis Distance: D² = (x-μ)ᵀΣ⁻¹(x-μ)
   - **Where used**: Anomaly detection, data cleaning
 
-    ```python
+    ```py
     from scipy.spatial.distance import mahalanobis
     from scipy import stats
 
@@ -15504,7 +15507,7 @@ Ax = b
   - **Purpose**: Reduce variables while preserving variance
   - **Where used**: Feature reduction, visualization of high-dimensional data
 
-    ```python
+    ```py
     from sklearn.decomposition import PCA
     from sklearn.preprocessing import StandardScaler
 
@@ -15536,7 +15539,7 @@ Ax = b
   - **Purpose**: Understand how variable combinations affect outcome
   - **Where used**: Feature engineering, model interpretation
 
-    ```python
+    ```py
     # Create interaction features
     df['Age_Fare_Interaction'] = df['Age'] * df['Fare']
     df['Family_Size'] = df['SibSp'] + df['Parch'] + 1
@@ -15565,7 +15568,7 @@ Ax = b
 
 ## **Titanic Dataset EDA**
 
-```python
+```py
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15580,7 +15583,7 @@ print(f"\nFirst 5 rows:\n{df.head()}")
 
 ### Univariate Analysis(Titanic)
 
-```python
+```py
 # === NUMERICAL VARIABLES ===
 print("\n" + "="*50)
 print("UNIVARIATE ANALYSIS - NUMERICAL VARIABLES")
@@ -15713,7 +15716,7 @@ print(missing_df[missing_df['Count'] > 0])
 
 ### Bivariate Analysis(Titanic)
 
-```python
+```py
 print("\n" + "="*50)
 print("BIVARIATE ANALYSIS")
 print("="*50)
@@ -15862,7 +15865,7 @@ plt.show()
 
 ### Multivariate Analysis(Titanic)
 
-```python
+```py
 print("\n" + "="*50)
 print("MULTIVARIATE ANALYSIS")
 print("="*50)
@@ -16034,7 +16037,7 @@ print("\n" + "="*50)
   - **Purpose**: Ensure data integrity, avoid bias in analysis
   - **Where used**: Data cleaning, preprocessing
 
-    ```python
+    ```py
     # Check duplicates
     duplicates = df.duplicated().sum()
     print(f"Number of duplicate rows: {duplicates}")
@@ -16056,7 +16059,7 @@ print("\n" + "="*50)
   - **Purpose**: Prevent errors in analysis, optimize memory
   - **Where used**: Data validation, preprocessing
 
-    ```python
+    ```py
     # Check data types
     print("Data Types:")
     print(df.dtypes)
@@ -16077,7 +16080,7 @@ print("\n" + "="*50)
   - **Purpose**: Understand variable granularity, identify categorical vs numerical
   - **Where used**: Feature engineering decisions
 
-    ```python
+    ```py
     # Unique value counts
     cardinality = pd.DataFrame({
         'Column': df.columns,
@@ -16095,7 +16098,7 @@ print("\n" + "="*50)
   - **Purpose**: Remove uninformative features
   - **Where used**: Feature selection, dimensionality reduction
 
-    ```python
+    ```py
     # Constant features (all same value)
     constant_features = [col for col in df.columns
                         if df[col].nunique() == 1]
@@ -16121,7 +16124,7 @@ print("\n" + "="*50)
   - **Threshold**: |z| > 3 typically considered outlier
   - **Where used**: Numerical outlier detection
 
-    ```python
+    ```py
     from scipy import stats
 
     # Calculate Z-scores
@@ -16160,7 +16163,7 @@ print("\n" + "="*50)
   - **Formula**: Lower = Q1 - 1.5×IQR, Upper = Q3 + 1.5×IQR
   - **Where used**: Robust outlier detection, less sensitive to extreme values
 
-    ```python
+    ```py
     # Calculate IQR
     Q1 = df['Fare'].quantile(0.25)
     Q3 = df['Fare'].quantile(0.75)
@@ -16202,7 +16205,7 @@ print("\n" + "="*50)
   - **Purpose**: Detect outliers in multivariate data
   - **Where used**: Anomaly detection, fraud detection
 
-    ```python
+    ```py
     from sklearn.ensemble import IsolationForest
 
     # Prepare data
@@ -16232,7 +16235,7 @@ print("\n" + "="*50)
   - **Purpose**: Identify outliers based on local density
   - **Where used**: Anomaly detection in complex distributions
 
-    ```python
+    ```py
     from sklearn.neighbors import LocalOutlierFactor
 
     # Fit LOF
@@ -16273,7 +16276,7 @@ print("\n" + "="*50)
   - **Tests**: Shapiro-Wilk, Kolmogorov-Smirnov, Anderson-Darling
   - **Where used**: Statistical test assumptions, transformation decisions
 
-    ```python
+    ```py
     from scipy.stats import shapiro, normaltest, kstest, anderson
 
     # Shapiro-Wilk test (best for n < 5000)
@@ -16303,7 +16306,7 @@ print("\n" + "="*50)
   - **Purpose**: Understand underlying data generation process
   - **Where used**: Probability modeling, simulation
 
-    ```python
+    ```py
     from scipy import stats
 
     # Fit multiple distributions
@@ -16356,7 +16359,7 @@ print("\n" + "="*50)
   - **Purpose**: Visually check if data follows theoretical distribution
   - **Where used**: Distribution validation
 
-    ```python
+    ```py
     from scipy import stats
 
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
@@ -16404,7 +16407,7 @@ print("\n" + "="*50)
   - **Purpose**: Simplify analysis, handle non-linear relationships
   - **Where used**: Age groups, income brackets
 
-    ```python
+    ```py
     # Equal-width binning
     df['Age_Bins'] = pd.cut(df['Age'], bins=5)
     print(df['Age_Bins'].value_counts().sort_index())
@@ -16447,7 +16450,7 @@ print("\n" + "="*50)
   - **Purpose**: Extract hidden patterns, improve analysis
   - **Where used**: Domain-specific features
 
-    ```python
+    ```py
     # Create new features
     df['FamilySize'] = df['SibSp'] + df['Parch'] + 1
     df['IsAlone'] = (df['FamilySize'] == 1).astype(int)
@@ -16512,7 +16515,7 @@ print("\n" + "="*50)
   - **Types**: Label encoding, one-hot encoding, ordinal encoding
   - **Where used**: Preparing data for correlation, modeling
 
-    ```python
+    ```py
     # Label Encoding
     from sklearn.preprocessing import LabelEncoder
 
@@ -16548,7 +16551,7 @@ print("\n" + "="*50)
   - **Types**: Log, square root, Box-Cox, power transforms
   - **Where used**: Normalizing skewed distributions
 
-    ```python
+    ```py
     from scipy.stats import boxcox
 
     # Original distribution
@@ -16611,7 +16614,7 @@ print("\n" + "="*50)
   - **Purpose**: Identify trends, seasonality, cycles
   - **Where used**: Time series data, temporal features
 
-    ```python
+    ```py
     # Note: Titanic dataset doesn't have explicit time data,
     # but we can demonstrate with simulated dates
 
@@ -16657,7 +16660,7 @@ print("\n" + "="*50)
   - **Purpose**: Identify distinct groups, targeted analysis
   - **Where used**: Market segmentation, personalization
 
-    ```python
+    ```py
     from sklearn.cluster import KMeans
     from sklearn.preprocessing import StandardScaler
 
@@ -16714,7 +16717,7 @@ print("\n" + "="*50)
 
 ### Comprehensive EDA Report
 
-```python
+```py
 # === COMPLETE EDA SUMMARY REPORT ===
 print("="*70)
 print(" "*20 + "TITANIC DATASET - EDA REPORT")
@@ -16790,5 +16793,156 @@ print("\n" + "="*70)
 print("END OF EDA REPORT")
 print("="*70)
 ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 45 - Bivariate and Multivariate Analysis in EDA**
+
+## **Bivariate and Multivariate Analysis**
+
+- [Bivariate Analysis](#bivariate-analysis)
+- [Multivariate Analysis](#multivariate-analysis)
+
+[⬆️ Go to Context](#context)
+
+## **Automatic Analysis**
+
+- **[ydata-profiling](https://pypi.org/project/ydata-profiling/) ([pandas-profiling](https://pypi.org/project/pandas-profiling/))**: Complete Statistical Profiling (Single Dataset)
+
+  - Generates a detailed HTML report
+  - Includes:
+    - Descriptive statistics
+    - Missing value analysis
+    - Correlation matrices
+    - Duplicates detection
+    - Sample rows
+    - Feature interactions
+  - Ideal as the first step before model building
+
+    ```py
+    from ydata_profiling import ProfileReport
+
+    profile = ProfileReport(df, title="EDA Report", explorative=True)
+    profile.to_file("ydata_report.html")
+    ```
+
+- **[Sweetviz](https://pypi.org/project/sweetviz/)**: Dataset Comparison & Target Analysis
+
+  - High-density visual HTML reports
+  - Strong for:
+
+    - Train vs Test comparison
+    - Before vs After cleaning comparison
+    - Target variable analysis
+  - Useful for detecting data drift and leakage
+
+    ```py
+    import sweetviz as sv
+
+    report = sv.analyze([df, "Dataset"])
+    report.show_html("sweetviz_report.html")
+    ```
+
+  - Comparison example:
+
+    ```py
+    report = sv.compare(
+        [train_df, "Train"],
+        [test_df, "Test"],
+        "Target_Column"
+    )
+
+    report.show_html("comparison_report.html")
+    ```
+
+- **[DataPrep](https://pypi.org/project/dataprep/) (dataprep.eda)**: Faster Reports on Larger DataFrames
+
+  - Clean, modern interactive report
+  - Good performance on medium/large datasets
+  - Programmatic API control
+
+    ```py
+    from dataprep.eda import create_report
+
+    create_report(df).show_browser()
+    ```
+
+- **[Lux](https://pypi.org/project/lux/)**: Automatic Visualization Suggestions in Jupyter
+
+  - Works directly inside Jupyter Notebook
+  - Automatically suggests meaningful visualizations
+  - No need to manually define plots
+
+    ```py
+    import lux
+
+    df  # Just displaying df shows visualization recommendations
+    ```
+
+  - To guide Lux:
+
+    ```py
+    df.intent = ["age", "salary"]
+    df
+    ```
+
+- **[D-Tale](https://pypi.org/project/dtale/)** Interactive Spreadsheet-Like Exploration
+
+  - Browser-based GUI
+  - Filter, sort, group
+  - Visualize columns
+  - Generates Python code from UI actions
+  - Helpful for messy datasets
+
+    ```py
+    import dtale
+
+    d = dtale.show(df)
+    d.open_browser()
+    ```
+
+- **[AutoViz](https://pypi.org/project/autoviz/)**: Automatic Visual Storytelling
+
+  - Automatically selects impactful charts
+  - Generates:
+
+    - Scatter plots
+    - Box plots
+    - Violin plots
+    - Histograms
+    - Heatmaps
+  - Handles larger datasets with sampling
+
+    ```py
+    from autoviz.AutoViz_Class import AutoViz_Class
+
+    AV = AutoViz_Class()
+    AV.AutoViz("", dfte=df)
+    ```
+
+- **[PandasGUI](https://pypi.org/project/pandasgui/)**: No-Code Interactive GUI
+
+  - Desktop-style GUI for DataFrames
+  - Browse, filter, sort
+  - Create plots visually
+  - Good for exploratory inspection
+
+    ```py
+    from pandasgui import show
+
+    show(df)
+    ```
+
+- All tools compare
+
+  | Package             | Strength           | Best Use Case                           |
+  | ------------------- | ------------------ | --------------------------------------- |
+  | **ydata-profiling** | Deep statistics    | Full statistical overview of a dataset  |
+  | **Sweetviz**        | Comparison-focused | Train/Test comparison & target analysis |
+  | **DataPrep**        | Performance        | Faster reports for larger datasets      |
+  | **Lux**             | Notebook visuals   | Auto chart suggestions inside Jupyter   |
+  | **D-Tale**          | Interactive GUI    | Manual exploration & cleaning           |
+  | **AutoViz**         | Chart diversity    | Quick visual discovery                  |
+  | **PandasGUI**       | No-code interface  | GUI-based exploration                   |
 
 [⬆️ Go to Context](#context)

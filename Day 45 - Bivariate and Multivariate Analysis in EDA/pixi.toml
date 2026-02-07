@@ -1,0 +1,13 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 45 - Bivariate and Multivariate Analysis in EDA"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+ydata-profiling = ">=4.18.1,<5"
+ipykernel = ">=7.2.0,<8"
