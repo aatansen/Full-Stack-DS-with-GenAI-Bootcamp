@@ -321,7 +321,7 @@
   - [**Copy vs View**](#copy-vs-view)
   - [**Sorting \& Searching**](#sorting--searching)
   - [**Stacking \& Splitting**](#stacking--splitting)
-  - [**Linear Algebra**](#linear-algebra)
+  - [**Linear Algebra Using Numpy**](#linear-algebra-using-numpy)
   - [**File I/O with NumPy**](#file-io-with-numpy)
   - [**NumPy vs Python Lists**](#numpy-vs-python-lists)
   - [**When to Use NumPy**](#when-to-use-numpy)
@@ -522,6 +522,13 @@
     - [Chi-Square Test of Independence](#chi-square-test-of-independence)
     - [Chi-Square Test of Goodness of Fit](#chi-square-test-of-goodness-of-fit)
     - [Chi-Square \& Errors Link](#chi-square--errors-link)
+- [**Day 42 - Mathematics For Data Science 01**](#day-42---mathematics-for-data-science-01)
+  - [**Linear Algebra**](#linear-algebra)
+    - [Vectors](#vectors)
+    - [Scalars](#scalars)
+    - [Matrices](#matrices)
+    - [Core Matrix Properties and Decompositions](#core-matrix-properties-and-decompositions)
+  - [**Statistics \& Probability**](#statistics--probability)
 
 # **Day 01 - Induction Session**
 
@@ -9936,7 +9943,7 @@ The system allows you to control lights, fan, and TV using voice commands proces
 
 [⬆️ Go to Context](#context)
 
-## **Linear Algebra**
+## **Linear Algebra Using Numpy**
 
 - Matrix multiplication
 
@@ -14035,5 +14042,376 @@ There are **three key concepts**:
 
 - Rejecting a true null hypothesis → **Type I Error**
 - Failing to detect real difference → **Type II Error**
+
+[⬆️ Go to Context](#context)
+
+# **Day 42 - Mathematics For Data Science 01**
+
+## **Linear Algebra**
+
+- Linear Algebra is the most important math topic in Data Science. Used in `ML models`, `neural networks`, `embeddings`, `PCA`, `SVD`, etc.
+
+[⬆️ Go to Context](#context)
+
+### Vectors
+
+- **Vector Basics**: An ordered array of numbers representing magnitude and direction in n-dimensional space
+  - **Formula**: **v** = [v₁, v₂, v₃, ..., vₙ]
+  - **Where used**: Feature representation, word embeddings, coordinate systems
+
+    ```py
+    import numpy as np
+    vector_a = np.array([1, 2, 3])
+    vector_b = np.array([4, 5, 6])
+    ```
+
+- **Dot Product (Vector)**: Scalar result from multiplying corresponding elements and summing them
+  - **Formula**: **a** · **b** = a₁b₁ + a₂b₂ + ... + aₙbₙ = Σ(aᵢbᵢ)
+  - **Where used**: Similarity measures, neural network computations, cosine similarity
+
+    ```py
+    dot_product = np.dot(vector_a, vector_b)  # Result: 32
+    # Or: vector_a @ vector_b
+    ```
+
+- **Cross Product (Vector)**: Vector perpendicular to two input vectors (only in 3D)
+  - **Formula**: **a** × **b** = [a₂b₃ - a₃b₂, a₃b₁ - a₁b₃, a₁b₂ - a₂b₁]
+  - **Where used**: Computer graphics, robotics, physics simulations
+
+    ```py
+    cross_product = np.cross(vector_a, vector_b)  # Result: [-3, 6, -3]
+    ```
+
+- **Vector Magnitude (Norm)**: Length of a vector
+  - **Formula**: ||**v**|| = √(v₁² + v₂² + ... + vₙ²)
+  - **Where used**: Distance calculations, normalization, regularization
+
+    ```py
+    magnitude = np.linalg.norm(vector_a)  # L2 norm
+    ```
+
+- **Unit Vector (Normalization)**: Vector with magnitude 1
+  - **Formula**: **û** = **v** / ||**v**||
+  - **Where used**: Feature scaling, gradient descent optimization
+
+    ```py
+    unit_vector = vector_a / np.linalg.norm(vector_a)
+    ```
+
+- **Cosine Similarity**: Measure of similarity between two vectors
+  - **Formula**: cos(θ) = (**a** · **b**) / (||**a**|| × ||**b**||)
+  - **Where used**: Text similarity, recommendation systems, clustering
+
+    ```py
+    from sklearn.metrics.pairwise import cosine_similarity
+    similarity = cosine_similarity([vector_a], [vector_b])
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Scalars
+
+- **Scalar Basics**: A single numerical value
+  - **Formula**: k ∈ ℝ (a real number)
+  - **Where used**: Learning rates, weights, biases, temperature in softmax
+
+    ```py
+    scalar = 5
+    scaled_vector = scalar * vector_a  # [5, 10, 15]
+    ```
+
+- **Scalar Multiplication (Vector)**: Multiplying each element of a vector by a scalar
+  - **Formula**: k**v** = [kv₁, kv₂, ..., kvₙ]
+  - **Where used**: Feature scaling, adjusting learning rates
+
+    ```py
+    result = 3 * vector_a  # [3, 6, 9]
+    ```
+
+- **Scalar Multiplication (Matrix)**: Multiplying each element of a matrix by a scalar
+  - **Formula**: kA = [ka₁₁, ka₁₂, ...; ka₂₁, ka₂₂, ...]
+  - **Where used**: Weight initialization, gradient scaling
+
+    ```py
+    matrix = np.array([[1, 2], [3, 4]])
+    scaled_matrix = 2 * matrix  # [[2, 4], [6, 8]]
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Matrices
+
+- **Matrix Basics**: 2D array of numbers arranged in rows and columns
+  - **Formula**: A = [a₁₁, a₁₂, ..., a₁ₙ; a₂₁, a₂₂, ..., a₂ₙ; ...; aₘ₁, aₘ₂, ..., aₘₙ]
+  - **Where used**: Data representation, transformations, neural network layers
+
+    ```py
+    matrix = np.array([[1, 2, 3], [4, 5, 6]])
+    ```
+
+- **Matrix Order (Shape)**: Dimensions of a matrix (rows × columns)
+  - **Formula**: A ∈ ℝᵐˣⁿ (m rows, n columns)
+  - **Where used**: Ensuring compatible matrix operations, defining model architecture
+
+    ```py
+    shape = matrix.shape  # (2, 3) - 2 rows, 3 columns
+    ```
+
+- **Null (Zero) Matrix**: Matrix with all elements as zero
+  - **Formula**: O = [0, 0, ..., 0; 0, 0, ..., 0; ...]
+  - **Where used**: Initialization, padding, placeholder matrices
+
+    ```py
+    null_matrix = np.zeros((3, 3))
+    ```
+
+- **Identity Matrix**: Square matrix with 1s on diagonal, 0s elsewhere
+  - **Formula**: I = [1, 0, ..., 0; 0, 1, ..., 0; ...; 0, 0, ..., 1]
+  - **Where used**: Matrix inverse verification, neutral element in multiplication
+
+    ```py
+    identity = np.eye(3)  # 3x3 identity matrix
+    ```
+
+- **Square Matrix**: Matrix with equal rows and columns
+  - **Formula**: A ∈ ℝⁿˣⁿ
+  - **Where used**: Covariance matrices, correlation matrices, transformation matrices
+
+    ```py
+    square_matrix = np.array([[1, 2], [3, 4]])
+    ```
+
+- **Column Matrix**: Matrix with single column
+  - **Formula**: **c** = [c₁; c₂; ...; cₘ] ∈ ℝᵐˣ¹
+  - **Where used**: Feature vectors, target variables in regression
+
+    ```py
+    column_matrix = np.array([[1], [2], [3]])  # Shape: (3, 1)
+    ```
+
+- **Row Matrix**: Matrix with single row
+  - **Formula**: **r** = [r₁, r₂, ..., rₙ] ∈ ℝ¹ˣⁿ
+  - **Where used**: Single data sample, probability distributions
+
+    ```py
+    row_matrix = np.array([[1, 2, 3]])  # Shape: (1, 3)
+    ```
+
+- **Transpose Matrix**: Flipping rows and columns
+  - **Formula**: (Aᵀ)ᵢⱼ = Aⱼᵢ
+  - **Where used**: Changing data orientation, matrix calculations, neural networks
+
+    ```py
+    transposed = matrix.T  # or np.transpose(matrix)
+    ```
+
+- **Adjoint (Adjugate) Matrix**: Transpose of cofactor matrix
+  - **Formula**: adj(A) = Cᵀ (where C is cofactor matrix)
+  - **Where used**: Computing matrix inverse, theoretical linear algebra
+
+    ```py
+    # For 2x2 matrix
+    A = np.array([[1, 2], [3, 4]])
+    det = np.linalg.det(A)
+    adj = det * np.linalg.inv(A)  # Adjoint = det(A) * A^(-1)
+    ```
+
+- **Inverse Matrix**: Matrix that when multiplied gives identity matrix
+  - **Formula**: A⁻¹A = AA⁻¹ = I, where A⁻¹ = adj(A) / det(A)
+  - **Where used**: Solving linear equations, linear regression (normal equation)
+
+    ```py
+    A = np.array([[4, 7], [2, 6]])
+    A_inv = np.linalg.inv(A)
+    # Verify: A @ A_inv ≈ Identity
+    ```
+
+- **Matrix Addition**: Adding corresponding elements of matrices
+  - **Formula**: (A + B)ᵢⱼ = Aᵢⱼ + Bᵢⱼ
+  - **Where used**: Gradient accumulation, bias addition in neural networks
+
+    ```py
+    A = np.array([[1, 2], [3, 4]])
+    B = np.array([[5, 6], [7, 8]])
+    result = A + B  # [[6, 8], [10, 12]]
+    ```
+
+- **Matrix Multiplication**: Dot product of rows and columns
+  - **Formula**: (AB)ᵢⱼ = Σₖ(Aᵢₖ × Bₖⱼ)
+  - **Where used**: Neural network forward propagation, transformations, PCA
+
+    ```py
+    A = np.array([[1, 2], [3, 4]])
+    B = np.array([[5, 6], [7, 8]])
+    result = A @ B  # or np.dot(A, B)
+    ```
+
+- **Matrix Rank**: Maximum number of linearly independent rows/columns
+  - **Formula**: rank(A) = number of linearly independent rows (or columns)
+  - **Where used**: Determining data dimensionality, checking multicollinearity
+
+    ```py
+    A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    rank = np.linalg.matrix_rank(A)  # Result: 2 (not full rank)
+    ```
+
+[⬆️ Go to Context](#context)
+
+### Core Matrix Properties and Decompositions
+
+- **Eigenvalues and Eigenvectors**: Special scalars and vectors where Av = λv
+  - **Formula**: A**v** = λ**v**, where det(A - λI) = 0
+  - **Where used**: PCA, dimensionality reduction, stability analysis, PageRank
+
+    ```py
+    A = np.array([[4, 2], [1, 3]])
+    eigenvalues, eigenvectors = np.linalg.eig(A)
+    ```
+
+- **Determinant**: Scalar value describing matrix properties
+  - **Formula**: det(A) = Σ(±a₁ᵢ₁a₂ᵢ₂...aₙᵢₙ) (for 2×2: ad - bc)
+  - **Where used**: Checking invertibility, volume scaling, feature importance
+
+    ```py
+    det = np.linalg.det(A)
+    ```
+
+- **Singular Value Decomposition (SVD)**: Factorization into three matrices
+  - **Formula**: A = UΣVᵀ (U: left singular vectors, Σ: singular values, V: right singular vectors)
+  - **Where used**: Dimensionality reduction, recommendation systems, image compression
+
+    ```py
+    U, S, Vt = np.linalg.svd(matrix)
+    ```
+
+- **Trace**: Sum of diagonal elements
+  - **Formula**: tr(A) = Σᵢ aᵢᵢ
+  - **Where used**: Matrix derivatives, regularization, PCA
+
+    ```py
+    trace = np.trace(A)
+    ```
+
+[⬆️ Go to Context](#context)
+
+## **Statistics & Probability**
+
+- **Mean (Average)**: Central tendency measure
+  - **Formula**: μ = (Σxᵢ) / n
+  - **Where used**: Data summarization, feature normalization
+
+    ```py
+    data = np.array([1, 2, 3, 4, 5])
+    mean = np.mean(data)
+    ```
+
+- **Median**: Middle value in sorted data
+  - **Formula**: Middle value when n is odd; average of two middle values when n is even
+  - **Where used**: Robust central tendency (less affected by outliers)
+
+    ```py
+    median = np.median(data)
+    ```
+
+- **Mode**: Most frequently occurring value
+  - **Formula**: Value with highest frequency
+  - **Where used**: Categorical data analysis, imputation
+
+    ```py
+    from scipy import stats
+    mode = stats.mode(data)
+    ```
+
+- **Variance**: Average squared deviation from mean
+  - **Formula**: σ² = Σ(xᵢ - μ)² / n (population), s² = Σ(xᵢ - x̄)² / (n-1) (sample)
+  - **Where used**: Measuring data spread, feature scaling, model evaluation
+
+    ```py
+    variance = np.var(data)  # Population variance
+    variance_sample = np.var(data, ddof=1)  # Sample variance
+    ```
+
+- **Standard Deviation**: Square root of variance
+  - **Formula**: σ = √(σ²), s = √(s²)
+  - **Where used**: Feature scaling, confidence intervals, anomaly detection
+
+    ```py
+    std_dev = np.std(data)
+    ```
+
+- **Covariance**: Measure of joint variability between two variables
+  - **Formula**: cov(X,Y) = Σ(xᵢ - x̄)(yᵢ - ȳ) / (n-1)
+  - **Where used**: Feature relationship analysis, PCA
+
+    ```py
+    data1 = np.array([1, 2, 3, 4, 5])
+    data2 = np.array([2, 4, 5, 4, 5])
+    cov_matrix = np.cov(data1, data2)
+    ```
+
+- **Correlation (Pearson)**: Normalized covariance
+  - **Formula**: ρ(X,Y) = cov(X,Y) / (σₓ × σᵧ), range: [-1, 1]
+  - **Where used**: Feature selection, multicollinearity detection
+
+    ```py
+    correlation = np.corrcoef(data1, data2)
+    ```
+
+- **Normal (Gaussian) Distribution**: Bell-shaped probability distribution
+  - **Formula**: f(x) = (1/(σ√(2π))) × e^(-(x-μ)²/(2σ²))
+  - **Where used**: Statistical inference, data generation, assumptions in models
+
+    ```py
+    from scipy import stats
+    normal_dist = stats.norm(loc=0, scale=1)
+    sample = normal_dist.rvs(size=1000)
+    ```
+
+- **Binomial Distribution**: Discrete probability of k successes in n trials
+  - **Formula**: P(X=k) = C(n,k) × p^k × (1-p)^(n-k), where C(n,k) = n!/(k!(n-k)!)
+  - **Where used**: A/B testing, binary classification evaluation
+
+    ```py
+    binomial_dist = stats.binom(n=10, p=0.5)
+    prob = binomial_dist.pmf(k=5)
+    ```
+
+- **Poisson Distribution**: Discrete probability of k events in fixed interval
+  - **Formula**: P(X=k) = (λ^k × e^(-λ)) / k!, where λ is the average rate
+  - **Where used**: Counting events, rare event modeling
+
+    ```py
+    poisson_dist = stats.poisson(mu=3)
+    prob = poisson_dist.pmf(k=2)
+    ```
+
+- **Bayes' Theorem**: Update probability based on new evidence
+  - **Formula**: P(A|B) = [P(B|A) × P(A)] / P(B)
+  - **Where used**: Naive Bayes classifier, probabilistic inference
+
+    ```py
+    # P(Disease|Positive) = P(Positive|Disease) * P(Disease) / P(Positive)
+    posterior = (0.95 * 0.01) / 0.05  # = 0.19
+    ```
+
+- **Conditional Probability**: Probability of A given B has occurred
+  - **Formula**: P(A|B) = P(A ∩ B) / P(B)
+  - **Where used**: Decision trees, probabilistic graphical models
+
+    ```py
+    p_a_and_b = 0.3
+    p_b = 0.5
+    p_a_given_b = p_a_and_b / p_b
+    ```
+
+- **Expected Value (Mean of distribution)**: Long-run average
+  - **Formula**: E[X] = Σ(xᵢ × P(xᵢ)) (discrete), ∫(x × f(x))dx (continuous)
+  - **Where used**: Decision theory, risk assessment
+
+    ```py
+    values = np.array([1, 2, 3, 4, 5])
+    probabilities = np.array([0.1, 0.2, 0.3, 0.2, 0.2])
+    expected_value = np.sum(values * probabilities)
+    ```
 
 [⬆️ Go to Context](#context)
