@@ -554,6 +554,8 @@
 - [**Day 45 - Bivariate and Multivariate Analysis in EDA**](#day-45---bivariate-and-multivariate-analysis-in-eda)
   - [**Bivariate and Multivariate Analysis**](#bivariate-and-multivariate-analysis)
   - [**Automatic Analysis**](#automatic-analysis)
+- [**Day 46 - EDA Project**](#day-46---eda-project)
+  - [**Titanic EDA**](#titanic-eda)
 
 # **Day 01 - Induction Session**
 
@@ -16944,5 +16946,13 @@ print("="*70)
   | **D-Tale**          | Interactive GUI    | Manual exploration & cleaning           |
   | **AutoViz**         | Chart diversity    | Quick visual discovery                  |
   | **PandasGUI**       | No-code interface  | GUI-based exploration                   |
+
+[⬆️ Go to Context](#context)
+
+# **Day 46 - EDA Project**
+
+## **Titanic EDA**
+
+- [Titanic Dataset EDA](#titanic-dataset-eda)
 
 [⬆️ Go to Context](#context)
