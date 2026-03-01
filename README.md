@@ -583,6 +583,19 @@
       - [Word Embeddings (NLP)](#word-embeddings-nlp)
     - [5. Feature Engineering Pipeline](#5-feature-engineering-pipeline)
       - [When To Use Which Technique](#when-to-use-which-technique)
+- [**Day 48 - MinMaxScaling, Handling Categorical Data, Label Encoding**](#day-48---minmaxscaling-handling-categorical-data-label-encoding)
+  - [**MinMaxScaling**](#minmaxscaling)
+  - [**Handling Categorical Data**](#handling-categorical-data)
+    - [Ordinal Encoding](#ordinal-encoding)
+    - [One-Hot Encoding (Nominal)](#one-hot-encoding-nominal)
+    - [Label Encoding (Mostly for Target Variable)](#label-encoding-mostly-for-target-variable)
+    - [Label Encoding vs Ordinal Encoding](#label-encoding-vs-ordinal-encoding)
+      - [Label Encoding(No order)](#label-encodingno-order)
+      - [Ordinal Encoding(ordered)](#ordinal-encodingordered)
+    - [Dummy Variable Trap](#dummy-variable-trap)
+    - [Target Encoding](#target-encoding)
+    - [Frequency Encoding](#frequency-encoding)
+  - [**Pipeline-Ready Preprocessing Setup**](#pipeline-ready-preprocessing-setup)
 
 # **Day 01 - Induction Session**
 
@@ -17722,5 +17735,337 @@ Represent words as vectors capturing semantic meaning, e.g., Word2Vec, GloVe, BE
 | Select top features      | RFE, Lasso, RF Importance  | High-dimensional data             |
 | Visualize clusters       | t-SNE, UMAP                | Exploratory analysis              |
 | NLP features             | TF-IDF + SVD, BERT         | Text classification, similarity   |
+
+[⬆️ Go to Context](#context)
+
+# **Day 48 - MinMaxScaling, Handling Categorical Data, Label Encoding**
+
+## **MinMaxScaling**
+
+- Scales numerical features into a fixed range (usually **0 → 1**)
+- Preserves original data distribution
+- Sensitive to outliers
+- Commonly used in Neural Networks and distance-based algorithms
+
+```math
+X_{\text{scaled}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
+```
+
+- **When to Use**
+  - Feature values have different ranges
+  - Algorithms depend on distance
+  - Deep Learning models
+
+  ```py
+  from sklearn.preprocessing import MinMaxScaler
+  import pandas as pd
+
+  data = pd.DataFrame({
+      "age": [18, 25, 40, 60]
+  })
+
+  scaler = MinMaxScaler()
+  data_scaled = scaler.fit_transform(data)
+
+  print(data_scaled)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Handling Categorical Data**
+
+- Machine learning models work with numbers, not text
+- Categorical values must be converted into numerical form
+- Encoding method depends on category type
+
+- **Types**
+  - **Ordinal Encoding** → ordered categories
+  - **One-Hot Encoding** → unordered (nominal) categories
+  - **Label Encoding** → mainly for target labels
+
+[⬆️ Go to Context](#context)
+
+### Ordinal Encoding
+
+- Converts categories into integers based on **defined order**
+- Used when categories have **natural ranking**
+- Model understands relative importance
+
+- **Example Categories**
+  - Low < Medium < High
+  - Beginner < Intermediate < Expert
+
+  ```py
+  from sklearn.preprocessing import OrdinalEncoder
+  import pandas as pd
+
+  data = pd.DataFrame({
+      "size": ["Small", "Medium", "Large"]
+  })
+
+  encoder = OrdinalEncoder(
+      categories=[["Small", "Medium", "Large"]]
+  )
+
+  encoded = encoder.fit_transform(data)
+
+  print(encoded)
+  ```
+
+> [!NOTE]
+>
+> - Only use when order exists
+> - Wrong usage introduces false relationships
+
+[⬆️ Go to Context](#context)
+
+### One-Hot Encoding (Nominal)
+
+- Creates binary columns for each category
+- No ranking relationship introduced
+- Safest encoding for unordered categories
+
+- **Example Categories**
+  - Red, Blue, Green
+  - Dhaka, Chittagong, Sylhet
+
+  ```py
+  from sklearn.preprocessing import OneHotEncoder
+  import pandas as pd
+
+  data = pd.DataFrame({
+      "color": ["Red", "Blue", "Green"]
+  })
+
+  encoder = OneHotEncoder(sparse_output=False)
+  encoded = encoder.fit_transform(data)
+
+  print(encoded)
+  ```
+
+- **Using pandas shortcut**
+
+  ```py
+  pd.get_dummies(data["color"])
+  ```
+
+> [!NOTE]
+>
+> - Creates many columns for large categories
+> - May increase dimensionality
+
+[⬆️ Go to Context](#context)
+
+### Label Encoding (Mostly for Target Variable)
+
+- Assigns integer labels automatically
+- Does **not** represent true ordering
+- Commonly used for encoding **target (y)**
+
+  ```py
+  from sklearn.preprocessing import LabelEncoder
+
+  labels = ["Cat", "Dog", "Bird"]
+
+  encoder = LabelEncoder()
+  encoded = encoder.fit_transform(labels)
+
+  print(encoded)
+  ```
+
+> [!NOTE]
+>
+> - Not recommended for input features
+> - Model may assume incorrect ranking
+
+- Data Type And Encoding
+
+  | Data Type           | Encoding         |
+  | ------------------- | ---------------- |
+  | Ordinal categorical | Ordinal Encoding |
+  | Nominal categorical | One-Hot Encoding |
+  | Target labels       | Label Encoding   |
+
+[⬆️ Go to Context](#context)
+
+### Label Encoding vs Ordinal Encoding
+
+- Both convert categories into numbers
+- Often confused in interviews
+- Key difference → **meaning of numbers**
+
+[⬆️ Go to Context](#context)
+
+#### Label Encoding(No order)
+
+- Assigns arbitrary integer values
+- No order awareness
+- Mainly used for **target (y) labels**
+
+  ```py
+  from sklearn.preprocessing import LabelEncoder
+
+  data = ["Cat", "Dog", "Bird"]
+
+  encoder = LabelEncoder()
+  encoded = encoder.fit_transform(data)
+
+  print(encoded)
+  ```
+
+  ```sh
+  Bird=0, Cat=1, Dog=2
+  ```
+
+- Numbers are random
+- Model may wrongly assume ranking
+
+[⬆️ Go to Context](#context)
+
+#### Ordinal Encoding(ordered)
+
+- Used when categories have logical order
+- Order is explicitly defined
+
+  ```py
+  from sklearn.preprocessing import OrdinalEncoder
+
+  data = [["Low"], ["Medium"], ["High"]]
+
+  encoder = OrdinalEncoder(
+      categories=[["Low", "Medium", "High"]]
+  )
+
+  print(encoder.fit_transform(data))
+  ```
+
+- Label Encoding ≠ Ordinal Encoding
+- Label Encoding → arbitrary mapping
+- Ordinal Encoding → meaningful ranking
+
+- **Rule**
+  - Target column → Label Encoding
+  - Ordered feature → Ordinal Encoding
+  - Unordered feature → One-Hot Encoding
+
+[⬆️ Go to Context](#context)
+
+### Dummy Variable Trap
+
+- Happens during One-Hot Encoding
+- One column becomes predictable from others
+- Causes **multicollinearity**
+
+  ```sh
+  Male → [1,0]
+  Female → [0,1]
+  ```
+
+  > If Male is known → Female automatically known.
+
+- Problem
+  - Linear Regression models become unstable
+  - Coefficients become unreliable
+
+- Solution
+  - Drop one encoded column
+
+- **Using pandas**
+
+  ```py
+  pd.get_dummies(data["gender"], drop_first=True)
+  ```
+
+- **Using sklearn**
+
+  ```py
+  from sklearn.preprocessing import OneHotEncoder
+
+  encoder = OneHotEncoder(drop="first")
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Target Encoding
+
+- Replace category using target mean
+- Useful for high-cardinality features
+- Common in competitions (Kaggle)
+
+  ```sh
+  Category → Mean(target)
+  ```
+
+  ```py
+  import pandas as pd
+
+  data = pd.DataFrame({
+      "city": ["A", "A", "B", "B"],
+      "price": [100, 120, 200, 220]
+  })
+
+  target_mean = data.groupby("city")["price"].mean()
+
+  data["city_encoded"] = data["city"].map(target_mean)
+
+  print(data)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Frequency Encoding
+
+- Replace category with occurrence frequency
+- Keeps dataset compact
+- Good for large categorical sets
+
+  ```py
+  freq = data["city"].value_counts(normalize=True)
+
+  data["city_freq"] = data["city"].map(freq)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Pipeline-Ready Preprocessing Setup**
+
+- Automates preprocessing
+- Prevents data leakage
+- Production-ready workflow
+
+- Step 1 — Separate Columns
+
+  ```py
+  num_features = ["age", "salary"]
+  cat_features = ["city", "gender"]
+  ```
+
+- Step 2 — Create Transformers
+
+  ```py
+  from sklearn.preprocessing import StandardScaler, OneHotEncoder
+  from sklearn.compose import ColumnTransformer
+
+  preprocessor = ColumnTransformer(
+      transformers=[
+          ("num", StandardScaler(), num_features),
+          ("cat", OneHotEncoder(drop="first"), cat_features)
+      ]
+  )
+  ```
+
+- Step 3 — Full ML Pipeline
+
+  ```py
+  from sklearn.pipeline import Pipeline
+  from sklearn.linear_model import LogisticRegression
+
+  pipeline = Pipeline([
+      ("preprocessing", preprocessor),
+      ("model", LogisticRegression())
+  ])
+
+  pipeline.fit(X_train, y_train)
+  ```
 
 [⬆️ Go to Context](#context)
