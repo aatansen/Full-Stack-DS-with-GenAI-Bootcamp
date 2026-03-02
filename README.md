@@ -596,6 +596,17 @@
     - [Target Encoding](#target-encoding)
     - [Frequency Encoding](#frequency-encoding)
   - [**Pipeline-Ready Preprocessing Setup**](#pipeline-ready-preprocessing-setup)
+- [**Day 49 - Train Test Split, Use Of Column Transformer In Sklearn**](#day-49---train-test-split-use-of-column-transformer-in-sklearn)
+  - [**Train Test Split**](#train-test-split)
+    - [Test Split Using Scikit-learn](#test-split-using-scikit-learn)
+    - [Train Test Split Explanation](#train-test-split-explanation)
+    - [Train Model After Split](#train-model-after-split)
+    - [When NOT to Shuffle](#when-not-to-shuffle)
+  - [**Column Transformer in Scikit-learn**](#column-transformer-in-scikit-learn)
+    - [Why ColumnTransformer is Needed](#why-columntransformer-is-needed)
+    - [Column Transformer](#column-transformer)
+    - [After ColumnTransformer](#after-columntransformer)
+    - [ColumnTransformer + Model](#columntransformer--model)
 
 # **Day 01 - Induction Session**
 
@@ -18069,3 +18080,278 @@ X_{\text{scaled}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
   ```
 
 [⬆️ Go to Context](#context)
+
+# **Day 49 - Train Test Split, Use Of Column Transformer In Sklearn**
+
+## **Train Test Split**
+
+- Train Test Split is used to evaluate how well a machine learning model performs on **unseen data**
+- Dataset is divided into two parts:
+  - **Training set** → used to train the model
+  - **Testing set** → used to evaluate performance
+- Prevents **overfitting** (model memorizing data instead of learning)
+
+- Common split ratios:
+  - 80% Training — 20% Testing
+  - 70% Training — 30% Testing
+  - 90% Training — 10% Testing (large datasets)
+
+[⬆️ Go to Context](#context)
+
+### Test Split Using Scikit-learn
+
+- Import required function:
+
+  ```py
+  from sklearn.model_selection import train_test_split
+  ```
+
+- Example
+
+  ```py
+  import pandas as pd
+
+  data = {
+      "hours": [1,2,3,4,5,6,7,8],
+      "score": [10,20,30,40,50,60,70,80]
+  }
+
+  df = pd.DataFrame(data)
+
+  X = df[["hours"]]   # Features
+  y = df["score"]     # Target
+  ```
+
+- Perform Train Test Split
+
+  ```py
+  from sklearn.model_selection import train_test_split
+
+  X_train, X_test, y_train, y_test = train_test_split(
+      X,
+      y,
+      test_size=0.2,
+      random_state=42
+  )
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Train Test Split Explanation
+
+- Parameter Explanation
+
+  - `test_size=0.2`
+
+    - 20% data used for testing
+
+  - `random_state=42`
+
+    - Ensures same split every run
+    - Important for reproducibility
+
+- Check Split Size
+
+  ```py
+  print(X_train.shape)
+  print(X_test.shape)
+  ```
+
+  ```sh
+  (6, 1)
+  (2, 1)
+  ```
+
+- Visual Understanding
+
+  ```sh
+  Full Dataset
+  │
+  ├── Training Data (80%)
+  │       Model Learning
+  │
+  └── Testing Data (20%)
+          Model Evaluation
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Train Model After Split
+
+```py
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+```
+
+[⬆️ Go to Context](#context)
+
+### When NOT to Shuffle
+
+- Time-based datasets:
+  - Stock prices
+  - Weather data
+  - Sales forecasting
+
+  ```py
+  train_test_split(X, y, shuffle=False)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Column Transformer in Scikit-learn**
+
+- `ColumnTransformer` allows applying **different preprocessing steps** to different columns
+- Useful when dataset contains:
+  - Numerical features
+  - Categorical features
+  - Mixed data types
+- Keeps preprocessing clean and automated
+
+[⬆️ Go to Context](#context)
+
+### Why ColumnTransformer is Needed
+
+Real datasets usually contain:
+
+- Numerical data → needs scaling
+- Categorical data → needs encoding
+
+Without ColumnTransformer:
+
+- Manual preprocessing becomes messy
+- Hard to maintain pipelines
+- Risk of preprocessing mistakes
+
+ColumnTransformer solves this by handling everything **in one step**
+
+- Example dataset:
+
+  | Age | Salary | City       |
+  | --- | ------ | ---------- |
+  | 25  | 30000  | Dhaka      |
+  | 30  | 50000  | Chittagong |
+  | 35  | 70000  | Dhaka      |
+
+Required preprocessing:
+
+- Age, Salary → Scaling
+- City → One-Hot Encoding
+
+[⬆️ Go to Context](#context)
+
+### Column Transformer
+
+  ```py
+  from sklearn.compose import ColumnTransformer
+  from sklearn.preprocessing import StandardScaler, OneHotEncoder
+  ```
+
+  ```py
+  import pandas as pd
+
+  data = {
+      "age": [25, 30, 35],
+      "salary": [30000, 50000, 70000],
+      "city": ["Dhaka", "Chittagong", "Dhaka"]
+  }
+
+  df = pd.DataFrame(data)
+
+  X = df
+  ```
+
+- Define Column Groups
+
+  ```py
+  num_cols = ["age", "salary"]
+  cat_cols = ["city"]
+  ```
+
+- Create ColumnTransformer
+
+  ```py
+  preprocessor = ColumnTransformer(
+      transformers=[
+          ("num", StandardScaler(), num_cols),
+          ("cat", OneHotEncoder(), cat_cols)
+      ]
+  )
+  ```
+
+- Each tuple contains:
+  - Name → `"num"` or `"cat"`
+  - Transformer → preprocessing method
+  - Columns → target columns
+
+- Structure:
+
+  ```sh
+  (name, transformer, columns)
+  ```
+
+- Apply Transformation
+
+  ```py
+  X_transformed = preprocessor.fit_transform(X)
+  ```
+
+  ```py
+  print(X_transformed)
+  ```
+
+- Result:
+  - Numerical columns scaled
+  - Categorical column converted into encoded vectors
+  - Combined into one final feature matrix
+
+[⬆️ Go to Context](#context)
+
+### After ColumnTransformer
+
+- Convert Output to DataFrame
+
+  ```py
+  import pandas as pd
+
+  pd.DataFrame(
+      X_transformed,
+      columns=preprocessor.get_feature_names_out()
+  )
+  ```
+
+- Using with Train Test Split
+
+  ```py
+  from sklearn.model_selection import train_test_split
+
+  X_train, X_test = train_test_split(X, test_size=0.2, random_state=42)
+
+  X_train = preprocessor.fit_transform(X_train)
+  X_test = preprocessor.transform(X_test)
+  ```
+
+  - `fit_transform()` → training data
+  - `transform()` → test data
+
+[⬆️ Go to Context](#context)
+
+### ColumnTransformer + Model
+
+  ```py
+  from sklearn.pipeline import Pipeline
+  from sklearn.linear_model import LinearRegression
+
+  pipeline = Pipeline([
+      ("preprocessing", preprocessor),
+      ("model", LinearRegression())
+  ])
+
+  pipeline.fit(X_train, y_train)
+  ```
+
+[⬆️ Go to Context](#context)
+
