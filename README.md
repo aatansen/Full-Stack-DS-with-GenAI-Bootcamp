@@ -554,7 +554,7 @@
 - [**Day 45 - Bivariate and Multivariate Analysis in EDA**](#day-45---bivariate-and-multivariate-analysis-in-eda)
   - [**Bivariate and Multivariate Analysis**](#bivariate-and-multivariate-analysis)
   - [**Automatic Analysis**](#automatic-analysis)
-- [**Day 46 - EDA Project**](#day-46---eda-project)
+- [**Day 46 - EDA Project - Titanic Data**](#day-46---eda-project---titanic-data)
   - [**Titanic EDA**](#titanic-eda)
 - [**Day 47 - Feature Engineering**](#day-47---feature-engineering)
   - [**What is GIGO?**](#what-is-gigo)
@@ -607,6 +607,8 @@
     - [Column Transformer](#column-transformer)
     - [After ColumnTransformer](#after-columntransformer)
     - [ColumnTransformer + Model](#columntransformer--model)
+- [**Day 50 - EDA Project - Visa Data**](#day-50---eda-project---visa-data)
+  - [**Visa Data EDA**](#visa-data-eda)
 
 # **Day 01 - Induction Session**
 
@@ -17000,7 +17002,7 @@ print("="*70)
 
 [⬆️ Go to Context](#context)
 
-# **Day 46 - EDA Project**
+# **Day 46 - EDA Project - Titanic Data**
 
 ## **Titanic EDA**
 
@@ -18355,3 +18357,23 @@ Required preprocessing:
 
 [⬆️ Go to Context](#context)
 
+# **Day 50 - EDA Project - Visa Data**
+
+## **Visa Data EDA**
+
+- Dataset: [EasyVisa_Dataset](https://www.kaggle.com/datasets/moro23/easyvisa-dataset)
+- Full EDA on Visa Data: [EDA_Visa_data.ipynb](./Day%2050%20-%20EDA%20Project%20-%20Visa%20Data/EDA_Visa_data.ipynb)
+
+---
+
+- For FE:
+  - Missing value - No
+  - Categorical handler - Yes
+  - Outlier - Yes
+  - Imbalance - Yes
+  - Duplicate - No
+  - Drop any column - Yes
+  - Scaling - Yes
+  - Transformation - Yes
+
+[⬆️ Go to Context](#context)
