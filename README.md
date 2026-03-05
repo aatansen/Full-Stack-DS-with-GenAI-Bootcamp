@@ -616,6 +616,17 @@
   - [**Predict Using Pipeline**](#predict-using-pipeline)
     - [What Happens Internally?](#what-happens-internally)
   - [**Manual vs Pipeline Prediction**](#manual-vs-pipeline-prediction)
+- [**Day 52 - Data Transformation Techniques**](#day-52---data-transformation-techniques)
+  - [**Function Transformer**](#function-transformer)
+    - [Log Transformation](#log-transformation)
+    - [Reciprocal Transformation](#reciprocal-transformation)
+    - [Square Transformation](#square-transformation)
+    - [Square Root Transformation](#square-root-transformation)
+  - [**Function Transformer Comparison**](#function-transformer-comparison)
+  - [**Power Transformer**](#power-transformer)
+    - [Box-Cox Transformation](#box-cox-transformation-1)
+    - [Yeo Johnson Transformation](#yeo-johnson-transformation)
+  - [**Power Transformer Comparison**](#power-transformer-comparison)
 
 # **Day 01 - Induction Session**
 
@@ -19112,5 +19123,294 @@ When we call:
   - Clean
   - Reliable
   - Scalable
+
+[⬆️ Go to Context](#context)
+
+# **Day 52 - Data Transformation Techniques**
+
+## **Function Transformer**
+
+- A **Function Transformer** applies a mathematical function to a feature.
+- Used in preprocessing to **change the distribution of data**.
+- Often used when data is **skewed, has large ranges, or violates model assumptions**.
+- In libraries like **scikit-learn**, it is implemented using `FunctionTransformer`.
+
+  ```py
+  from sklearn.preprocessing import FunctionTransformer
+  import numpy as np
+
+  transformer = FunctionTransformer(np.log)
+
+  data = np.array([[1],[2],[10],[100]])
+  transformed = transformer.transform(data)
+
+  print(transformed)
+  ```
+
+There are:
+
+- Log Transformation
+- Reciprocal Transformation
+- Square Transformation
+- Square Root Transformation
+
+[⬆️ Go to Context](#context)
+
+### Log Transformation
+
+- Applies the **logarithm** to values.
+- Reduces **right-skewed distributions**.
+- Compresses large values more than small values.
+- Formula
+  - `y = log(x)`
+
+- When to Use
+  - Data is **highly right skewed**
+  - Feature values grow **exponentially**
+  - There are **large outliers**
+
+- Where Used
+  - Financial data
+  - Population growth
+  - Income distribution
+  - Web traffic counts
+
+  ```py
+  import numpy as np
+  from sklearn.preprocessing import FunctionTransformer
+
+  log_transformer = FunctionTransformer(np.log1p)  # log(1+x) safer for zero values
+
+  X = np.array([[0],[1],[10],[100]])
+
+  X_log = log_transformer.transform(X)
+
+  print(X_log)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Reciprocal Transformation
+
+- Uses the **inverse of the variable**.
+- Strongly reduces the effect of **very large values**.
+- Formula
+  - `y = 1 / x`
+
+- When to Use
+  - Data has **extreme right skew**
+  - Relationship between variables is **inverse**
+
+- Where Used
+  - Physics formulas
+  - Rate calculations
+  - Time vs speed relationships
+
+  ```py
+  import numpy as np
+  from sklearn.preprocessing import FunctionTransformer
+
+  reciprocal_transformer = FunctionTransformer(lambda x: 1/x)
+
+  X = np.array([[1],[2],[4],[8]])
+
+  X_recip = reciprocal_transformer.transform(X)
+
+  print(X_recip)
+  ```
+
+> [!NOTE]
+>
+> - Cannot contain **zero values**.
+
+[⬆️ Go to Context](#context)
+
+### Square Transformation
+
+- Squares each value.
+- Expands large values more than small ones.
+- Formula
+  - `y = x²`
+
+- When to Use
+  - Relationship is **quadratic**
+  - Need to emphasize **large differences**
+
+- Where Used
+  - Polynomial regression
+  - Variance calculations
+  - Feature engineering
+
+  ```py
+  import numpy as np
+  from sklearn.preprocessing import FunctionTransformer
+
+  square_transformer = FunctionTransformer(lambda x: x**2)
+
+  X = np.array([[1],[2],[3],[4]])
+
+  X_square = square_transformer.transform(X)
+
+  print(X_square)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Square Root Transformation
+
+- Takes the **square root** of values.
+- Moderately reduces **right skew**.
+- Formula
+  - `y = √x`
+
+- When to Use
+  - Data is **moderately skewed**
+  - Counts or frequency data
+
+- Where Used
+  - Biological counts
+  - Event frequencies
+  - Population data
+
+  ```py
+  import numpy as np
+  from sklearn.preprocessing import FunctionTransformer
+
+  sqrt_transformer = FunctionTransformer(np.sqrt)
+
+  X = np.array([[1],[4],[9],[16]])
+
+  X_sqrt = sqrt_transformer.transform(X)
+
+  print(X_sqrt)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Function Transformer Comparison**
+
+| Transformation | Strength              | Handles Zero  | Typical Use              |
+| -------------- | --------------------- | ------------- | ------------------------ |
+| Log            | Strong skew reduction | Yes (`log1p`) | Finance, growth data     |
+| Reciprocal     | Very strong           | No            | Rates, inverse relations |
+| Square         | Expands values        | Yes           | Polynomial models        |
+| Square Root    | Mild skew reduction   | Yes           | Count data               |
+
+[⬆️ Go to Context](#context)
+
+## **Power Transformer**
+
+- A **Power Transformer** applies a **power-based mathematical transformation** to make data more **Gaussian (normal distribution)**.
+- Helps reduce **skewness** and stabilize **variance**.
+- Commonly used before models that assume normality (e.g., linear models).
+
+- In **scikit-learn**, this is implemented using `PowerTransformer`.
+
+  ```py
+  from sklearn.preprocessing import PowerTransformer
+  import numpy as np
+
+  X = np.array([[1],[2],[3],[4],[5]])
+
+  pt = PowerTransformer()
+
+  X_transformed = pt.fit_transform(X)
+
+  print(X_transformed)
+  ```
+
+- Box-Cox Transformation
+- Yeo Johnson Transformation
+
+[⬆️ Go to Context](#context)
+
+### Box-Cox Transformation
+
+- A **power transformation** designed to make data **more normally distributed**.
+- Uses a parameter **λ (lambda)** to determine the transformation strength.
+- Formula
+  - If λ ≠ 0 → `y = (x^λ − 1) / λ`
+  - If λ = 0 → `y = log(x)`
+
+- When to Use
+  - Data is **positively skewed**
+  - Values are **strictly positive**
+  - Need to approximate **normal distribution**
+
+- Where Used
+  - Econometrics
+  - Biological measurements
+  - Financial modeling
+
+> [!NOTE]
+>
+> - **Cannot handle zero or negative values**
+
+  ```py
+  from sklearn.preprocessing import PowerTransformer
+  import numpy as np
+
+  X = np.array([[1],[2],[3],[4],[5]])
+
+  boxcox = PowerTransformer(method='box-cox')
+
+  X_boxcox = boxcox.fit_transform(X)
+
+  print(X_boxcox)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Yeo Johnson Transformation
+
+- Extension of **Box-Cox** that works with **negative values and zero**.
+- Automatically finds the **best λ parameter**.
+- Key Advantage
+  - Works with **positive, zero, and negative values**.
+
+- When to Use
+  - Data contains **zero or negative numbers**
+  - Want **automatic skewness correction**
+  - Similar goal as Box-Cox but more flexible
+
+- Where Used
+  - General machine learning preprocessing
+  - Real-world datasets containing **mixed values**
+
+  ```py
+  from sklearn.preprocessing import PowerTransformer
+  import numpy as np
+
+  X = np.array([[-5],[-1],[0],[2],[10]])
+
+  yeo = PowerTransformer(method='yeo-johnson')
+
+  X_yeo = yeo.fit_transform(X)
+
+  print(X_yeo)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Power Transformer Comparison**
+
+  | Transformation | Handles Zero | Handles Negative | Typical Use                   |
+  | -------------- | ------------ | ---------------- | ----------------------------- |
+  | Box-Cox        | No           | No               | Strictly positive skewed data |
+  | Yeo-Johnson    | Yes          | Yes              | Real-world mixed data         |
+
+- Use **Box-Cox** when you are **sure all values are positive**.
+- Use **Yeo-Johnson** when dataset may contain **zero or negative values**.
+
+- Inside a pipeline:
+
+  ```py
+  from sklearn.preprocessing import PowerTransformer
+  from sklearn.pipeline import Pipeline
+
+  pipe = Pipeline([
+      ('power', PowerTransformer(method='yeo-johnson'))
+  ])
+  ```
 
 [⬆️ Go to Context](#context)
