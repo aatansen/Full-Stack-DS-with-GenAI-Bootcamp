@@ -609,6 +609,13 @@
     - [ColumnTransformer + Model](#columntransformer--model)
 - [**Day 50 - EDA Project - Visa Data**](#day-50---eda-project---visa-data)
   - [**Visa Data EDA**](#visa-data-eda)
+- [**Day 51 - Machine Learning Pipelines**](#day-51---machine-learning-pipelines)
+  - [**Titanic training without pipeline**](#titanic-training-without-pipeline)
+  - [**Predict without pipeline**](#predict-without-pipeline)
+  - [**Titanic Training Using Pipeline**](#titanic-training-using-pipeline)
+  - [**Predict Using Pipeline**](#predict-using-pipeline)
+    - [What Happens Internally?](#what-happens-internally)
+  - [**Manual vs Pipeline Prediction**](#manual-vs-pipeline-prediction)
 
 # **Day 01 - Induction Session**
 
@@ -18375,5 +18382,735 @@ Required preprocessing:
   - Drop any column - Yes
   - Scaling - Yes
   - Transformation - Yes
+
+[⬆️ Go to Context](#context)
+
+# **Day 51 - Machine Learning Pipelines**
+
+## **Titanic training without pipeline**
+
+- **Step 0 – Import Libraries**
+  - `numpy` → numerical operations
+  - `pandas` → data handling
+  - `sklearn` → preprocessing, model, evaluation
+  - `pickle` → save trained objects
+
+    ```py
+    import numpy as np
+    import pandas as pd
+
+    from sklearn.model_selection import train_test_split
+    from sklearn.impute import SimpleImputer
+    from sklearn.preprocessing import OneHotEncoder
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.metrics import accuracy_score
+
+    import pickle
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 1 – Load Dataset**
+
+  - Read CSV file
+  - Quick inspection using `.head()`
+
+    ```py
+    df = pd.read_csv('train.csv')
+    df.head()
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 2 – Drop Unnecessary Columns**
+
+  These columns are not useful for prediction:
+
+  - PassengerId → unique ID
+  - Name → too many unique values
+  - Ticket → high cardinality
+  - Cabin → too many missing values
+
+    ```py
+    df.drop(columns=['PassengerId','Name','Ticket','Cabin'], inplace=True)
+    df.head()
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 3 – Train Test Split**
+
+  - Separate features (X) and target (y)
+  - 80% training, 20% testing
+  - `random_state=42` for reproducibility
+
+    ```py
+    X_train, X_test, y_train, y_test = train_test_split(
+        df.drop(columns=['Survived']),
+        df['Survived'],
+        test_size=0.2,
+        random_state=42
+    )
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 4 – Check Missing Values**
+
+  ```py
+  df.isnull().sum()
+  ```
+
+  - Important columns with missing values:
+    - Age
+    - Embarked
+
+[⬆️ Go to Context](#context)
+
+- **Step 5 – Imputation (Handling Missing Values)**
+  - Strategy
+    - Age → Mean (default)
+    - Embarked → Most frequent value
+
+  - Create Imputers
+
+    ```py
+    si_age = SimpleImputer()
+    si_embarked = SimpleImputer(strategy='most_frequent')
+    ```
+
+  - Fit on Training Data (Very Important Rule)
+    - Always fit on training data
+    - Only transform test data
+
+      ```py
+      X_train_age = si_age.fit_transform(X_train[['Age']])
+      X_test_age = si_age.transform(X_test[['Age']])
+
+      X_train_embarked = si_embarked.fit_transform(X_train[['Embarked']])
+      X_test_embarked = si_embarked.transform(X_test[['Embarked']])
+      ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 6 – One Hot Encoding**
+
+  Categorical columns:
+
+  - Sex
+  - Embarked
+
+- Create Encoders
+
+  ```py
+  ohe_sex = OneHotEncoder(sparse=False, handle_unknown='ignore')
+  ohe_embarked = OneHotEncoder(sparse=False, handle_unknown='ignore')
+  ```
+
+- Fit & Transform
+
+  ```py
+  X_train_sex = ohe_sex.fit_transform(X_train[['Sex']])
+  X_test_sex = ohe_sex.transform(X_test[['Sex']])
+
+  X_train_embarked = ohe_embarked.fit_transform(X_train_embarked)
+  X_test_embarked = ohe_embarked.transform(X_test_embarked)
+  ```
+
+  - `handle_unknown='ignore'` prevents error if unseen category appears
+  - `sparse=False` gives normal numpy array
+
+[⬆️ Go to Context](#context)
+
+- **Step 7 – Remove Original Columns**
+
+  Drop already processed columns:
+
+  - Sex
+  - Age
+  - Embarked
+
+    ```py
+    X_train_rem = X_train.drop(columns=['Sex','Age','Embarked'])
+    X_test_rem = X_test.drop(columns=['Sex','Age','Embarked'])
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 8 – Concatenate All Features**
+
+  Combine:
+
+  - Remaining numeric columns
+  - Imputed Age
+  - Encoded Sex
+  - Encoded Embarked
+
+    ```py
+    X_train_transformed = np.concatenate(
+        (X_train_rem, X_train_age, X_train_sex, X_train_embarked),
+        axis=1
+    )
+
+    X_test_transformed = np.concatenate(
+        (X_test_rem, X_test_age, X_test_sex, X_test_embarked),
+        axis=1
+    )
+    ```
+
+- Check shape:
+
+  ```py
+  X_train_transformed.shape
+  X_test_transformed.shape
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 9 – Train Model**
+
+  Using Decision Tree Classifier:
+
+    ```py
+    clf = DecisionTreeClassifier()
+    clf.fit(X_train_transformed, y_train)
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 10 – Prediction**
+
+  ```py
+  y_pred = clf.predict(X_test_transformed)
+  ```
+
+- **Step 11 – Evaluation**
+
+  Accuracy Score:
+
+  ```py
+  accuracy_score(y_test, y_pred)
+  ```
+
+  - Measures percentage of correct predictions
+  - Range → 0 to 1
+
+[⬆️ Go to Context](#context)
+
+- **Step 12 – Save Model & Encoders**
+
+  Very important for deployment.
+
+    ```py
+    pickle.dump(ohe_sex, open('models/ohe_sex.pkl','wb'))
+    pickle.dump(ohe_embarked, open('models/ohe_embarked.pkl','wb'))
+    pickle.dump(clf, open('models/clf.pkl','wb'))
+    ```
+
+  Also save `si_age`,`si_embarked` for imputers:
+
+    ```py
+    pickle.dump(si_age, open('models/si_age.pkl','wb'))
+    pickle.dump(si_embarked, open('models/si_embarked.pkl','wb'))
+    ```
+
+[⬆️ Go to Context](#context)
+
+## **Predict without pipeline**
+
+- **Step 1 – Import Libraries**
+
+  ```py
+  import pickle
+  import numpy as np
+  ```
+
+- **Step 2 – Load Saved Objects**
+  - OneHotEncoder for Sex
+  - OneHotEncoder for Embarked
+  - Trained Decision Tree model
+
+    ```py
+    ohe_sex = pickle.load(open('models/ohe_sex.pkl','rb'))
+    ohe_embarked = pickle.load(open('models/ohe_embarked.pkl','rb'))
+    clf = pickle.load(open('models/clf.pkl','rb'))
+    ```
+
+- Load imputers:
+
+  ```py
+  si_age = pickle.load(open('models/si_age.pkl','rb'))
+  si_embarked = pickle.load(open('models/si_embarked.pkl','rb'))
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 3 – Create User Input**
+
+  Feature order must match training:
+
+  - Pclass
+  - Sex
+  - Age
+  - SibSp
+  - Parch
+  - Fare
+  - Embarked
+
+    ```py
+    # Pclass / Sex / Age / SibSp / Parch / Fare / Embarked
+    test_input = np.array(
+        [2, 'male', 31.0, 0, 0, 10.5, 'S'],
+        dtype=object
+    ).reshape(1,7)
+
+    test_input
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 4 – Apply Same Preprocessing**
+
+  - Extract and Encode Sex
+
+    ```py
+    test_input_sex = ohe_sex.transform(
+        test_input[:,1].reshape(1,1)
+    )
+    ```
+
+  - Extract and Encode Embarked
+
+    ```py
+    test_input_embarked = ohe_embarked.transform(
+        test_input[:,-1].reshape(1,1)
+    )
+    ```
+
+  - Extract Age
+
+    If no missing value:
+
+    ```py
+    test_input_age = test_input[:,2].reshape(1,1)
+    ```
+
+    If missing value handling needed:
+
+      ```py
+      test_input_age = si_age.transform(
+          test_input[:,2].reshape(1,1)
+      )
+      ```
+
+  - Extract Remaining Numeric Columns
+
+    Keep:
+
+    - Pclass
+    - SibSp
+    - Parch
+    - Fare
+
+    ```py
+    test_input_numeric = test_input[:,[0,3,4,5]]
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 5 – Concatenate Features**
+
+  Order must match training order:
+
+  - Remaining numeric
+  - Age
+  - Encoded Sex
+  - Encoded Embarked
+
+    ```py
+    test_input_transformed = np.concatenate(
+        (
+            test_input_numeric,
+            test_input_age,
+            test_input_sex,
+            test_input_embarked
+        ),
+        axis=1
+    )
+
+    test_input_transformed.shape
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 6 – Make Prediction**
+
+  ```py
+  clf.predict(test_input_transformed)
+  ```
+
+  Output:
+
+  - `0` → Did Not Survive
+  - `1` → Survived
+
+[⬆️ Go to Context](#context)
+
+## **Titanic Training Using Pipeline**
+
+- **Step 0 – Import Libraries**
+
+  ```py
+  import numpy as np
+  import pandas as pd
+
+  from sklearn.model_selection import train_test_split
+  from sklearn.compose import ColumnTransformer
+  from sklearn.impute import SimpleImputer
+  from sklearn.preprocessing import OneHotEncoder
+  from sklearn.preprocessing import MinMaxScaler
+  from sklearn.pipeline import Pipeline, make_pipeline
+  from sklearn.feature_selection import SelectKBest, chi2
+  from sklearn.tree import DecisionTreeClassifier
+  from sklearn.metrics import accuracy_score
+  from sklearn.model_selection import cross_val_score
+
+  import pickle
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 1 – Load Dataset**
+
+  ```py
+  df = pd.read_csv('train.csv')
+  df.head()
+  ```
+
+- **Step 2 – Drop Unnecessary Columns**
+
+  Removed columns:
+
+  - PassengerId → unique identifier
+  - Name → high cardinality
+  - Ticket → high cardinality
+  - Cabin → too many missing values
+
+    ```py
+    df.drop(columns=['PassengerId','Name','Ticket','Cabin'], inplace=True)
+    ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 3 – Train Test Split**
+
+  ```py
+  X_train, X_test, y_train, y_test = train_test_split(
+      df.drop(columns=['Survived']),
+      df['Survived'],
+      test_size=0.2,
+      random_state=42
+  )
+  ```
+
+  - 80% training
+  - 20% testing
+  - `random_state=42` ensures reproducibility
+
+> [!NOTE]
+> Understanding Each Transformer
+>
+> - Pipeline steps will execute sequentially:
+> - Imputation → Encoding → Scaling → Feature Selection → Model
+
+[⬆️ Go to Context](#context)
+
+- **Step 4 – Imputation (trf1)**
+
+  Handle missing values:
+
+  - Age → Mean
+  - Embarked → Most frequent
+
+    ```py
+    trf1 = ColumnTransformer([
+        ('impute_age', SimpleImputer(), [2]),
+        ('impute_embarked', SimpleImputer(strategy='most_frequent'), [6])
+    ], remainder='passthrough')
+    ```
+
+    - Column indices used instead of names
+    - `remainder='passthrough'` keeps other columns
+
+[⬆️ Go to Context](#context)
+
+- **Step 5 – One Hot Encoding (trf2)**
+
+  Encode:
+
+  - Sex
+  - Embarked
+
+    ```py
+    trf2 = ColumnTransformer([
+        ('ohe_sex_embarked',
+        OneHotEncoder(sparse=False, handle_unknown='ignore'),
+        [1,6])
+    ], remainder='passthrough')
+    ```
+
+    - `handle_unknown='ignore'` prevents errors
+    - Output becomes numpy array
+
+[⬆️ Go to Context](#context)
+
+- **Step 6 – Scaling (trf3)**
+
+  Scale features between 0 and 1:
+
+    ```py
+    trf3 = ColumnTransformer([
+        ('scale', MinMaxScaler(), slice(0,10))
+    ])
+    ```
+
+  - Why scaling?
+    - Required for chi-square feature selection
+    - Makes features comparable
+
+[⬆️ Go to Context](#context)
+
+- **Step 7 – Feature Selection (trf4)**
+
+  Select top 8 features using Chi-square test:
+
+  ```py
+  trf4 = SelectKBest(score_func=chi2, k=8)
+  ```
+
+  - `chi2` works only with non-negative values
+  - That is why scaling was done before
+
+[⬆️ Go to Context](#context)
+
+- **Step 8 – Model (trf5)**
+
+  ```py
+  trf5 = DecisionTreeClassifier()
+  ```
+
+- **Step 9 – Create Full Pipeline**
+
+  ```py
+  pipe = Pipeline([
+      ('trf1', trf1),
+      ('trf2', trf2),
+      ('trf3', trf3),
+      ('trf4', trf4),
+      ('trf5', trf5)
+  ])
+  ```
+
+Execution order:
+
+1. Missing value handling
+2. Encoding
+3. Scaling
+4. Feature selection
+5. Model training
+
+- **Pipeline vs make_pipeline**
+
+- `Pipeline()` → must name each step
+- `make_pipeline()` → names auto-generated
+
+Same idea applies to:
+
+- `ColumnTransformer()`
+- `make_column_transformer()`
+
+Alternate syntax:
+
+  ```py
+  pipe = make_pipeline(trf1, trf2, trf3, trf4, trf5)
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 10 – Train the Pipeline**
+
+  ```py
+  pipe.fit(X_train, y_train)
+  ```
+
+Important:
+
+- All preprocessing + training happens internally
+- No manual transformations required
+
+- **Explore Pipeline**
+
+  ```py
+  pipe.named_steps
+  ```
+
+- Optional visualization:
+
+  ```py
+  from sklearn import set_config
+  set_config(display='diagram')
+  pipe
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 11 – Prediction**
+
+  ```py
+  y_pred = pipe.predict(X_test)
+  y_pred
+  ```
+
+No manual preprocessing required.
+
+- **Step 12 – Evaluation**
+
+  ```py
+  accuracy_score(y_test, y_pred)
+  ```
+
+- **Step 13 – Cross Validation**
+
+  ```py
+  cross_val_score(pipe, X_train, y_train, cv=5, scoring='accuracy').mean()
+  ```
+
+- Why this is powerful?
+
+  - Each fold automatically applies full preprocessing
+  - No data leakage
+  - Cleaner evaluation
+
+- **Step 14 – Export Full Pipeline**
+
+  ```py
+  pickle.dump(pipe, open('pipe.pkl','wb'))
+  ```
+
+- Now only need:
+
+  ```py
+  pipe = pickle.load(open('pipe.pkl','rb'))
+  pipe.predict(new_data)
+  ```
+
+> [!NOTE]
+>
+> - No separate encoders. No manual preprocessing.
+
+[⬆️ Go to Context](#context)
+
+## **Predict Using Pipeline**
+
+- **Step 1 – Import Libraries**
+
+  ```py
+  import pickle
+  import pandas as pd
+  ```
+
+- **Step 2 – Load Saved Pipeline**
+
+  ```py
+  pipe = pickle.load(open('pipe.pkl','rb'))
+  ```
+
+  What this pipeline already contains:
+
+  - Imputation
+  - One Hot Encoding
+  - Scaling
+  - Feature Selection
+  - Decision Tree Model
+
+  Everything is bundled together.
+
+[⬆️ Go to Context](#context)
+
+- **Step 3 – Create User Input**
+
+  Important rules:
+
+  - Must be a pandas DataFrame
+  - Column names must match training data
+  - Column order should remain same
+
+  ```py
+  test_input2 = pd.DataFrame(
+      [[2, 'male', 31.0, 0, 0, 10.5, 'S']],
+      columns=['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
+  )
+
+  test_input2
+  ```
+
+[⬆️ Go to Context](#context)
+
+- **Step 4 – Make Prediction**
+
+  ```py
+  pipe.predict(test_input2)
+  ```
+
+  Output:
+
+  - `0` → Did Not Survive
+  - `1` → Survived
+
+[⬆️ Go to Context](#context)
+
+### What Happens Internally?
+
+When we call:
+
+  ```py
+  pipe.predict(test_input2)
+  ```
+
+- Pipeline automatically performs:
+  - Missing value handling
+  - Encoding categorical features
+  - Scaling numeric values
+  - Selecting best features
+  - Passing processed data into Decision Tree
+
+- Why This Is Powerful
+  - No manual feature extraction
+  - No need to load encoders separately
+  - No risk of feature order mismatch
+  - Cleaner and safer deployment
+  - Production ready
+
+- Common Mistakes to Avoid
+  - Passing numpy array instead of DataFrame (if using column names internally)
+  - Missing required columns
+  - Changing column order
+  - Wrong data types
+
+[⬆️ Go to Context](#context)
+
+## **Manual vs Pipeline Prediction**
+
+- Without Pipeline:
+  - Manually impute
+  - Manually encode
+  - Manually concatenate
+  - High risk of mistakes
+
+- With Pipeline:
+  - One line → `pipe.predict()`
+  - Clean
+  - Reliable
+  - Scalable
 
 [⬆️ Go to Context](#context)
