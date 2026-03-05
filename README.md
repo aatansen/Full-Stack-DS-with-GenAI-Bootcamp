@@ -627,6 +627,11 @@
     - [Box-Cox Transformation](#box-cox-transformation-1)
     - [Yeo Johnson Transformation](#yeo-johnson-transformation)
   - [**Power Transformer Comparison**](#power-transformer-comparison)
+- [**Day 53 - Outlier Detection and Removal**](#day-53---outlier-detection-and-removal)
+  - [**Outlier Detection**](#outlier-detection)
+  - [**Outlier Removal**](#outlier-removal)
+    - [Trimming](#trimming)
+    - [Capping](#capping)
 
 # **Day 01 - Induction Session**
 
@@ -19411,6 +19416,109 @@ There are:
   pipe = Pipeline([
       ('power', PowerTransformer(method='yeo-johnson'))
   ])
+  ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 53 - Outlier Detection and Removal**
+
+- [placement dataset](https://www.kaggle.com/datasets/biplavkant/placement)
+
+## **Outlier Detection**
+
+- Detects data points that are significantly different from the rest.
+- Helps improve model accuracy by identifying anomalies.
+- **Z-Score Method**
+
+  - Measures how many standard deviations a point is from the mean.
+  - Typically, |z| > 3 is considered an outlier.
+
+- **IQR (Interquartile Range) Method**
+
+  - Calculates Q1 (25th percentile) and Q3 (75th percentile).
+  - Outliers: values < Q1 − 1.5×IQR or > Q3 + 1.5×IQR.
+
+- **Boxplot Visualization**
+
+  - Uses quartiles to visually detect outliers as points outside whiskers.
+
+- **Scatter Plot / Pair Plot**
+
+  - Helps detect outliers in multidimensional data visually.
+
+- **Percentile / Quantile Method**
+
+  - Defines thresholds based on specific percentiles (e.g., top 1% or bottom 1%).
+
+- **DBSCAN (Density-Based Clustering)**
+
+  - Points far from dense clusters are flagged as outliers in multidimensional data.
+
+- **Isolation Forest**
+
+  - Tree-based model isolates anomalies automatically in large datasets.
+
+  ```py
+  import pandas as pd
+  import numpy as np
+  from scipy.stats import zscore
+
+  data = pd.DataFrame({'Age': [12, 15, 14, 130, 16, 17, 15]})
+
+  # Z-Score Detection
+  data['z_score'] = zscore(data['Age'])
+  z_outliers = data[np.abs(data['z_score']) > 3]
+
+  # IQR Detection
+  Q1 = data['Age'].quantile(0.25)
+  Q3 = data['Age'].quantile(0.75)
+  IQR = Q3 - Q1
+  iqr_outliers = data[(data['Age'] < Q1 - 1.5*IQR) | (data['Age'] > Q3 + 1.5*IQR)]
+
+  print("Z-Score Outliers:\n", z_outliers)
+  print("IQR Outliers:\n", iqr_outliers)
+  ```
+
+[⬆️ Go to Context](#context)
+
+## **Outlier Removal**
+
+- Removes or reduces the effect of extreme values.
+- Two common methods: **Trimming** and **Capping**.
+
+[⬆️ Go to Context](#context)
+
+### Trimming
+
+- Completely removes the outlier rows from the dataset.
+- Simple but reduces dataset size.
+
+  ```py
+  # Removing outliers beyond 3 standard deviations
+  data_trimmed = data[np.abs(data['z_score']) <= 3]
+  print(data_trimmed)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Capping
+
+- Replaces outliers with the nearest non-outlier value.
+- Preserves dataset size while reducing extreme impact.
+
+  ```py
+  # Using IQR method for capping
+  Q1 = data['Age'].quantile(0.25)
+  Q3 = data['Age'].quantile(0.75)
+  IQR = Q3 - Q1
+
+  lower_bound = Q1 - 1.5 * IQR
+  upper_bound = Q3 + 1.5 * IQR
+
+  data_capped = data.copy()
+  data_capped['Age'] = np.where(data['Age'] > upper_bound, upper_bound,
+                                np.where(data['Age'] < lower_bound, lower_bound, data['Age']))
+  print(data_capped)
   ```
 
 [⬆️ Go to Context](#context)

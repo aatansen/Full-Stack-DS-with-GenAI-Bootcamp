@@ -1,0 +1,16 @@
+[workspace]
+authors = ["Md. Alahi Almin Tansen <aatansen@gmail.com>"]
+channels = ["conda-forge"]
+name = "Day 53 - Outlier Detection and Removal"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+numpy = ">=2.4.2,<3"
+pandas = ">=3.0.1,<4"
+matplotlib = ">=3.10.8,<4"
+seaborn = ">=0.13.2,<0.14"
+ipykernel = ">=7.2.0,<8"
