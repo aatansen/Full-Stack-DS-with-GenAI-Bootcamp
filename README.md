@@ -632,6 +632,22 @@
   - [**Outlier Removal**](#outlier-removal)
     - [Trimming](#trimming)
     - [Capping](#capping)
+- [**Day 54 - Excel Part 01**](#day-54---excel-part-01)
+  - [**Excel Powerful Formulas \& Features**](#excel-powerful-formulas--features)
+    - [1. VLOOKUP / HLOOKUP / XLOOKUP](#1-vlookup--hlookup--xlookup)
+      - [VLOOKUP (Vertical Lookup)](#vlookup-vertical-lookup)
+      - [HLOOKUP (Horizontal Lookup)](#hlookup-horizontal-lookup)
+      - [XLOOKUP (Modern replacement)](#xlookup-modern-replacement)
+    - [2. SUMIF / SUMIFS](#2-sumif--sumifs)
+      - [SUMIF](#sumif)
+      - [SUMIFS](#sumifs)
+    - [3. FILTER](#3-filter)
+    - [4. Table Design](#4-table-design)
+    - [5. Pivot Table](#5-pivot-table)
+    - [6. Slicer](#6-slicer)
+    - [7. Chart](#7-chart)
+    - [8. Dashboard Design](#8-dashboard-design)
+    - [Excel And Python Usage](#excel-and-python-usage)
 
 # **Day 01 - Induction Session**
 
@@ -19520,5 +19536,353 @@ There are:
                                 np.where(data['Age'] < lower_bound, lower_bound, data['Age']))
   print(data_capped)
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Day 54 - Excel Part 01**
+
+## **Excel Powerful Formulas & Features**
+
+### 1. VLOOKUP / HLOOKUP / XLOOKUP
+
+#### VLOOKUP (Vertical Lookup)
+
+- Searches **vertically in the first column** of a table.
+- Returns a value from another column in the **same row**.
+
+  ```xlsx
+  =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+  ```
+
+  ```xlsx
+  =VLOOKUP(A2, A1:D10, 3, FALSE)
+  ```
+
+  ```py
+  import pandas as pd
+
+  df1 = pd.DataFrame({
+      "id":[1,2,3],
+      "name":["A","B","C"]
+  })
+
+  df2 = pd.DataFrame({
+      "id":[1,2,3],
+      "salary":[500,600,700]
+  })
+
+  result = pd.merge(df1, df2, on="id")
+  print(result)
+  ```
+
+  - Finds value of `A2` in column A
+  - Returns value from **3rd column**
+
+- **Limitation**
+  - Can only search **left → right**
+
+[⬆️ Go to Context](#context)
+
+#### HLOOKUP (Horizontal Lookup)
+
+- Searches **horizontally in the first row** of a table.
+
+  ```xlsx
+  =HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])
+  ```
+
+  ```xlsx
+  =HLOOKUP("Sales", A1:G5, 3, FALSE)
+  ```
+
+[⬆️ Go to Context](#context)
+
+#### XLOOKUP (Modern replacement)
+
+- Works **both directions**
+- No column index needed
+- Much easier and safer
+
+  ```xlsx
+  =XLOOKUP(lookup_value, lookup_array, return_array)
+  ```
+
+  ```xlsx
+  =XLOOKUP(A2, A2:A10, C2:C10)
+  ```
+
+- **Advantages**
+  - Left or right lookup
+  - Exact match by default
+  - Handles errors easily
+
+[⬆️ Go to Context](#context)
+
+### 2. SUMIF / SUMIFS
+
+#### SUMIF
+
+- Adds numbers **based on one condition**
+
+  ```xlsx
+  =SUMIF(range, criteria, sum_range)
+  ```
+
+  ```xlsx
+  =SUMIF(A2:A10,"Apple",B2:B10)
+  ```
+
+  ```py
+  df[df["product"]=="Apple"]["sales"].sum()
+  ```
+
+Sum values in column B where column A = Apple.
+
+[⬆️ Go to Context](#context)
+
+#### SUMIFS
+
+- Adds numbers **based on multiple conditions**
+
+  ```xlsx
+  =SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2, criteria2)
+  ```
+
+  ```xlsx
+  =SUMIFS(C2:C10, A2:A10, "Apple", B2:B10, ">50")
+  ```
+
+  ```py
+  df[(df["product"]=="Apple") & (df["qty"]>50)]["sales"].sum()
+  ```
+
+  - Sum sales where
+  - Product = Apple
+  - and Quantity > 50
+
+[⬆️ Go to Context](#context)
+
+### 3. FILTER
+
+- Extracts **specific rows that match conditions**.
+
+  ```xlsx
+  =FILTER(array, include)
+  ```
+
+  ```xlsx
+  =FILTER(A2:C10, B2:B10="Apple")
+  ```
+
+  ```py
+  df[df["product"]=="Apple"]
+  ```
+
+Returns rows where column B = Apple.
+
+[⬆️ Go to Context](#context)
+
+### 4. Table Design
+
+Excel Tables help organize data.
+
+- **Features**
+  - Auto formatting
+  - Automatic formulas
+  - Structured references
+  - Easy sorting and filtering
+
+- **Create Table**
+
+  ```xlsx
+  Ctrl + T
+  ```
+
+  ```py
+  df = pd.read_csv("data.csv")
+  ```
+
+Benefits
+
+- Dynamic ranges
+- Cleaner formulas
+- Better for dashboards
+
+[⬆️ Go to Context](#context)
+
+### 5. Pivot Table
+
+Used for **summarizing large datasets quickly**.
+
+- Can calculate:
+  - Sum
+  - Count
+  - Average
+  - Min / Max
+
+- Convert this
+
+  | Product | Sales |
+  | ------- | ----- |
+  | Apple   | 50    |
+  | Banana  | 30    |
+
+- Into
+
+  | Product | Total Sales |
+  | ------- | ----------- |
+  | Apple   | 200         |
+  | Banana  | 120         |
+
+- **Create**
+
+  ```xlsx
+  Insert → PivotTable
+  ```
+
+  ```py
+  df.pivot_table(
+      values="sales",
+      index="product",
+      aggfunc="sum"
+  )
+  ```
+
+  ```py
+  df.groupby("product")["sales"].sum()
+  ```
+
+[⬆️ Go to Context](#context)
+
+### 6. Slicer
+
+A **visual filter for Pivot Tables**.
+
+- Features
+  - Clickable buttons
+  - Easy filtering
+  - Used in dashboards
+
+- Example filter by:
+  - Year
+  - Department
+  - Product
+
+- Python equivalent tools:
+  - plotly
+  - streamlit
+  - dash
+
+  ```py
+  import streamlit as st
+
+  product = st.selectbox("Select product", df["product"].unique())
+
+  filtered = df[df["product"] == product]
+
+  st.write(filtered)
+  ```
+
+[⬆️ Go to Context](#context)
+
+### 7. Chart
+
+Charts visualize data.
+
+- Common charts
+  - Bar chart
+  - Line chart
+  - Pie chart
+  - Area chart
+  - Scatter plot
+
+- **Create**
+
+  ```xlsx
+  Insert → Chart
+  ```
+
+- Common ones in python:
+  - matplotlib
+  - seaborn
+  - plotly
+
+  ```py
+  import matplotlib.pyplot as plt
+
+  df.groupby("product")["sales"].sum().plot(kind="bar")
+
+  plt.show()
+  ```
+
+- Best practice
+  - Keep charts simple
+  - Use labels
+  - Avoid too many colors
+
+[⬆️ Go to Context](#context)
+
+### 8. Dashboard Design
+
+Dashboard = **visual summary of data**
+
+- Usually contains:
+  - KPIs (Key Performance Indicators)
+  - Charts
+  - Pivot Tables
+  - Slicers
+  - Key metrics
+
+- Example metrics
+  - Total Sales
+  - Employees
+  - Profit
+  - Growth
+
+- Good dashboard rules*
+  - Simple layout
+  - Consistent colors
+  - Interactive filters
+  - Clear titles
+
+- Most Excel dashboards rely mainly on:
+  - Tables
+  - Pivot Tables
+  - Charts
+  - Slicers
+  - XLOOKUP
+  - SUMIFS
+  - FILTER
+
+- Popular tools in python:
+  - Streamlit
+  - Dash
+  - Plotly
+
+  ```py
+  import streamlit as st
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  st.title("Sales Dashboard")
+
+  st.bar_chart(df.groupby("product")["sales"].sum())
+  ```
+
+[⬆️ Go to Context](#context)
+
+### Excel And Python Usage
+
+  | Excel Feature     | What it Does                     | Python Equivalent                          |
+  | ----------------- | -------------------------------- | ------------------------------------------ |
+  | VLOOKUP / XLOOKUP | Lookup values from another table | `pandas.merge()`                           |
+  | SUMIF / SUMIFS    | Conditional aggregation          | `groupby()` + `sum()` or boolean filtering |
+  | FILTER            | Extract rows based on condition  | Boolean indexing                           |
+  | Table Design      | Structured data table            | `pandas.DataFrame`                         |
+  | Pivot Table       | Data summarization               | `pivot_table()` or `groupby()`             |
+  | Slicer            | Interactive filtering            | Dashboard tools (Plotly, Streamlit, Dash)  |
+  | Chart             | Data visualization               | `matplotlib`, `seaborn`, `plotly`          |
+  | Dashboard         | Visual reporting                 | `Streamlit`, `Dash`, `Power BI`, `Tableau` |
 
 [⬆️ Go to Context](#context)
