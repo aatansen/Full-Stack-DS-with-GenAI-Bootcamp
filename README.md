@@ -647,7 +647,19 @@
     - [6. Slicer](#6-slicer)
     - [7. Chart](#7-chart)
     - [8. Dashboard Design](#8-dashboard-design)
-    - [Excel And Python Usage](#excel-and-python-usage)
+    - [Excel and Python Workflow I](#excel-and-python-workflow-i)
+- [**Day 55 - Excel Part 02**](#day-55---excel-part-02)
+  - [**Excel Data Processing \& Dashboard Tools**](#excel-data-processing--dashboard-tools)
+    - [1. Power Query](#1-power-query)
+    - [2. ETL (Extract Transform Load)](#2-etl-extract-transform-load)
+      - [Extract](#extract)
+      - [Transform](#transform)
+      - [Load](#load)
+    - [3. Pivot Table (Advanced Usage)](#3-pivot-table-advanced-usage)
+    - [4. Slicers](#4-slicers)
+    - [5. Charts (Business Analytics)](#5-charts-business-analytics)
+    - [6. HR Dashboard Example](#6-hr-dashboard-example)
+  - [Excel and Python Workflow II](#excel-and-python-workflow-ii)
 
 # **Day 01 - Induction Session**
 
@@ -19872,7 +19884,7 @@ Dashboard = **visual summary of data**
 
 [⬆️ Go to Context](#context)
 
-### Excel And Python Usage
+### Excel and Python Workflow I
 
   | Excel Feature     | What it Does                     | Python Equivalent                          |
   | ----------------- | -------------------------------- | ------------------------------------------ |
@@ -19884,5 +19896,327 @@ Dashboard = **visual summary of data**
   | Slicer            | Interactive filtering            | Dashboard tools (Plotly, Streamlit, Dash)  |
   | Chart             | Data visualization               | `matplotlib`, `seaborn`, `plotly`          |
   | Dashboard         | Visual reporting                 | `Streamlit`, `Dash`, `Power BI`, `Tableau` |
+
+[⬆️ Go to Context](#context)
+
+# **Day 55 - Excel Part 02**
+
+## **Excel Data Processing & Dashboard Tools**
+
+### 1. Power Query
+
+Power Query is Excel’s **data preparation tool**.
+
+- Used to:
+
+  - Import data
+  - Clean data
+  - Transform data
+  - Combine multiple datasets
+
+- It works like a **data pipeline inside Excel**.
+
+- Example tasks:
+
+  - Remove duplicates
+  - Split columns
+  - Change data types
+  - Merge datasets
+  - Load data from files, databases, APIs
+
+- **Open Power Query**
+
+  ```xlsx
+  Data → Get Data
+  ```
+
+- Example workflow
+
+  1. Import CSV
+  2. Clean columns
+  3. Remove nulls
+  4. Load to Excel table
+
+  ```py
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  # cleaning
+  df = df.drop_duplicates()
+  df = df.dropna()
+
+  df["date"] = pd.to_datetime(df["date"])
+
+  print(df.head())
+  ```
+
+Power Query is basically **Excel’s visual version of pandas data cleaning**.
+
+[⬆️ Go to Context](#context)
+
+### 2. ETL (Extract Transform Load)
+
+ETL is a **core concept in Data Engineering and Data Analytics**.
+
+#### Extract
+
+- Collect data from sources:
+
+  - Excel
+  - CSV
+  - Databases
+  - APIs
+
+  ```py
+  df = pd.read_csv("sales.csv")
+  ```
+
+#### Transform
+
+- Clean and modify data
+
+Examples:
+
+- remove nulls
+- convert data types
+- create new columns
+
+  ```py
+  df["profit"] = df["revenue"] - df["cost"]
+  ```
+
+#### Load
+
+- Store processed data
+
+Examples:
+
+- Excel file
+- Database
+- Dashboard
+
+```py
+df.to_csv("clean_sales.csv", index=False)
+```
+
+Excel Power Query performs **ETL visually without coding**.
+
+Common ETL workflow:
+
+  ```xlsx
+  Raw Data → Cleaning → Transformation → Analysis
+  ```
+
+[⬆️ Go to Context](#context)
+
+### 3. Pivot Table (Advanced Usage)
+
+Pivot Tables are used to **summarize and analyze data quickly**.
+
+Example dataset
+
+| Department | Employee | Salary |
+| ---------- | -------- | ------ |
+| HR         | A        | 500    |
+| HR         | B        | 600    |
+| IT         | C        | 800    |
+
+Pivot Table result
+
+| Department | Avg Salary |
+| ---------- | ---------- |
+| HR         | 550        |
+| IT         | 800        |
+
+Common operations
+
+- Sum
+- Average
+- Count
+- Percentage of total
+- Grouping by date/month/year
+
+- Create Pivot Table
+
+  ```xlsx
+  Insert → PivotTable
+  ```
+
+  ```py
+  df.pivot_table(
+      values="salary",
+      index="department",
+      aggfunc="mean"
+  )
+  ```
+
+- Another common approach
+
+  ```py
+  df.groupby("department")["salary"].mean()
+  ```
+
+Pivot Tables are heavily used in **business reporting and HR analytics**.
+
+[⬆️ Go to Context](#context)
+
+### 4. Slicers
+
+Slicers are **interactive filters for Pivot Tables and charts**.
+
+Instead of dropdown filters, slicers provide **visual buttons**.
+
+Example slicer filters:
+
+- Department
+- Year
+- Region
+- Product
+
+Benefits
+
+- Easy filtering
+- Interactive dashboards
+- Works with multiple Pivot Tables simultaneously
+
+- Add slicer
+
+  ```xlsx
+  Insert → Slicer
+  ```
+
+- Python dashboard
+
+  ```py
+  import streamlit as st
+  import pandas as pd
+
+  df = pd.read_csv("employees.csv")
+
+  department = st.selectbox(
+      "Select Department",
+      df["department"].unique()
+  )
+
+  filtered = df[df["department"] == department]
+
+  st.write(filtered)
+  ```
+
+Slicers are widely used in **Excel dashboards for business users**.
+
+[⬆️ Go to Context](#context)
+
+### 5. Charts (Business Analytics)
+
+Charts convert **raw numbers into visual insights**.
+
+Most used charts in business analysis
+
+- Bar chart → category comparison
+- Line chart → trends over time
+- Pie chart → percentage distribution
+- Scatter plot → correlation analysis
+- Area chart → cumulative trends
+
+- Create chart
+
+  ```xlsx
+  Insert → Chart
+  ```
+
+```py
+import matplotlib.pyplot as plt
+
+sales = df.groupby("product")["sales"].sum()
+
+sales.plot(kind="bar")
+
+plt.title("Sales by Product")
+plt.xlabel("Product")
+plt.ylabel("Sales")
+
+plt.show()
+```
+
+Best practices
+
+- Label axes
+- Keep charts simple
+- Avoid unnecessary colors
+- Use clear titles
+
+[⬆️ Go to Context](#context)
+
+### 6. HR Dashboard Example
+
+HR dashboards help analyze **employee and workforce data**.
+
+Typical HR dataset
+
+| Employee | Department | Salary | Join Year |
+| -------- | ---------- | ------ | --------- |
+| A        | HR         | 500    | 2021      |
+| B        | IT         | 800    | 2020      |
+
+Common HR metrics
+
+- Total Employees
+- Average Salary
+- Employees per Department
+- Hiring Trend
+- Gender distribution
+- Attrition rate
+
+Example Excel dashboard components
+
+- Pivot Tables
+- Charts
+- KPI cards
+- Slicers
+- Tables
+
+  ```py
+  import streamlit as st
+  import pandas as pd
+
+  df = pd.read_csv("employees.csv")
+
+  st.title("HR Dashboard")
+
+  st.metric("Total Employees", len(df))
+
+  dept_count = df["department"].value_counts()
+
+  st.bar_chart(dept_count)
+  ```
+
+- Typical HR dashboard layout
+
+  ```txt
+  KPI Cards
+  ↓
+  Employee Distribution Chart
+  ↓
+  Department Salary Chart
+  ↓
+  Filters (Slicers)
+  ```
+
+Excel dashboards are widely used because **they require no coding** and are easy for business teams.
+
+[⬆️ Go to Context](#context)
+
+## Excel and Python Workflow II
+
+  | Excel Tool   | Purpose                          | Python Equivalent                 |
+  | ------------ | -------------------------------- | --------------------------------- |
+  | Power Query  | Data cleaning and transformation | `pandas` data processing          |
+  | ETL          | Data pipeline                    | `pandas` + ETL frameworks         |
+  | Pivot Table  | Data summarization               | `pivot_table()` / `groupby()`     |
+  | Slicer       | Interactive filtering            | `Streamlit`, `Dash`, `Plotly`     |
+  | Charts       | Data visualization               | `matplotlib`, `seaborn`, `plotly` |
+  | HR Dashboard | Business reporting               | `Streamlit`, `Dash` dashboards    |
 
 [⬆️ Go to Context](#context)
