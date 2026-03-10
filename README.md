@@ -591,6 +591,7 @@
   - [**Automatic Analysis**](#automatic-analysis)
 - [**Day 46 - EDA Project - Titanic Data**](#day-46---eda-project---titanic-data)
   - [**Titanic EDA**](#titanic-eda)
+- [**Assignment 06**](#assignment-06)
 - [**Day 47 - Feature Engineering**](#day-47---feature-engineering)
   - [**What is GIGO?**](#what-is-gigo)
   - [**Machine Learning Workflow Pipeline**](#machine-learning-workflow-pipeline)
@@ -17717,6 +17718,12 @@ print("="*70)
 ## **Titanic EDA**
 
 - [Titanic Dataset EDA](#titanic-dataset-eda)
+
+[⬆️ Go to Context](#context)
+
+# **Assignment 06**
+
+- [A Comprehensive Exploratory Data Analysis (EDA) On House Prices](https://github.com/aatansen/A-Comprehensive-Exploratory-Data-Analysis-of-House-Prices)
 
 [⬆️ Go to Context](#context)
 

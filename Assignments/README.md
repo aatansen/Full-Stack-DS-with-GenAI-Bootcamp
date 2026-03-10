@@ -5,6 +5,7 @@
 </div>
 
 # **Context**
+
 - [**Context**](#context)
 - [**Assignments**](#assignments)
   - [**Assignment 01**](#assignment-01)
@@ -47,6 +48,8 @@
     - [Assignment 04 Solution](#assignment-04-solution)
   - [**Assignment 05**](#assignment-05)
     - [Assignment 05 Solution](#assignment-05-solution)
+  - [**Assignment 06**](#assignment-06)
+    - [Assignment 06 Solution](#assignment-06-solution)
 
 # **Assignments**
 
@@ -728,5 +731,51 @@ Print:
 [⬆️ Go to Context](#context)
 
 ### [Assignment 05 Solution](https://github.com/aatansen/Personal-AI-Assistant)
+
+[⬆️ Go to Context](#context)
+
+## **Assignment 06**
+
+- Dataset
+  - [House Prices - Advanced Regression Techniques](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data)
+
+- **Phase 1: Data Inspection & Structural Audit**
+  - Before plotting, you must understand the "`skeleton`" of your data.
+  - **Load & Glimpse:** Import the data using Pandas. Display the first 10 rows and use .`info()` to identify column names and data types.
+  - **Variable Categorization:** Create two lists: `numerical_features` and `categorical_features`.
+  - **The Target Variable:** Perform a univariate analysis on `SalePrice`.
+    - Calculate `mean`, `median`, `skewness`, and `kurtosis`.
+    - Task: Plot a histogram and a `Q-Q plot`. Does it follow a normal distribution? If not, apply a log transformation.
+
+- **Phase 2: The "Cleaning" Ritual**
+  - Instead of guessing which points are outliers, we use the Interquartile Range (IQR).
+  - **The Calculation:**
+    1. Calculate Q1 (25th percentile) and Q3 (75th percentile) for `SalePrice`.
+    2. Find the IQR = Q3 - Q1.
+    3. Define the bounds:
+       - Lower Bound: $Q1 - 1.5 \times IQR$
+       - Upper Bound: $Q3 + 1.5 \times IQR$
+
+  - **The Task:** Filter your dataframe to keep only the rows where SalePrice falls between these two bounds.
+  - **Visualization:** Create a `Boxplot` before and after this process to show how the "whiskers" and "fliers" (the dots) change.
+
+- **Phase 3: Multivariate Analysis & Visualization**
+  - This is the heart of EDA—finding how variables dance together.
+  - **Correlation Matrix:** Generate a heatmap of the correlation matrix.
+  - **Task:** Identify the top 10 features most strongly correlated with `SalePrice` (e.g., `OverallQual`,`GrLivArea`, `GarageCars`).
+  - **Categorical Deep-Dive:** Use boxplots to show the relationship between `OverallQual` (1–10 scale) and `SalePrice`.
+  - **Neighborhood Analysis:** Create a bar chart showing **the average price per neighborhood**. Which is the
+  "Beverly Hills" of this dataset?
+
+- **Phase 4: Final Insights & Reporting**
+  - Summarize your findings in a "Managerial Report" format:
+    1. **Top 3 Drivers:** What are the three most important factors in determining a house's price?
+    2. **Anomaly Report:** Which features had the most missing data, and how might that affect a future
+    model?
+    3. **Visual Summary:** Include your 4 most impactful charts.
+
+[⬆️ Go to Context](#context)
+
+### [Assignment 06 Solution](https://github.com/aatansen/A-Comprehensive-Exploratory-Data-Analysis-of-House-Prices)
 
 [⬆️ Go to Context](#context)
