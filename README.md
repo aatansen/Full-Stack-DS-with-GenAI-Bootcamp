@@ -683,7 +683,7 @@
     - [6. Slicer](#6-slicer)
     - [7. Chart](#7-chart)
     - [8. Dashboard Design](#8-dashboard-design)
-    - [Excel and Python Workflow I](#excel-and-python-workflow-i)
+  - [**Excel and Python Workflow I**](#excel-and-python-workflow-i)
 - [**Day 55 - Excel Part 02**](#day-55---excel-part-02)
   - [**Excel Data Processing \& Dashboard Tools**](#excel-data-processing--dashboard-tools)
     - [1. Power Query](#1-power-query)
@@ -695,7 +695,13 @@
     - [4. Slicers](#4-slicers)
     - [5. Charts (Business Analytics)](#5-charts-business-analytics)
     - [6. HR Dashboard Example](#6-hr-dashboard-example)
-  - [Excel and Python Workflow II](#excel-and-python-workflow-ii)
+  - [**Excel and Python Workflow II**](#excel-and-python-workflow-ii)
+- [**Day 56 - Excel Part 03**](#day-56---excel-part-03)
+  - [**Power Query Editor**](#power-query-editor)
+  - [**Pivot Table**](#pivot-table)
+  - [**Slicer And Filtering**](#slicer-and-filtering)
+  - [**Chart, Dashboard Design**](#chart-dashboard-design)
+  - [**Dashboard Design Principles**](#dashboard-design-principles)
 
 # **Day 01 - Induction Session**
 
@@ -20550,7 +20556,7 @@ Dashboard = **visual summary of data**
 
 [⬆️ Go to Context](#context)
 
-### Excel and Python Workflow I
+## **Excel and Python Workflow I**
 
   | Excel Feature     | What it Does                     | Python Equivalent                          |
   | ----------------- | -------------------------------- | ------------------------------------------ |
@@ -20874,7 +20880,7 @@ Excel dashboards are widely used because **they require no coding** and are easy
 
 [⬆️ Go to Context](#context)
 
-## Excel and Python Workflow II
+## **Excel and Python Workflow II**
 
   | Excel Tool   | Purpose                          | Python Equivalent                 |
   | ------------ | -------------------------------- | --------------------------------- |
@@ -20884,5 +20890,291 @@ Excel dashboards are widely used because **they require no coding** and are easy
   | Slicer       | Interactive filtering            | `Streamlit`, `Dash`, `Plotly`     |
   | Charts       | Data visualization               | `matplotlib`, `seaborn`, `plotly` |
   | HR Dashboard | Business reporting               | `Streamlit`, `Dash` dashboards    |
+
+[⬆️ Go to Context](#context)
+
+# **Day 56 - Excel Part 03**
+
+## **Power Query Editor**
+
+Power Query Editor is the **visual interface used to clean and transform data** after importing it into Excel.
+
+- It is part of **Power Query**, but this is where the **actual data transformation happens**.
+
+- Used to:
+
+  - Clean messy data
+  - Transform columns
+  - Filter rows
+  - Combine datasets
+  - Build repeatable data pipelines
+
+- It records each step as a **query step**, so the process can be **reapplied automatically when data refreshes**.
+
+- Open Power Query Editor
+
+  ```xlsx
+  Data → Get Data → Transform Data
+  ```
+
+- Common tools inside Power Query Editor
+
+  - Remove rows
+  - Replace values
+  - Split column
+  - Merge queries
+  - Change data types
+  - Filter rows
+  - Add custom column
+
+Example workflow
+
+1. Import raw CSV
+2. Remove unnecessary columns
+3. Convert date column
+4. Remove duplicates
+5. Load cleaned data into Excel
+
+- Python equivalent
+
+  ```py
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  # remove unnecessary column
+  df = df.drop(columns=["temp_column"])
+
+  # convert date
+  df["date"] = pd.to_datetime(df["date"])
+
+  # remove duplicates
+  df = df.drop_duplicates()
+
+  print(df.head())
+  ```
+
+Power Query Editor works like a **visual data transformation engine similar to pandas pipelines**.
+
+[⬆️ Go to Context](#context)
+
+## **Pivot Table**
+
+Pivot Tables allow **dynamic data summarization and analysis** without writing formulas.
+
+They help answer questions like:
+
+- Total sales by region
+- Average salary per department
+- Monthly revenue trends
+- Product performance
+
+Example dataset
+
+  | Product | Region | Sales |
+  | ------- | ------ | ----- |
+  | A       | East   | 100   |
+  | B       | West   | 200   |
+  | A       | West   | 150   |
+
+Pivot result
+
+  | Product | Total Sales |
+  | ------- | ----------- |
+  | A       | 250         |
+  | B       | 200         |
+
+Create Pivot Table
+
+  ```xlsx
+  Insert → PivotTable
+  ```
+
+Pivot Table structure
+
+- **Rows** → Categories to group data
+- **Columns** → Additional grouping
+- **Values** → Calculations (sum, average, count)
+- **Filters** → Dataset filters
+
+Example
+
+  | Rows       | Values         |
+  | ---------- | -------------- |
+  | Department | Average Salary |
+
+- Python equivalent
+
+  ```py
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  pivot = df.pivot_table(
+      values="sales",
+      index="product",
+      aggfunc="sum"
+  )
+
+  print(pivot)
+  ```
+
+- Another common method
+
+  ```py
+  df.groupby("product")["sales"].sum()
+  ```
+
+Pivot Tables are heavily used in **finance, HR analytics, and business reporting**.
+
+[⬆️ Go to Context](#context)
+
+## **Slicer And Filtering**
+
+Slicers provide **interactive filtering controls for Pivot Tables and Excel dashboards**.
+
+Instead of using dropdown filters, slicers show **visual buttons that users can click**.
+
+Example slicer filters
+
+- Department
+- Region
+- Product
+- Year
+
+Benefits
+
+- Easy for non-technical users
+- Real-time filtering
+- Can control **multiple Pivot Tables simultaneously**
+- Ideal for dashboards
+
+Add slicer
+
+```xlsx
+Insert → Slicer
+```
+
+Example scenario
+
+A sales dashboard might include slicers for:
+
+- Region
+- Product Category
+- Year
+
+Clicking **Region = Asia** instantly updates all charts and Pivot Tables.
+
+- Python dashboard equivalent
+
+  ```py
+  import streamlit as st
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  region = st.selectbox(
+      "Select Region",
+      df["region"].unique()
+  )
+
+  filtered = df[df["region"] == region]
+
+  st.write(filtered)
+  ```
+
+Slicers are a key component of **interactive Excel dashboards**.
+
+[⬆️ Go to Context](#context)
+
+## **Chart, Dashboard Design**
+
+Charts transform **raw data into visual insights**.
+
+They help stakeholders quickly understand trends, patterns, and comparisons.
+
+Common business charts
+
+- **Bar Chart** → Compare categories
+- **Line Chart** → Time trends
+- **Pie Chart** → Percentage distribution
+- **Scatter Plot** → Relationship between variables
+- **Area Chart** → Growth over time
+
+Create chart
+
+  ```xlsx
+  Insert → Charts
+  ```
+
+- Example using Python
+
+  ```py
+  import matplotlib.pyplot as plt
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  sales = df.groupby("product")["sales"].sum()
+
+  sales.plot(kind="bar")
+
+  plt.title("Sales by Product")
+  plt.xlabel("Product")
+  plt.ylabel("Sales")
+
+  plt.show()
+  ```
+
+## **Dashboard Design Principles**
+
+A good dashboard should be **simple, clear, and actionable**.
+
+- Typical dashboard layout
+
+  ```txt
+  KPI Cards
+  ↓
+  Main Business Chart
+  ↓
+  Category Breakdown Chart
+  ↓
+  Detailed Table
+  ↓
+  Filters (Slicers)
+  ```
+
+Common dashboard components
+
+- KPI cards
+- Charts
+- Pivot Tables
+- Tables
+- Slicers / filters
+
+Example KPI metrics
+
+- Total Revenue
+- Total Employees
+- Average Salary
+- Monthly Sales
+- Growth Rate
+
+Python dashboard example
+
+  ```py
+  import streamlit as st
+  import pandas as pd
+
+  df = pd.read_csv("sales.csv")
+
+  st.title("Sales Dashboard")
+
+  st.metric("Total Sales", df["sales"].sum())
+
+  product_sales = df.groupby("product")["sales"].sum()
+
+  st.bar_chart(product_sales)
+  ```
 
 [⬆️ Go to Context](#context)
