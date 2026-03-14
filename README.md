@@ -669,6 +669,11 @@
     - [Trimming](#trimming)
     - [Capping](#capping)
 - [**Day 54 - Excel Part 01**](#day-54---excel-part-01)
+  - [**Fact Table (The Measurable Data)**](#fact-table-the-measurable-data)
+  - [**Dimension Table (Descriptive Information)**](#dimension-table-descriptive-information)
+  - [**Fact Table Vs Dimension Table**](#fact-table-vs-dimension-table)
+    - [Duplicate Data in a Fact Table](#duplicate-data-in-a-fact-table)
+    - [Duplicate Data in a Dimension Table](#duplicate-data-in-a-dimension-table)
   - [**Excel Powerful Formulas \& Features**](#excel-powerful-formulas--features)
     - [1. VLOOKUP / HLOOKUP / XLOOKUP](#1-vlookup--hlookup--xlookup)
       - [VLOOKUP (Vertical Lookup)](#vlookup-vertical-lookup)
@@ -20224,6 +20229,156 @@ There are:
 [⬆️ Go to Context](#context)
 
 # **Day 54 - Excel Part 01**
+
+## **Fact Table (The Measurable Data)**
+
+A **Fact Table** stores the **numbers you want to analyze**. For example **event or transaction record**.
+
+- Example: Sales Data
+
+  | DateID | ProductID | CustomerID | Quantity | Revenue |
+  | ------ | --------- | ---------- | -------- | ------- |
+  | 101    | P01       | C12        | 2        | 400     |
+  | 101    | P02       | C20        | 1        | 250     |
+  | 102    | P01       | C12        | 3        | 600     |
+
+Here:
+
+- **Quantity**
+- **Revenue**
+
+are called **facts (measures)** because they are **numeric values you calculate**.
+
+Typical calculations:
+
+- SUM
+- AVERAGE
+- COUNT
+- MIN / MAX
+
+Example questions answered by fact tables:
+
+- Total sales?
+- Total orders?
+- Average revenue?
+
+[⬆️ Go to Context](#context)
+
+## **Dimension Table (Descriptive Information)**
+
+A **Dimension Table** stores **descriptive attributes** that explain the facts.
+
+- Example: Product Table
+
+  | ProductID | ProductName | Category    | Brand    |
+  | --------- | ----------- | ----------- | -------- |
+  | P01       | Laptop      | Electronics | Dell     |
+  | P02       | Mouse       | Accessories | Logitech |
+
+- Example: Customer Table
+
+  | CustomerID | CustomerName | City       |
+  | ---------- | ------------ | ---------- |
+  | C12        | Rahim        | Dhaka      |
+  | C20        | Karim        | Chittagong |
+
+These tables help answer questions like:
+
+- Sales **by city**
+- Sales **by product category**
+- Sales **by brand**
+
+[⬆️ Go to Context](#context)
+
+## **Fact Table Vs Dimension Table**
+
+### Duplicate Data in a Fact Table
+
+- Duplicates are **often valid** in a Fact table.
+
+  **Reason**:
+  A fact table stores **transactions or events**, and many events can share the same dimension values.
+
+- Example
+
+  | DateID | ProductID | CustomerID | Quantity | Revenue |
+  | ------ | --------- | ---------- | -------- | ------- |
+  | 101    | P01       | C12        | 2        | 400     |
+  | 101    | P01       | C12        | 1        | 200     |
+  | 101    | P01       | C12        | 3        | 600     |
+
+These rows look similar but they represent **different transactions**.
+
+Possible reasons:
+
+- Different orders
+- Different invoices
+- Different times
+- Different stores
+
+So **duplicate dimension keys are normal** in fact tables.
+
+[⬆️ Go to Context](#context)
+
+### Duplicate Data in a Dimension Table
+
+- In dimension tables, duplicates are usually **NOT allowed** for the **key column**.
+
+- Example product dimension:
+
+  | ProductID | ProductName | Category    |
+  | --------- | ----------- | ----------- |
+  | P01       | Laptop      | Electronics |
+  | P02       | Mouse       | Accessories |
+
+- If this happens:
+
+  | ProductID | ProductName | Category    |
+  | --------- | ----------- | ----------- |
+  | P01       | Laptop      | Electronics |
+  | P01       | Laptop      | Electronics |
+
+*This causes **relationship errors**.*
+
+Why?
+
+Because data models require:
+
+  ```xlsx
+  Fact Table → Many
+  Dimension Table → One
+  ```
+
+This is called a **Many-to-One relationship**.
+
+- Correct Relationship Model
+
+```xlsx
+Fact Table (many rows)
+        |
+        | ProductID
+        |
+Dimension Table (unique ProductID)
+```
+
+Example:
+
+Fact Table
+
+| ProductID | Sales |
+| --------- | ----- |
+| P01       | 400   |
+| P01       | 200   |
+| P02       | 300   |
+
+Dimension Table
+
+| ProductID | Category    |
+| --------- | ----------- |
+| P01       | Electronics |
+| P02       | Accessories |
+
+[⬆️ Go to Context](#context)
 
 ## **Excel Powerful Formulas & Features**
 
