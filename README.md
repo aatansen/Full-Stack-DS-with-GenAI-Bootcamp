@@ -707,6 +707,7 @@
   - [**Slicer And Filtering**](#slicer-and-filtering)
   - [**Chart, Dashboard Design**](#chart-dashboard-design)
   - [**Dashboard Design Principles**](#dashboard-design-principles)
+- [**Assignment 07**](#assignment-07)
 
 # **Day 01 - Induction Session**
 
@@ -21331,5 +21332,11 @@ Python dashboard example
 
   st.bar_chart(product_sales)
   ```
+
+[⬆️ Go to Context](#context)
+
+# **Assignment 07**
+
+- [Assignment 07](./Assignments/Assignment%2007/)
 
 [⬆️ Go to Context](#context)

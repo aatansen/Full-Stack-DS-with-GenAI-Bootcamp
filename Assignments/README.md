@@ -50,6 +50,8 @@
     - [Assignment 05 Solution](#assignment-05-solution)
   - [**Assignment 06**](#assignment-06)
     - [Assignment 06 Solution](#assignment-06-solution)
+  - [**Assignment 07**](#assignment-07)
+    - [Assignment 07 Solution](#assignment-07-solution)
 
 # **Assignments**
 
@@ -777,5 +779,47 @@ Print:
 [⬆️ Go to Context](#context)
 
 ### [Assignment 06 Solution](https://github.com/aatansen/A-Comprehensive-Exploratory-Data-Analysis-of-House-Prices)
+
+[⬆️ Go to Context](#context)
+
+## **Assignment 07**
+
+- **Key Metrics**
+
+  - **Workforce Composition (Headcount)**
+    - **Total Headcount:** What is the total number of employees currently on the payroll?
+    - **​Departmental Split:** How many employees are in each department (e.g., Production, Quality, Packing)?
+    - **​Designation Breakdown:** Which designations (e.g., Line Operator, Loader) have the highest number of employees?
+    - **​Employee Category:** What is the ratio of Management to Direct/Indirect workers?
+
+  - **Salary & Financial Analysis**
+    - **​Total Monthly Payroll:** What is the total "Basic Salary" expenditure per month?
+    - **​Average Salary by Department:** Which department has the highest and lowest average basic salary?
+    - **​Salary by Designation:** What is the average salary for a "Line Operator" versus other roles?
+    - **​Salary vs. Employee Type:** How does the salary differ between "Permanent" and "Probation" employees?
+
+  - **Recruitment & Retention**
+    - **​Hiring Trends:** How many employees were joined in each month or quarter? (Time-series analysis)
+    - **​Employee Status:** What percentage of employees are currently "Active" vs. "Resigned" or "Fire"?
+    - **​Confirmation Pipeline:** How many employees are currently in their "Probation" period vs. "Permanent"?
+
+  - **Employee Demographics & Logistics**
+    - **​Gender Diversity:** What is the male-to-female ratio across different departments?
+    - **​Commute Analysis:** How many employees live within 1–3km vs. those living 10–15km away? (Useful for transport planning).
+    - **​Marital Status & Health:** What is the distribution of Marital Status and Blood Groups (useful for HR records and emergency planning)?
+
+- **​Suggested Dashboard Layout (Visuals)**
+  - ​To answer these questions, your Excel dashboard should include:
+    1. KPI Cards: Total Employees, Total Basic Salary, Active Employees, Average Salary.
+    2. Bar Chart: Number of Employees by Department (sorted).
+    3. Pie/Donut Chart: Gender Distribution and Employee Type (Permanent vs. Probation).
+    4. Bar Chart: Average Salary by Designation.
+    5. Line Chart: Number of Joinees by Month (using Date of Join).
+
+    > ​Slicers (Filters): Department, Working Status, Gender, and Employee Category to make the dashboard interactive
+
+[⬆️ Go to Context](#context)
+
+### [Assignment 07 Solution](./Assignment%2007/)
 
 [⬆️ Go to Context](#context)
