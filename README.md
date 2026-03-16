@@ -708,6 +708,21 @@
   - [**Chart, Dashboard Design**](#chart-dashboard-design)
   - [**Dashboard Design Principles**](#dashboard-design-principles)
 - [**Assignment 07**](#assignment-07)
+- [**Day 57 - Introduction to Power BI**](#day-57---introduction-to-power-bi)
+  - [**Why Power BI? Why not Excel or Google Sheets?**](#why-power-bi-why-not-excel-or-google-sheets)
+  - [**Power BI Architecture**](#power-bi-architecture)
+  - [**What is ETL, and why is it needed?**](#what-is-etl-and-why-is-it-needed)
+  - [**Relationships In Power BI**](#relationships-in-power-bi)
+  - [**Drill Down vs Drill Up**](#drill-down-vs-drill-up)
+    - [1. Drill Down](#1-drill-down)
+    - [2. Drill Up](#2-drill-up)
+    - [The 4 Drill Buttons](#the-4-drill-buttons)
+  - [**4 Types of Relationships in Power BI (Model View)**](#4-types-of-relationships-in-power-bi-model-view)
+    - [1. One-to-One (1:1)](#1-one-to-one-11)
+    - [2. One-to-Many (1:\*)](#2-one-to-many-1)
+    - [3. Many-to-One (\*:1)](#3-many-to-one-1)
+    - [4. Many-to-Many (*:*)](#4-many-to-many-)
+  - [**For Data Modeling**](#for-data-modeling)
 
 # **Day 01 - Induction Session**
 
@@ -21338,5 +21353,359 @@ Python dashboard example
 # **Assignment 07**
 
 - [Assignment 07](./Assignments/Assignment%2007/)
+
+[⬆️ Go to Context](#context)
+
+# **Day 57 - Introduction to Power BI**
+
+## **Why Power BI? Why not Excel or Google Sheets?**
+
+1. **Visualization Power:**
+
+   - Excel charts are often limited and manual.
+   - Power BI is designed specifically for visualization, allowing you to create professional, interactive, and dynamic dashboards with just a few clicks.
+
+2. **Large Data Handling:**
+
+   - Excel slows down significantly with large datasets.
+   - Power BI can handle millions of rows efficiently using a columnar storage model and compression.
+
+3. **Data Modeling & Relationship:**
+
+   - Instead of complex VLOOKUP or INDEX-MATCH formulas, Power BI allows you to build data models by dragging and dropping relationships between multiple tables.
+
+4. **Automation & Refresh**
+
+   - Power BI allows for scheduled auto-refresh, eliminating manual data entry.
+   - You can use a gateway to connect to live data.
+
+5. **DAX (Data Analysis Expressions)**
+
+   - A formula language more powerful than Excel formulas.
+   - Used for complex calculations like Year-Over-Year (YOY) growth, running totals, and time intelligence.
+
+6. **Security & Sharing**
+
+   - Offers Row-Level Security (RLS) to control who sees what data.
+   - Dashboards are easily published to the web or mobile apps, whereas Excel sharing is often file-based and less secure.
+
+[⬆️ Go to Context](#context)
+
+## **Power BI Architecture**
+
+  ```mermaid
+  graph LR
+      %% Data Sources
+      subgraph Sources [Data Sources]
+          DB[(MySQL)]
+          XLS[Excel / Files]
+      end
+
+      %% ETL Process
+      Sources -- Extract --> Transform{Transform}
+      Transform -- Load --> DW[(Data Warehouse)]
+
+      %% Output
+      DW --> Viz[Visualization / Dashboards]
+      Viz --> User((User))
+
+      %% Styling
+      style Sources fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5,color:#ffffff
+      style DB color:#ffffff
+      style XLS color:#ffffff
+
+      style Transform fill:#e1f5fe,stroke:#01579b,color:#000000
+      style DW fill:#fff9c4,stroke:#fbc02d,color:#000000
+      style Viz fill:#e8f5e9,stroke:#2e7d32,color:#000000
+      style User fill:#f3e5f5,stroke:#7b1fa2,color:#000000
+  ```
+
+- **Extract:** Data is pulled from various sources like MySQL databases and flat files (Excel/CSV).
+- **Transform:** Data is cleaned and modeled (this is where Power Query and DAX usually sit).
+- **Load:** The processed data is stored in the Data Warehouse/Model.
+- **Visualization:** The final output is created as interactive charts and dashboards.
+- **User:** The stakeholder interacts with the insights.
+
+[⬆️ Go to Context](#context)
+
+## **What is ETL, and why is it needed?**
+
+- **ETL—Extract, Transform, Load**
+
+  1. **Extract (Data Import):** Bringing data in from various sources (Excel, SQL, and web).
+  2. **Transform (Cleaning & Changing)**
+
+     - Raw data is usually messy.
+     - You use **Power Query Editor** to clean (remove nulls, fix spelling), format (change text to dates/numbers), split columns, or merge tables.
+     - This makes the data analysis ready.
+
+  3. **Load:** Once transformed, the data is loaded into the main Power BI model to be used for visuals and DAX measures.
+
+[⬆️ Go to Context](#context)
+
+## **Relationships In Power BI**
+
+- Fact table and Dimension table
+
+   ```mermaid
+   erDiagram
+      FACT_EMPLOYEE_METRICS {
+         int EmployeeID
+         int DepartmentID
+         int StatusID
+         decimal BasicSalary
+      }
+
+      DIM_EMPLOYEE {
+         int EmployeeID
+         string Name
+         string Gender
+         string DistanceFromOffice
+         string EmployeeCategory
+      }
+
+      DIM_DEPARTMENT {
+         int DepartmentID
+         string DepartmentName
+      }
+
+      DIM_STATUS {
+         int StatusID
+         string WorkingStatus
+      }
+
+      DIM_EMPLOYEE ||--o{ FACT_EMPLOYEE_METRICS : EmployeeID
+      DIM_DEPARTMENT ||--o{ FACT_EMPLOYEE_METRICS : DepartmentID
+      DIM_STATUS ||--o{ FACT_EMPLOYEE_METRICS : StatusID
+   ```
+
+[⬆️ Go to Context](#context)
+
+## **Drill Down vs Drill Up**
+
+### 1. Drill Down
+
+**Drill Down = Go from higher level → lower level (more detail).**
+
+Example hierarchy:
+
+- Year
+- Quarter
+- Month
+- Day
+
+If a chart shows **Sales by Year**, drilling down lets you see:
+
+- 2024 → Q1, Q2, Q3, Q4
+- Then → Months inside Q1
+
+Example
+
+Suppose a chart shows:
+
+  | Department  | Employees |
+  | ----------- | --------- |
+  | Engineering | 120       |
+  | HR          | 20        |
+
+[⬆️ Go to Context](#context)
+
+### 2. Drill Up
+
+**Drill Up = Go from lower level → higher level (summary).**
+
+Example:
+
+You drilled into:
+
+- Year → Quarter → Month
+
+Now drill up returns to:
+
+- Quarter → Year
+
+[⬆️ Go to Context](#context)
+
+### The 4 Drill Buttons
+
+Power BI actually has **4 navigation options**:
+
+- **Drill Down**
+  Click a bar to go to the next level for that specific item.
+
+- **Go to Next Level**
+  Moves the whole chart down one level.
+
+- **Expand All Down One Level**
+  Shows both parent and child levels together.
+
+- **Drill Up**
+  Return to previous level.
+
+[⬆️ Go to Context](#context)
+
+## **4 Types of Relationships in Power BI (Model View)**
+
+### 1. One-to-One (1:1)
+
+One record in **Table A** matches **one record in Table B**.
+
+Example:
+
+  | EmployeeID | Name  |
+  | ---------- | ----- |
+  | 101        | Rahim |
+
+  | EmployeeID | Passport |
+  | ---------- | -------- |
+  | 101        | A12345   |
+
+Relationship:
+
+  ```xlsx
+  Employees.EmployeeID  →  Passport.EmployeeID
+  ```
+
+- Each **EmployeeID appears once in both tables**.
+
+Typical use cases:
+
+- Split sensitive data into another table
+- Profile tables
+
+---
+
+[⬆️ Go to Context](#context)
+
+### 2. One-to-Many (1:*)
+
+This is the **most common relationship in Power BI**.
+
+One record in **Table A** relates to **many records in Table B**.
+
+Example:
+
+  | DepartmentID | Department  |
+  | ------------ | ----------- |
+  | D1           | HR          |
+  | D2           | Engineering |
+
+  | EmployeeID | DepartmentID |
+  | ---------- | ------------ |
+  | 1          | D1           |
+  | 2          | D2           |
+  | 3          | D2           |
+
+Relationship:
+
+  ```xlsx
+  Department (1)  →  Employee (*)
+  ```
+
+Meaning:
+
+- One **Department**
+- Many **Employees**
+
+This is the **typical Fact–Dimension relationship**.
+
+---
+
+[⬆️ Go to Context](#context)
+
+### 3. Many-to-One (*:1)
+
+This is basically the **same relationship but viewed from the opposite side**.
+
+Example:
+
+Employee table connecting to Department table:
+
+  ```xlsx
+  Employee (*) → Department (1)
+  ```
+
+Meaning:
+
+- Many employees belong to **one department**.
+
+Power BI internally treats **One-to-Many and Many-to-One the same**, just reversed.
+
+---
+
+[⬆️ Go to Context](#context)
+
+### 4. Many-to-Many (*:*)
+
+Many records in **Table A** relate to **many records in Table B**.
+
+Example:
+
+| Student | Course  |
+| ------- | ------- |
+| A       | Math    |
+| A       | Physics |
+| B       | Math    |
+
+Here:
+
+- One student can take **many courses**
+- One course can have **many students**
+
+Relationship:
+
+  ```xlsx
+  Student (*)
+    ↕
+  Course (*)
+  ```
+
+Usually solved with a **bridge table**:
+
+  ```xlsx
+  Students
+    ↓
+  Enrollment (Bridge)
+    ↓
+  Courses
+  ```
+
+---
+
+- Simple Visual Idea
+
+  ```xlsx
+  1:1   →  One ↔ One
+
+  1:*   →  One → Many
+
+  *:1   →  Many → One
+
+  *:*   →  Many ↔ Many
+  ```
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **For Data Modeling**
+
+In most **Power BI dashboards**, the ideal structure is:
+
+  ```xlsx
+  Dimension Table (1)
+          ↓
+  Fact Table (*)
+  ```
+
+Example:
+
+  ```xlsx
+  Departments (1)
+        ↓
+  Employees (*)
+  ```
+
+This is called a **Star Schema**, which is the **best practice for Power BI models**.
 
 [⬆️ Go to Context](#context)
