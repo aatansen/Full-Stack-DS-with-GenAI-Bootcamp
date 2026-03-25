@@ -723,6 +723,12 @@
     - [3. Many-to-One (\*:1)](#3-many-to-one-1)
     - [4. Many-to-Many (*:*)](#4-many-to-many-)
   - [**For Data Modeling**](#for-data-modeling)
+- [**Day 58 - Power BI Part 02**](#day-58---power-bi-part-02)
+  - [**1. Matrix (Visual)**](#1-matrix-visual)
+  - [**2. Filter Button / Slicer**](#2-filter-button--slicer)
+  - [**3. Bookmark**](#3-bookmark)
+  - [**4. Navigation**](#4-navigation)
+  - [**5. Map (Visual)**](#5-map-visual)
 
 # **Day 01 - Induction Session**
 
@@ -21707,5 +21713,129 @@ Example:
   ```
 
 This is called a **Star Schema**, which is the **best practice for Power BI models**.
+
+[⬆️ Go to Context](#context)
+
+# **Day 58 - Power BI Part 02**
+
+## **1. Matrix (Visual)**
+
+- A table-like visual that supports **hierarchical data** (rows + columns + values)
+
+- Similar to Pivot Table in Excel
+
+- **Key Features**
+
+  - Row & Column grouping
+  - Drill down / expand-collapse hierarchy
+  - Subtotals and grand totals
+  - Conditional formatting
+
+- **When to use**
+
+  - When you need **multi-level analysis**
+
+    - Region → Country → City
+    - Category → Subcategory → Product
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **2. Filter Button / Slicer**
+
+- Used to **filter data interactively** in reports
+
+- Slicer is the visual version of filters placed on canvas
+
+- **Key Features**
+
+  - Visual-level, Page-level, and Report-level filtering
+  - Multiple formats (dropdown, list, date, range slider)
+  - Search inside slicer
+  - Single-select or multi-select
+
+- **When to use**
+
+  - When users need to **control what data they see**
+
+    - Filter by Region
+    - Filter by Date
+    - Filter by Category
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **3. Bookmark**
+
+- Saves the **current state of a report**
+
+  - Filters
+  - Visual visibility
+  - Drill position
+
+- **Key Features**
+
+  - Capture report view (data + display)
+  - Toggle between visuals (show/hide)
+  - Works with Selection Pane
+  - Can control navigation
+
+- **When to use**
+
+  - When creating **interactive reports**
+
+    - Toggle Chart ↔ Table
+    - Create storytelling dashboards
+    - Build custom UI experience
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **4. Navigation**
+
+- Helps users **move between pages or report states**
+
+- **Key Features**
+
+  - Page Navigator (auto page buttons)
+  - Bookmark Navigator
+  - Drill-through navigation
+  - Custom buttons with actions
+
+- **When to use**
+
+  - When designing **multi-page dashboards**
+
+    - Switch between report pages
+    - Navigate using bookmarks
+    - Create app-like experience
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **5. Map (Visual)**
+
+- Displays data based on **geographical locations**
+
+- Useful for identifying regional patterns
+
+- **Key Features**
+
+  - Bubble maps (size based on value)
+  - Filled maps (color by region)
+  - Zoom, pan, and tooltips
+  - Supports Latitude & Longitude
+
+- **When to use**
+
+  - When analyzing **location-based data**
+
+    - Sales by country or city
+    - Regional performance comparison
+    - Geographic trends
 
 [⬆️ Go to Context](#context)
