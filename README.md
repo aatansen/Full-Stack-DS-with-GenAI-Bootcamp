@@ -729,6 +729,11 @@
   - [**3. Bookmark**](#3-bookmark)
   - [**4. Navigation**](#4-navigation)
   - [**5. Map (Visual)**](#5-map-visual)
+- [**Day 59 - Power BI Part 03**](#day-59---power-bi-part-03)
+  - [**1. Drill Through**](#1-drill-through)
+  - [**2. Fiscal Calendar**](#2-fiscal-calendar)
+  - [**3. DAX Formula (Data Analysis Expressions - DAX)**](#3-dax-formula-data-analysis-expressions---dax)
+  - [**4. DAX Key Concepts**](#4-dax-key-concepts)
 
 # **Day 01 - Induction Session**
 
@@ -21837,5 +21842,278 @@ This is called a **Star Schema**, which is the **best practice for Power BI mode
     - Sales by country or city
     - Regional performance comparison
     - Geographic trends
+
+[⬆️ Go to Context](#context)
+
+# **Day 59 - Power BI Part 03**
+
+## **1. Drill Through**
+
+- A feature that allows users to **navigate from a summary report to a detailed report page** using a selected data point.
+
+- **Key Features**
+
+  - Passes filters automatically from source visual
+  - Works on specific fields (e.g., Product, Customer, Region)
+  - Provides deep-level analysis
+  - Can include back button for navigation
+
+- **How to Use**
+
+  - Create a new page (Drill Through Page)
+  - Add a field to the **Drill-through filters pane**
+  - Design visuals for detailed analysis
+  - Right-click on a visual → Select Drill Through → Choose page
+
+- **When to Use**
+
+  - When you want **detailed breakdown**
+
+    - Summary: Total Sales by Product
+    - Drill Through: Detailed transactions of selected product
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **2. Fiscal Calendar**
+
+- A **custom calendar** where the year does not start in January (e.g., starts in April)
+
+- **Key Features**
+
+  - Supports business-specific reporting periods
+  - Enables proper financial analysis (FY, Quarter, Month)
+  - Aligns with accounting standards
+
+- **Common Setup (April Start Example)**
+
+  - **Create Calendar Table**
+
+    - `Calendar = CALENDARAUTO(3)`
+
+  - **Add Columns**
+
+    - Month Name
+
+      - `Month = FORMAT('Calendar'[Date], "mmm")`
+
+    - Month Sort (April = 1)
+
+      - `Month Sort = MONTH(EDATE('Calendar'[Date], -3))`
+
+    - Quarter
+
+      - `Qtr = FORMAT(EDATE('Calendar'[Date], -3), "\QQ")`
+
+    - Fiscal Year
+
+      ```dax
+      FY = 
+      VAR Check = MONTH('Calendar'[Date]) >= 4
+      VAR CY = RIGHT(YEAR('Calendar'[Date]), 2)
+      VAR NY = RIGHT(YEAR('Calendar'[Date]) + 1, 2)
+      VAR PY = RIGHT(YEAR('Calendar'[Date]) - 1, 2)
+      RETURN
+      IF(Check, CY & "-" & NY, PY & "-" & CY)
+      ```
+
+- **When to Use**
+
+  - Financial dashboards
+  - Budget vs Actual analysis
+  - Year-over-Year comparison based on fiscal periods
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **3. DAX Formula (Data Analysis Expressions - DAX)**
+
+- A formula language used in Power BI for:
+
+  - Calculations
+  - Measures
+  - Custom columns
+
+---
+
+- **Basic Aggregation Functions**
+
+  - **SUM**
+
+    - Adds values
+    - Example: `Total Sales = SUM(Sales[Amount])`
+
+  - **MIN / MAX**
+
+    - Finds smallest / largest value
+    - Example: `MAX(Products[Price])`
+
+  - **AVERAGE**
+
+    - Calculates mean
+    - Example: `AVERAGE(Sales[Amount])`
+
+---
+
+- **Iterator Functions (Row-by-Row Calculation)**
+
+  - **SUMX**
+
+    - Row calculation + total
+    - Example:
+
+      `SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])`
+
+  - **AVERAGEX**
+
+    - Row calculation + average
+    - Example:
+
+      `AVERAGEX(Sales, Sales[Price] - Sales[Cost])`
+
+  - **MINX / MAXX**
+
+    - Row-based min/max
+
+  - **COUNTX**
+
+    - Counts non-blank results of expression
+
+---
+
+- **Counting Functions**
+
+  - **COUNTROWS**
+
+    - Counts rows
+
+  - **DISTINCTCOUNT**
+
+    - Counts unique values
+
+  - **COUNTBLANK**
+
+    - Counts empty values
+
+---
+
+- **Logical & Conditional Functions**
+
+  - **IF**
+
+    - Condition check
+    - Example:
+      `IF([Total Sales] > 10000, "High", "Low")`
+
+  - **SWITCH**
+
+    - Multiple conditions (cleaner than IF)
+
+---
+
+- **Mathematical & Safe Operations**
+
+  - **DIVIDE**
+
+    - Safe division (avoids errors)
+    - Example:
+      `DIVIDE(SUM(Sales[Profit]), SUM(Sales[Sales]), 0)`
+
+---
+
+- **Filter & Context Functions (Most Important)**
+
+  - **CALCULATE**
+
+    - Changes filter context
+    - Example:
+      `CALCULATE(SUM(Sales[Amount]), Products[Color] = "Red")`
+
+  - **FILTER**
+
+    - Applies custom filtering logic
+
+  - **ALL**
+
+    - Removes filters (used in % calculations)
+
+---
+
+- **Relationship Functions**
+
+  - **RELATED**
+
+    - Fetch value from related table
+
+---
+
+- **Time Intelligence Functions**
+
+  - **TOTALYTD**
+
+    - Year-to-date calculation
+
+  - **DATEADD**
+
+    - Shift time (last month/year)
+
+---
+
+- **Table Functions**
+
+  - **SUMMARIZE**
+
+    - Creates summary table
+
+  - **VALUES**
+
+    - Returns unique values
+
+---
+
+- **Ranking & Text Functions**
+
+  - **RANKX**
+
+    - Ranking calculation
+
+  - **CONCATENATE / &**
+
+    - Combine text
+
+  - **UPPER / LOWER**
+
+    - Text case formatting
+
+  - **LEFT / RIGHT**
+
+    - Extract characters
+
+---
+
+[⬆️ Go to Context](#context)
+
+## **4. DAX Key Concepts**
+
+- **Row Context**
+
+  - Calculation happens **row by row**
+  - Used in calculated columns and iterator functions (SUMX, etc.)
+
+- **Filter Context**
+
+  - Filters applied from:
+
+    - Visuals
+    - Slicers
+    - CALCULATE
+
+- **Context Transition**
+
+  - When CALCULATE turns row context into filter context
+
+---
 
 [⬆️ Go to Context](#context)
