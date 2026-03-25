@@ -734,6 +734,7 @@
   - [**2. Fiscal Calendar**](#2-fiscal-calendar)
   - [**3. DAX Formula (Data Analysis Expressions - DAX)**](#3-dax-formula-data-analysis-expressions---dax)
   - [**4. DAX Key Concepts**](#4-dax-key-concepts)
+- [**Assignment 08**](#assignment-08)
 
 # **Day 01 - Induction Session**
 
@@ -22115,5 +22116,11 @@ This is called a **Star Schema**, which is the **best practice for Power BI mode
   - When CALCULATE turns row context into filter context
 
 ---
+
+[⬆️ Go to Context](#context)
+
+# **Assignment 08**
+
+- [Assignment 08](./Assignments/Assignment%2008/)
 
 [⬆️ Go to Context](#context)

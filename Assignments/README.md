@@ -52,6 +52,8 @@
     - [Assignment 06 Solution](#assignment-06-solution)
   - [**Assignment 07**](#assignment-07)
     - [Assignment 07 Solution](#assignment-07-solution)
+  - [**Assignment 08**](#assignment-08)
+    - [Assignment 08 Solution](#assignment-08-solution)
 
 # **Assignments**
 
@@ -821,5 +823,70 @@ Print:
 [⬆️ Go to Context](#context)
 
 ### [Assignment 07 Solution](./Assignment%2007/)
+
+[⬆️ Go to Context](#context)
+
+## **Assignment 08**
+
+- Page 1: Executive Overview
+  1. **Total Revenue, Total Units, and Total Profit.**
+      > **Visual:** Cards
+  2. **How are we performing against our total sales goals?**
+      > **Visual:** Gauge Chart (Target vs. Actual Revenue).
+  3. **Are our sales growing or shrinking month-by-month?**
+      > **Visual:** Line Chart (Date on X-axis, Revenue on Y-axis).
+  4. **Which phone category is our primary revenue driver?**
+      > **Visual:** Donut Chart (Category).
+
+  > [!NOTE]
+  >
+  > - **Slicers to add:** Date Range, Area.
+
+---
+
+- Page 2: Product & Category Analysis
+
+  1. **Which specific phone models are the "Best Sellers"?**
+     > **Visual:** Treemap (Product Name by Revenue)
+  2. **Which category has the highest number of units sold?**
+     > **Visual:** Funnel Chart or Bar Chart (Units by Category).
+  3. **Which products reached more than 90% of their target?**
+     > **Visual:** Clustered Column Chart (Actual Units vs. Target Units).
+  4. **Is there a relationship between Sales Price and Units sold?**
+     > **Visual:** Scatter Chart.
+
+  > [!NOTE]
+  >
+  > - **Slicers to add:** Category, Product Name.
+
+---
+
+- Page 3: Dealer & Regional Insights
+  1. **Which city (Area) is our most profitable market?**
+     > **Visual:** Filled Map (Area as Location, Profit as Tooltip).
+  2. **Who are our "Star Dealers" (Top 10 by Revenue)?**
+     > **Visual:** Horizontal Bar Chart (Shop Name)
+  3. **How many units is each dealer buying on average?**
+     > **Visual:** Table or Matrix (Shop Name, Units, Revenue, Location)
+  4. **Which area has the most potential for smartphone growth?**
+     > **Visual:** Stacked Bar Chart (Area on Axis, Category as Legend)
+
+  > [!NOTE]
+  >
+  > - **Slicers to add:** Area, Shop Name.
+
+---
+
+- Page 4: Summary
+
+---
+
+> [!NOTE]
+>
+> - **Must be added Features:** Navigation, Bookmarks, Drill through, Fiscal Calendar, publish to BI service.
+
+[⬆️ Go to Context](#context)
+
+### [Assignment 08 Solution](./Assignment%2008/)
 
 [⬆️ Go to Context](#context)
