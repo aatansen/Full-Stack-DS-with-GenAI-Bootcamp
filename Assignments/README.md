@@ -46,8 +46,10 @@
     - [**Assignment 03 Result \& Correction**](#assignment-03-result--correction)
   - [**Assignment 04**](#assignment-04)
     - [Assignment 04 Solution](#assignment-04-solution)
+    - [**Assignment 04 Result \& Correction**](#assignment-04-result--correction)
   - [**Assignment 05**](#assignment-05)
     - [Assignment 05 Solution](#assignment-05-solution)
+    - [**Assignment 05 Result \& Correction**](#assignment-05-result--correction)
   - [**Assignment 06**](#assignment-06)
     - [Assignment 06 Solution](#assignment-06-solution)
   - [**Assignment 07**](#assignment-07)
@@ -583,6 +585,12 @@ Print:
 
 ### [Assignment 04 Solution](https://github.com/aatansen/Jarvis-AI/)
 
+### **Assignment 04 Result & Correction**
+
+- All Correct
+
+- **Final result : `10`**
+
 [⬆️ Go to Context](#context)
 
 ## **Assignment 05**
@@ -735,6 +743,12 @@ Print:
 [⬆️ Go to Context](#context)
 
 ### [Assignment 05 Solution](https://github.com/aatansen/Personal-AI-Assistant)
+
+### **Assignment 05 Result & Correction**
+
+- Video representation missing
+
+- **Final result : `8`**
 
 [⬆️ Go to Context](#context)
 
