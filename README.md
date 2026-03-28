@@ -100,9 +100,9 @@
 
 [⬆️ Go to Context](#context)
 
-## [Module 10 - Virtual Environment & Requirements](../Module%2010%20-%20Virtual%20Environment%20&%20Requirements/)
+## [Module 10 - Virtual Environment & Requirements](./Module%2010%20-%20Virtual%20Environment%20&%20Requirements/)
 
-- [Day 10 - Virtual Environment & Requirements](../Module%2010%20-%20Virtual%20Environment%20&%20Requirements/README.md/#day-10---virtual-environment--requirements)
+- [Day 10 - Virtual Environment & Requirements](./Module%2010%20-%20Virtual%20Environment%20&%20Requirements/README.md/#day-10---virtual-environment--requirements)
 
 [⬆️ Go to Context](#context)
 
