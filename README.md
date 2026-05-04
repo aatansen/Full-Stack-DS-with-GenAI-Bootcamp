@@ -42,6 +42,7 @@
   - [**Assignment 07**](#assignment-07)
   - [Module 34 - Data Analytics Power BI](#module-34---data-analytics-power-bi)
   - [**Assignment 08**](#assignment-08)
+  - [Module 35 - Tableau](#module-35---tableau)
 
 ## [Module 01 - Welcome to the Course](./Module%2001%20-%20Welcome%20to%20the%20Course/)
 
@@ -275,5 +276,11 @@
 ## **Assignment 08**
 
 - [Assignment 08](./Assignments/Assignment%2008/)
+
+[⬆️ Go to Context](#context)
+
+## [Module 35 - Tableau](./Module%2035%20-%20Tableau/)
+
+- [Day 60 - Tableau](./Module%2035%20-%20Tableau/Day%2060%20-%20Tableau/README.md)
 
 [⬆️ Go to Context](#context)
